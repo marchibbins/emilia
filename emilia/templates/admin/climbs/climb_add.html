@@ -2,8 +2,10 @@
 
 {% from "macros/form.html" import render_field, render_form_errors %}
 
-{% block admin_content %}
-    <h2>{% block form_title %}Add climb{% endblock %}</h2>
+{% block content %}
+    <h1>{% block form_title %}Add climb{% endblock %}</h1>
+
+    <a href="{{ url_for('admin.index') }}">Admin home</a>
 
     <form method="POST">
         {{ render_form_errors(form) }}
