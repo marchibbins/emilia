@@ -3,7 +3,7 @@
 {% from "macros/form.html" import render_field, render_form_errors %}
 
 {% block admin_content %}
-    <h2>{{ title }}</h2>
+    <h2>{% block form_title %}Add climb{% endblock %}</h2>
 
     <form method="POST">
         {{ render_form_errors(form) }}

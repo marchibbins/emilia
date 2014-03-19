@@ -22,7 +22,6 @@ def index():
 def climb_add():
     """ Create a new Climb object. """
     form = ClimbForm()
-    title = "Add climb"
 
     if form.validate_on_submit():
         climb = Climb(number=form.number.data, name=form.name.data, location=form.location.data)
@@ -31,7 +30,7 @@ def climb_add():
         flash('Climb created.', 'success')
         return redirect(url_for('admin.index'))
 
-    return render_template('admin/climbs/climb_add.html', form=form, title=title)
+    return render_template('admin/climbs/climb_add.html', form=form)
 
 
 @admin.route('/climb/<int:climb_id>', methods=['GET', 'POST'])
@@ -40,7 +39,6 @@ def climb_edit(climb_id):
     """ Edit a Climb object. """
     climb = Climb.query.filter_by(id=climb_id).first_or_404()
     form = ClimbForm(obj=climb)
-    title = "Edit climb"
 
     if form.validate_on_submit():
         form.populate_obj(climb)
@@ -48,7 +46,7 @@ def climb_edit(climb_id):
         db.session.commit()
         flash('Climb updated.', 'success')
 
-    return render_template('admin/climbs/climb_edit.html', climb=climb, form=form, title=title)
+    return render_template('admin/climbs/climb_edit.html', climb=climb, form=form)
 
 
 @admin.route('/climb/<int:climb_id>/delete', methods=['GET', 'POST'])
