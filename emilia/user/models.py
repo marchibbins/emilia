@@ -2,7 +2,7 @@ from flask.ext.login import UserMixin
 from sqlalchemy import Column
 from werkzeug import generate_password_hash, check_password_hash
 
-from teela.extensions import db
+from emilia.extensions import db
 
 
 class User(db.Model, UserMixin):

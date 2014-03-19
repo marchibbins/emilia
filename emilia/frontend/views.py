@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from teela.example.models import Message
+from emilia.example.models import Message
 
 
 frontend = Blueprint('frontend', __name__)

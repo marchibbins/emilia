@@ -2,12 +2,12 @@ from flask import Flask, render_template
 from logging.handlers import RotatingFileHandler
 import logging
 
-from teela.admin import admin
-from teela.api import api
-from teela.config import Config
-from teela.extensions import cache, db, login_manager
-from teela.frontend import frontend
-from teela.user import user, user_loader
+from emilia.admin import admin
+from emilia.api import api
+from emilia.config import Config
+from emilia.extensions import cache, db, login_manager
+from emilia.frontend import frontend
+from emilia.user import user, user_loader
 
 
 def init():

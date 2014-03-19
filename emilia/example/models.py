@@ -1,6 +1,6 @@
 from sqlalchemy import Column
 
-from teela.extensions import db
+from emilia.extensions import db
 
 
 class Message(db.Model):

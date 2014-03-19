@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify
 from datetime import datetime
 
-from teela.extensions import cache
+from emilia.extensions import cache
 
 
 api = Blueprint('api', __name__, url_prefix='/api')

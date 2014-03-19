@@ -2,8 +2,8 @@ from flask import Blueprint, flash, request, redirect, render_template, url_for
 from flask.ext.login import confirm_login, current_user, login_required, \
     login_user, logout_user
 
-from teela.user.forms import LoginForm, ReauthForm
-from teela.user.models import User
+from emilia.user.forms import LoginForm, ReauthForm
+from emilia.user.models import User
 
 
 user = Blueprint('user', __name__, url_prefix='/user')

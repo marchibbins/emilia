@@ -1,9 +1,9 @@
 from flask import Blueprint, flash, render_template, redirect, request, url_for
 from flask.ext.login import login_required
 
-from teela.example.forms import MessageForm
-from teela.example.models import Message
-from teela.extensions import db
+from emilia.example.forms import MessageForm
+from emilia.example.models import Message
+from emilia.extensions import db
 
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')

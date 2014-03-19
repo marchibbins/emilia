@@ -1,9 +1,9 @@
 from flask.ext.script import Manager, Shell
 
-from teela import init
-from teela.extensions import db
-from teela.example import models as example_models
-from teela.user import models as user_models
+from emilia import init
+from emilia.extensions import db
+from emilia.example import models as example_models
+from emilia.user import models as user_models
 
 app = init()
 manager = Manager(app)
