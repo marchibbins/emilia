@@ -24,5 +24,11 @@ class Climb(db.Model):
             'location': self.location
         }
 
+    def __init__(self, number, name, location):
+        """ Populate model properties. """
+        self.number = number
+        self.name = name
+        self.location = location
+
     def __unicode__(self):
         return '%s. %s' % (self.number, self.name)

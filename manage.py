@@ -1,8 +1,10 @@
 from flask.ext.script import Manager, Shell
 
 from emilia import init
+from emilia.climbs import fixtures as climb_fixtures
 from emilia.extensions import db
 from emilia.user import models as user_models
+
 
 app = init()
 manager = Manager(app)
@@ -19,6 +21,9 @@ def setup():
     """ Init database and admin user. """
     db.drop_all()
     db.create_all()
+
+    # Populate climbs
+    climb_fixtures.install()
 
     # Admin user
     admin = user_models.User(username=u'admin', password=u'password')
