@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
 
     @classmethod
     def authenticate(self, username, password):
-        """ Attempt User select by username and password match. """
+        """ Attempts User select by username and password match. """
         user = self.query.filter(User.username == username).first()
 
         if user:
@@ -42,5 +42,5 @@ class User(db.Model, UserMixin):
 
 
 def user_loader(id):
-    """ Method for LoginManager to reload a User object. """
+    """ Loads (or reloads) a User object, used by LoginManager. """
     return User.query.get(id)

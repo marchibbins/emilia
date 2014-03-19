@@ -16,19 +16,20 @@ class Climb(db.Model):
     location = Column(db.String(LENGTH_STR_MAX))
 
     def serialize(self):
-        """ Return the object as an easily serializeable object. """
+        """ Returns the object as an easily serializeable object. """
         return {
             'id': self.id,
             'number': self.number,
             'name': self.name,
-            'location': self.location
+            'location': self.location,
         }
 
     def __init__(self, number, name, location):
-        """ Populate model properties. """
+        """ Populates model properties. """
         self.number = number
         self.name = name
         self.location = location
 
     def __unicode__(self):
+        """ Returns a string representation of the Climb object. """
         return '%s. %s' % (self.number, self.name)

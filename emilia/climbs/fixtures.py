@@ -3,7 +3,7 @@ from emilia.extensions import db
 
 
 def install():
-    """ Add Climb data to database. """
+    """ Adds Climb data to database. """
     climbs = [
         (1, 'Cheddar Gorge', 'Cheddar, Somerset'),
         (2, 'Weston Hill', 'Weston, Bath'),

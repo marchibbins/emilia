@@ -2,7 +2,7 @@ import os
 
 
 def env_var(key, default=None, required=False):
-    """ Parse environment variable accordingly. """
+    """ Parses environment variables based on type and requirement. """
     if required:
         # Throw KeyError for missing requirements
         val = os.environ[key]
@@ -21,7 +21,7 @@ def env_var(key, default=None, required=False):
 
 class Config(object):
 
-    """ Configure application with envionment variables. """
+    """ Creates a config objectbased on envionment variables. """
 
     PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 

@@ -12,13 +12,13 @@ manager = Manager(app)
 
 @manager.command
 def run():
-    """ Run locally, host and port set by configuration. """
+    """ Runs application locally, host and port set by configuration. """
     app.run()
 
 
 @manager.command
 def setup():
-    """ Init database and admin user. """
+    """ Inits database, installing fixture data. """
     db.drop_all()
     db.create_all()
 
@@ -34,7 +34,7 @@ def setup():
 
 @manager.shell
 def make_shell_context():
-    """ Configure shell setup. """
+    """ Configures shell setup. """
     # http://flask-script.readthedocs.org/en/latest/#default-commands
     return dict(app=app, db=db)
 
