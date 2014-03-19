@@ -40,6 +40,11 @@ class User(db.Model, UserMixin):
 
         return user, authenticated
 
+    def __init__(self, username, password):
+        """ Populates model properties. """
+        self.username = username
+        self.password = password
+
 
 def user_loader(id):
     """ Loads (or reloads) a User object, used by LoginManager. """
