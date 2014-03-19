@@ -1,1 +1,15 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    <h1>Climbs</h1>
+
+    {% if climbs %}
+    <ul>
+        {% for climb in climbs %}
+        <li>{{ climb }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>None yet!</p>
+    {% endif %}
+{% endblock %}
