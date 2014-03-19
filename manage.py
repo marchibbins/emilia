@@ -2,7 +2,6 @@ from flask.ext.script import Manager, Shell
 
 from emilia import init
 from emilia.extensions import db
-from emilia.example import models as example_models
 from emilia.user import models as user_models
 
 app = init()
@@ -17,13 +16,9 @@ def run():
 
 @manager.command
 def setup():
-    """ Init database and test message. """
+    """ Init database and admin user. """
     db.drop_all()
     db.create_all()
-
-    # Example, otherwise required setup only
-    message = example_models.Message(text=u'Hello World.')
-    db.session.add(message)
 
     # Admin user
     admin = user_models.User(username=u'admin', password=u'password')

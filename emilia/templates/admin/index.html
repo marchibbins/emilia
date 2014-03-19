@@ -4,20 +4,19 @@
     <h1>Admin</h1>
 
     {% block admin_content %}
-        {% if messages %}
+        {% if climbs %}
         <table>
-            {% for message in messages %}
+            {% for climb in climbs %}
             <tr>
-                <th>{{ message.id }}.</td>
-                <td>{{ message.text }}</td>
+                <td>{{ climb }}</td>
                 <td>
-                    <a href="{{ url_for('admin.message_edit', message_id=message.id) }}">Edit</a> |
-                    <a href="{{ url_for('admin.message_delete', message_id=message.id) }}">Delete</a>
+                    <a href="{{ url_for('admin.climb_edit', climb_id=climb.id) }}">Edit</a> |
+                    <a href="{{ url_for('admin.climb_delete', climb_id=climb.id) }}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
-        <a href="{{ url_for('admin.message_add') }}">Add new message</a>
+        <a href="{{ url_for('admin.climb_add') }}">Add new climb</a>
     {% endblock %}
 {% endblock %}

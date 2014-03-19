@@ -1,8 +1,8 @@
 from flask import Blueprint, flash, render_template, redirect, request, url_for
 from flask.ext.login import login_required
 
-from emilia.example.forms import MessageForm
-from emilia.example.models import Message
+from emilia.climbs.forms import ClimbForm
+from emilia.climbs.models import Climb
 from emilia.extensions import db
 
 
@@ -12,55 +12,55 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 @admin.route('/')
 @login_required
 def index():
-    """ Admin home, Message index. """
-    messages = Message.query.all()
-    return render_template('admin/index.html', messages=messages)
+    """ Admin home, lists all Climbs. """
+    climbs = Climb.query.all()
+    return render_template('admin/index.html', climbs=climbs)
 
 
-@admin.route('/message/add', methods=['GET', 'POST'])
+@admin.route('/climb/add', methods=['GET', 'POST'])
 @login_required
-def message_add():
-    """ Create a new Message. """
-    form = MessageForm()
-    title = "Add message"
+def climb_add():
+    """ Create a new Climb object. """
+    form = ClimbForm()
+    title = "Add climb"
 
     if form.validate_on_submit():
-        message = Message(text=form.text.data)
-        db.session.add(message)
+        climb = Climb(number=form.number.data, name=form.name.data, location=form.location.data)
+        db.session.add(climb)
         db.session.commit()
-        flash('Message created.', 'success')
+        flash('Climb created.', 'success')
         return redirect(url_for('admin.index'))
 
-    return render_template('admin/message/add_edit.html', form=form, title=title)
+    return render_template('admin/climbs/climb_add.html', form=form, title=title)
 
 
-@admin.route('/message/<int:message_id>', methods=['GET', 'POST'])
+@admin.route('/climb/<int:climb_id>', methods=['GET', 'POST'])
 @login_required
-def message_edit(message_id):
-    """ Edit a Message. """
-    message = Message.query.filter_by(id=message_id).first_or_404()
-    form = MessageForm(obj=message)
-    title = "Edit message"
+def climb_edit(climb_id):
+    """ Edit a Climb object. """
+    climb = Climb.query.filter_by(id=climb_id).first_or_404()
+    form = ClimbForm(obj=climb)
+    title = "Edit climb"
 
     if form.validate_on_submit():
-        form.populate_obj(message)
-        db.session.add(message)
+        form.populate_obj(climb)
+        db.session.add(climb)
         db.session.commit()
-        flash('Message updated.', 'success')
+        flash('Climb updated.', 'success')
 
-    return render_template('admin/message/add_edit.html', message=message, form=form, title=title)
+    return render_template('admin/climbs/climb_edit.html', climb=climb, form=form, title=title)
 
 
-@admin.route('/message/<int:message_id>/delete', methods=['GET', 'POST'])
+@admin.route('/climb/<int:climb_id>/delete', methods=['GET', 'POST'])
 @login_required
-def message_delete(message_id):
-    """ Delete a message. """
-    message = Message.query.filter_by(id=message_id).first_or_404()
+def climb_delete(climb_id):
+    """ Delete a climb object (on POST, confirm on GET). """
+    climb = Climb.query.filter_by(id=climb_id).first_or_404()
 
     if request.method == 'POST':
-        db.session.delete(message)
+        db.session.delete(climb)
         db.session.commit()
-        flash('Message deleted.', 'success')
+        flash('Climb deleted.', 'success')
         return redirect(url_for('admin.index'))
 
-    return render_template('admin/message/delete.html', message=message)
+    return render_template('admin/climbs/climb_delete.html', climb=climb)
