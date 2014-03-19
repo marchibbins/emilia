@@ -45,6 +45,10 @@ class User(db.Model, UserMixin):
         self.username = username
         self.password = password
 
+    def __unicode__(self):
+        """ Returns a string representation of the User object. """
+        return '%s' % self.username
+
 
 def user_loader(id):
     """ Loads (or reloads) a User object, used by LoginManager. """
