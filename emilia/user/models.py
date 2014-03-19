@@ -8,6 +8,7 @@ from emilia.extensions import db
 class User(db.Model, UserMixin):
 
     """ Basic User model, username and encrypted password. """
+
     id = Column(db.Integer, primary_key=True)
     username = Column(db.String(64), nullable=False, unique=True)
     password_store = Column('password', db.String(64), nullable=False)

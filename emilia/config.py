@@ -22,6 +22,7 @@ def env_var(key, default=None, required=False):
 class Config(object):
 
     """ Configure application with envionment variables. """
+
     PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
     DEBUG = env_var('DEBUG', default=False)
