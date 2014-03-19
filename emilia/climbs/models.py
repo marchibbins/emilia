@@ -15,5 +15,14 @@ class Climb(db.Model):
     name = Column(db.String(NAME_STR_MAX))
     location = Column(db.String(LENGTH_STR_MAX))
 
+    def serialize(self):
+        """ Return the object as an easily serializeable object. """
+        return {
+            'id': self.id,
+            'number': self.number,
+            'name': self.name,
+            'location': self.location
+        }
+
     def __unicode__(self):
         return '%s. %s' % (self.number, self.name)

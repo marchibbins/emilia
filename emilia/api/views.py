@@ -1,17 +1,16 @@
 from flask import Blueprint, render_template, jsonify
-from datetime import datetime
 
-from emilia.extensions import cache
+from emilia.climbs.models import Climb
 
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
 @api.route('/')
-@cache.cached(timeout=60)
 def index():
-    """ Create a JSON response. """
-    return jsonify(status='success', time=datetime.now())
+    """ Render full list of Climbs as JSON. """
+    climbs = Climb.query.all()
+    return jsonify(status='success', climbs=[i.serialize() for i in climbs])
 
 
 @api.errorhandler(404)
