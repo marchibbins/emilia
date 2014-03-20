@@ -56,12 +56,12 @@ class Climb(db.Model):
             'location': self.location,
         }
 
-    def __init__(self, number, name, location, book_id):
+    def __init__(self, number, name, location, book):
         """ Populates model properties. """
         self.number = number
         self.name = name
         self.location = location
-        self.book_id = book_id
+        self.book = book
 
     def __repr__(self):
         """ Returns the Climb object representation. """
