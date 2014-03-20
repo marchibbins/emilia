@@ -25,7 +25,6 @@ def setup():
     # Install fixutres
     climb_fixtures.install()
     user_fixtures.install()
-    db.session.commit()
 
 
 @manager.shell

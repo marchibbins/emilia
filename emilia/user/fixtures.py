@@ -7,3 +7,4 @@ def install():
     """ Adds admin User to database. """
     admin = User('admin', env_var('DEFAULT_ADMIN_PASSWORD', required=True))
     db.session.add(admin)
+    db.session.commit()

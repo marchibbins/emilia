@@ -30,3 +30,5 @@ def install():
         for climb in obj['climbs']:
             climb = Climb(*climb, book=book)
             db.session.add(climb)
+
+    db.session.commit()
