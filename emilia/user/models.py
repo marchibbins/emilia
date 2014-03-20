@@ -45,6 +45,10 @@ class User(db.Model, UserMixin):
         self.username = username
         self.password = password
 
+    def __repr__(self):
+        """ Returns the User object representation. """
+        return '<User %r>' % self.username
+
     def __unicode__(self):
         """ Returns a string representation of the User object. """
         return '%s' % self.username

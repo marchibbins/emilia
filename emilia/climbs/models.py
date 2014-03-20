@@ -30,6 +30,10 @@ class Climb(db.Model):
         self.name = name
         self.location = location
 
+    def __repr__(self):
+        """ Returns the Climb object representation. """
+        return '<Climb %r>' % self.name
+
     def __unicode__(self):
         """ Returns a string representation of the Climb object. """
         return '%s. %s' % (self.number, self.name)
