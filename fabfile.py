@@ -1,4 +1,5 @@
 from fabric.api import local, task
+from fabric.contrib.console import confirm
 
 
 def honcho(command):
@@ -26,7 +27,9 @@ def dev():
 @task
 def setup():
     """ Set up application and database. """
-    honcho_run('python manage.py setup')
+    if confirm('This action will completely destroy and rebuild the database. ' \
+                'Are you sure you want to do this?', default=False):
+        honcho_run('python manage.py setup')
 
 
 @task
