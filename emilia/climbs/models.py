@@ -29,7 +29,7 @@ class Book(db.Model):
 
     def __unicode__(self):
         """ Returns a string representation of the Climb object. """
-        return '%s. %s' % (self.number, self.name)
+        return '%s' % self.name
 
 
 class Climb(db.Model):
