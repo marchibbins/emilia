@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Climb detail</h1>
 
-    <p>{{ climb }}. {{ climb.location }}</p>
+    <p>{{ climb }}. {{ climb.location }} ({{ climb.strava_id }})</p>
 
     <a href="{{ url_for('frontend.book_detail', slug=climb.book.slug) }}" title="">Back to book</a>
 {% endblock %}

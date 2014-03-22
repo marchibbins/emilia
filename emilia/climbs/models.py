@@ -51,6 +51,7 @@ class Climb(db.Model):
     number = Column(db.Integer)
     name = Column(db.String(NAME_STR_MAX))
     location = Column(db.String(LENGTH_STR_MAX))
+    strava_id = Column(db.Integer)
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('climbs', lazy='dynamic'))
@@ -62,14 +63,16 @@ class Climb(db.Model):
             'number': self.number,
             'name': self.name,
             'location': self.location,
+            'strava_id': self.strava_id,
         }
 
-    def __init__(self, number, slug, name, location, book):
+    def __init__(self, number, slug, name, location, strava_id, book):
         """ Populates model properties. """
         self.slug = slug
         self.number = number
         self.name = name
         self.location = location
+        self.strava_id = strava_id
         self.book = book
 
     def __repr__(self):
