@@ -64,6 +64,7 @@ class Climb(db.Model):
             'name': self.name,
             'location': self.location,
             'strava_id': self.strava_id,
+            'book_id': self.book_id,
         }
 
     def __init__(self, number, slug, name, location, strava_id, book):
