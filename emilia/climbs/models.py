@@ -7,9 +7,11 @@ class Book(db.Model):
 
     """ Represents a single Book object. """
 
+    SLUG_STR_MAX = 32
     NAME_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
+    slug = Column(db.String(SLUG_STR_MAX))
     short_name = Column(db.String(NAME_STR_MAX))
     long_name = Column(db.String(NAME_STR_MAX))
 
@@ -21,8 +23,9 @@ class Book(db.Model):
             'long_name': self.long_name,
         }
 
-    def __init__(self, short_name, long_name):
+    def __init__(self, slug, short_name, long_name):
         """ Populates model properties. """
+        self.slug = slug
         self.short_name = short_name
         self.long_name = long_name
 

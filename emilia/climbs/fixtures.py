@@ -6,7 +6,8 @@ def install():
     """ Adds Book and Climb data to database. """
     fixtures = [
         {
-            'book': ("100 Greatest Cycling Climbs",
+            'book': ("greatest",
+                     "100 Greatest Cycling Climbs",
                      "100 Greatest Cycling Climbs: A Road Cyclist's Guide to Britain's Hills"),
             'climbs': [
                 (1, "Cheddar Gorge", "Cheddar, Somerset"),
@@ -15,7 +16,8 @@ def install():
             ]
         },
         {
-            'book': ("Another 100 Greatest Cycling Climbs",
+            'book': ("another",
+                     "Another 100 Greatest Cycling Climbs",
                      "Another 100 Greatest Cycling Climbs: A Road Cyclist's Guide to Britain's Hills"),
             'climbs': [
                 (101, "Gold Hill", "Shaftesbury, Dorset"),
