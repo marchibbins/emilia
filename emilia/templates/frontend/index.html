@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Climbs</h1>
+    <h1>Books</h1>
 
-    {% if climbs %}
+    {% if books %}
     <ul>
-        {% for climb in climbs %}
-        <li>{{ climb }}</li>
+        {% for book in books %}
+        <li><a href="{{ url_for('frontend.book_detail', slug=book.slug) }}">{{ book }}</a></li>
         {% endfor %}
     </ul>
     {% else %}
