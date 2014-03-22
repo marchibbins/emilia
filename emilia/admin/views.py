@@ -33,11 +33,11 @@ def climb_add():
     return render_template('admin/climbs/climb_add.html', form=form)
 
 
-@admin.route('/climb/<int:climb_id>', methods=['GET', 'POST'])
+@admin.route('/climb/<int:id>', methods=['GET', 'POST'])
 @login_required
-def climb_edit(climb_id):
+def climb_edit(id):
     """ Edit a Climb object. """
-    climb = Climb.query.filter(Climb.id == climb_id).first_or_404()
+    climb = Climb.query.get_or_404(id)
     form = ClimbForm(obj=climb)
 
     if form.validate_on_submit():
@@ -49,11 +49,11 @@ def climb_edit(climb_id):
     return render_template('admin/climbs/climb_edit.html', climb=climb, form=form)
 
 
-@admin.route('/climb/<int:climb_id>/delete', methods=['GET', 'POST'])
+@admin.route('/climb/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
-def climb_delete(climb_id):
+def climb_delete(id):
     """ Delete a climb object (on POST, confirm on GET). """
-    climb = Climb.query.filter(Climb.id == climb_id).first_or_404()
+    climb = Climb.query.get_or_404(id)
 
     if request.method == 'POST':
         db.session.delete(climb)

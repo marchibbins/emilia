@@ -9,8 +9,8 @@
         <tr>
             <td>{{ climb }}</td>
             <td>
-                <a href="{{ url_for('admin.climb_edit', climb_id=climb.id) }}">Edit</a> |
-                <a href="{{ url_for('admin.climb_delete', climb_id=climb.id) }}">Delete</a>
+                <a href="{{ url_for('admin.climb_edit', id=climb.id) }}">Edit</a> |
+                <a href="{{ url_for('admin.climb_delete', id=climb.id) }}">Delete</a>
             </td>
         </tr>
         {% endfor %}

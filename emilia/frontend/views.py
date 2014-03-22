@@ -19,15 +19,15 @@ def book_list():
     return render_template('frontend/climbs/book_list.html', books=books)
 
 
-@frontend.route('/books/<book_slug>')
-def book_detail(book_slug):
+@frontend.route('/books/<slug>')
+def book_detail(slug):
     """ Renders a detail view for the Book, matching slug. """
-    book = Book.query.filter(Book.slug == book_slug).first_or_404()
+    book = Book.query.filter_by(slug=slug).first_or_404()
     return render_template('frontend/climbs/book_detail.html', book=book)
 
 
-@frontend.route('/books/<book_slug>/<climb_number>')
-def climb_detail(book_slug, climb_number):
-    """ Renders a detail view for the Climb, matching book slug and climb number. """
-    climb = Climb.query.join(Book).filter(Book.slug == book_slug, Climb.number == climb_number).first_or_404()
+@frontend.route('/climbs/<slug>')
+def climb_detail(slug):
+    """ Renders a detail view for the Climb, matching slug. """
+    climb = Climb.query.filter_by(slug=slug).first_or_404()
     return render_template('frontend/climbs/climb_detail.html', climb=climb)

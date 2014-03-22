@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
     @classmethod
     def authenticate(self, username, password):
         """ Attempts User select by username and password match. """
-        user = self.query.filter(User.username == username).first()
+        user = self.query.filter_by(username=username).first()
 
         if user:
             authenticated = user.check_password(password)
