@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Book list</h1>
+
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li><a href="{{ url_for('frontend.book_detail', slug=book.slug) }}">{{ book }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>None yet!</p>
+    {% endif %}
+{% endblock %}

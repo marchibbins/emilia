@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Book detail</h1>
+
+    <p>{{ book }}</p>
+
+    <a href="{{ url_for('frontend.book_list') }}" title="">Back to list</a>
+{% endblock %}
