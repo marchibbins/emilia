@@ -11,7 +11,7 @@ class Book(db.Model):
     NAME_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
-    slug = Column(db.String(SLUG_STR_MAX))
+    slug = Column(db.String(SLUG_STR_MAX), unique=True)
     short_name = Column(db.String(NAME_STR_MAX))
     long_name = Column(db.String(NAME_STR_MAX))
 
