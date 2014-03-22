@@ -5,5 +5,11 @@
 
     <p>{{ book }}</p>
 
+    <ul>
+        {% for climb in book.climbs %}
+            <li><a href="{{ url_for('frontend.climb_detail', book_slug=book.slug, climb_number=climb.number) }}" title="">{{ climb }}</a></li>
+        {% endfor %}
+    </ul>
+
     <a href="{{ url_for('frontend.book_list') }}" title="">Back to list</a>
 {% endblock %}
