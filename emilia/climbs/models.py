@@ -10,26 +10,29 @@ class Book(db.Model):
     NAME_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
-    name = Column(db.String(NAME_STR_MAX))
+    short_name = Column(db.String(NAME_STR_MAX))
+    long_name = Column(db.String(NAME_STR_MAX))
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
         return {
             'id': self.id,
-            'name': self.name,
+            'short_name': self.short_name,
+            'long_name': self.long_name,
         }
 
-    def __init__(self, name):
+    def __init__(self, short_name, long_name):
         """ Populates model properties. """
-        self.name = name
+        self.short_name = short_name
+        self.long_name = long_name
 
     def __repr__(self):
         """ Returns the Book object representation. """
-        return '<Book %r>' % self.name
+        return '<Book %r>' % self.short_name
 
     def __unicode__(self):
         """ Returns a string representation of the Climb object. """
-        return '%s' % self.name
+        return '%s' % self.short_name
 
 
 class Climb(db.Model):
