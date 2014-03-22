@@ -19,10 +19,10 @@ def book_list():
     return render_template('frontend/climbs/book_list.html', books=books)
 
 
-@frontend.route('/books/<slug>')
-def book_detail(slug):
+@frontend.route('/books/<book_slug>')
+def book_detail(book_slug):
     """ Renders a detail view for the Book, matching slug. """
-    book = Book.query.filter_by(slug=slug).first_or_404()
+    book = Book.query.filter(Book.slug == book_slug).first_or_404()
     return render_template('frontend/climbs/book_detail.html', book=book)
 
 

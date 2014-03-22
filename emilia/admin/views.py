@@ -37,7 +37,7 @@ def climb_add():
 @login_required
 def climb_edit(climb_id):
     """ Edit a Climb object. """
-    climb = Climb.query.filter_by(id=climb_id).first_or_404()
+    climb = Climb.query.filter(Climb.id == climb_id).first_or_404()
     form = ClimbForm(obj=climb)
 
     if form.validate_on_submit():
@@ -53,7 +53,7 @@ def climb_edit(climb_id):
 @login_required
 def climb_delete(climb_id):
     """ Delete a climb object (on POST, confirm on GET). """
-    climb = Climb.query.filter_by(id=climb_id).first_or_404()
+    climb = Climb.query.filter(Climb.id == climb_id).first_or_404()
 
     if request.method == 'POST':
         db.session.delete(climb)
