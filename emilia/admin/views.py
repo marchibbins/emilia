@@ -108,6 +108,7 @@ def model_edit_view(model, form, id):
         db.session.add(obj)
         db.session.commit()
         flash('%s updated.' % name, 'success')
+        return redirect(url_for('admin.index'))
 
     return render_template('admin/model/edit.html', name=name, form=form)
 
