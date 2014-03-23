@@ -3,18 +3,35 @@
 {% block content %}
     <h1>Admin</h1>
 
+    <h2>Books</h2>
+    {% if books %}
+        <table>
+            {% for book in books %}
+            <tr>
+                <td>{{ book }}</td>
+                <td>
+                    <a href="{{ url_for('admin.book_edit', id=book.id) }}">Edit</a> |
+                    <a href="{{ url_for('admin.book_delete', id=book.id) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <a href="{{ url_for('admin.book_add') }}">Add new book</a>
+
+    <h2>Climbs</h2>
     {% if climbs %}
-    <table>
-        {% for climb in climbs %}
-        <tr>
-            <td>{{ climb }}</td>
-            <td>
-                <a href="{{ url_for('admin.climb_edit', id=climb.id) }}">Edit</a> |
-                <a href="{{ url_for('admin.climb_delete', id=climb.id) }}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+        <table>
+            {% for climb in climbs %}
+            <tr>
+                <td>{{ climb }}</td>
+                <td>
+                    <a href="{{ url_for('admin.climb_edit', id=climb.id) }}">Edit</a> |
+                    <a href="{{ url_for('admin.climb_delete', id=climb.id) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     {% endif %}
     <a href="{{ url_for('admin.climb_add') }}">Add new climb</a>
 {% endblock %}

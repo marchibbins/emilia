@@ -1,8 +1,8 @@
 from flask import Blueprint, flash, render_template, redirect, request, url_for
 from flask.ext.login import login_required
 
-from emilia.climbs.forms import ClimbForm
-from emilia.climbs.models import Climb
+from emilia.climbs.forms import BookForm, ClimbForm
+from emilia.climbs.models import Book, Climb
 from emilia.extensions import db
 
 
@@ -12,9 +12,31 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 @admin.route('/')
 @login_required
 def index():
-    """ Admin home, lists all Climbs. """
+    """ Admin home, lists all Books and Climbs. """
+    books = Book.query.all()
     climbs = Climb.query.all()
-    return render_template('admin/index.html', climbs=climbs)
+    return render_template('admin/index.html', books=books, climbs=climbs)
+
+
+@admin.route('/book/add', methods=['GET', 'POST'])
+@login_required
+def book_add():
+    """ Creates a new Book object. """
+    return model_add_view(Book, BookForm)
+
+
+@admin.route('/book/<int:id>', methods=['GET', 'POST'])
+@login_required
+def book_edit(id):
+    """ Edits a Book object. """
+    return model_edit_view(Book, BookForm, id)
+
+
+@admin.route('/book/<int:id>/delete', methods=['GET', 'POST'])
+@login_required
+def book_delete(id):
+    """ Deletes a Book object (on POST, confirm on GET). """
+    return model_delete_view(Book, id)
 
 
 @admin.route('/climb/add', methods=['GET', 'POST'])
