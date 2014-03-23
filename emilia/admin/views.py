@@ -20,45 +20,60 @@ def index():
 @admin.route('/climb/add', methods=['GET', 'POST'])
 @login_required
 def climb_add():
-    """ Create a new Climb object. """
-    form = ClimbForm()
-
-    if form.validate_on_submit():
-        climb = Climb(number=form.number.data, name=form.name.data, location=form.location.data)
-        db.session.add(climb)
-        db.session.commit()
-        flash('Climb created.', 'success')
-        return redirect(url_for('admin.index'))
-
-    return render_template('admin/climbs/climb_add.html', form=form)
+    """ Creates a new Climb object. """
+    return model_add_view('Climb', Climb, ClimbForm, 'admin/climbs/climb_add.html')
 
 
 @admin.route('/climb/<int:id>', methods=['GET', 'POST'])
 @login_required
 def climb_edit(id):
-    """ Edit a Climb object. """
-    climb = Climb.query.get_or_404(id)
-    form = ClimbForm(obj=climb)
-
-    if form.validate_on_submit():
-        form.populate_obj(climb)
-        db.session.add(climb)
-        db.session.commit()
-        flash('Climb updated.', 'success')
-
-    return render_template('admin/climbs/climb_edit.html', climb=climb, form=form)
+    """ Edits a Climb object. """
+    return model_edit_view('Climb', id, Climb, ClimbForm, 'admin/climbs/climb_edit.html')
 
 
 @admin.route('/climb/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
 def climb_delete(id):
-    """ Delete a climb object (on POST, confirm on GET). """
-    climb = Climb.query.get_or_404(id)
+    """ Deletes a Climb object (on POST, confirm on GET). """
+    return model_delete_view('Climb', id, Climb, 'admin/climbs/climb_delete.html', 'climb')
 
-    if request.method == 'POST':
-        db.session.delete(climb)
+
+def model_add_view(name, model, form, template):
+    """ Renders a generic form-based model create view. """
+    form = form()
+
+    if form.validate_on_submit():
+        obj = model(**form.data)
+        db.session.add(obj)
         db.session.commit()
-        flash('Climb deleted.', 'success')
+        flash('%s created.' % name, 'success')
         return redirect(url_for('admin.index'))
 
-    return render_template('admin/climbs/climb_delete.html', climb=climb)
+    return render_template(template, form=form)
+
+
+def model_edit_view(name, id, model, form, template):
+    """ Renders a generic form-based model edit view. """
+    obj = model.query.get_or_404(id)
+    form = form(obj=obj)
+
+    if form.validate_on_submit():
+        form.populate_obj(obj)
+        db.session.add(obj)
+        db.session.commit()
+        flash('%s updated.' % name, 'success')
+
+    return render_template(template, form=form)
+
+
+def model_delete_view(name, id, model, template, obj_name):
+    """ Renders a generic form-based model delete view. """
+    obj = model.query.get_or_404(id)
+
+    if request.method == 'POST':
+        db.session.delete(obj)
+        db.session.commit()
+        flash('%s deleted.' % name, 'success')
+        return redirect(url_for('admin.index'))
+
+    return render_template(template, **{obj_name: obj})
