@@ -1,8 +1,8 @@
 from flask import Blueprint, flash, render_template, redirect, request, url_for
 from flask.ext.login import login_required
 
-from emilia.climbs.forms import BookForm, ClimbForm
-from emilia.climbs.models import Book, Climb
+from emilia.climbs.forms import BookForm, ClimbForm, RegionForm
+from emilia.climbs.models import Book, Climb, Region
 from emilia.extensions import db
 
 
@@ -15,7 +15,8 @@ def index():
     """ Admin home, lists all Books and Climbs. """
     books = Book.query.all()
     climbs = Climb.query.all()
-    return render_template('admin/index.html', books=books, climbs=climbs)
+    regions = Region.query.all()
+    return render_template('admin/index.html', books=books, climbs=climbs, regions=regions)
 
 
 @admin.route('/book/add', methods=['GET', 'POST'])
@@ -58,6 +59,27 @@ def climb_edit(id):
 def climb_delete(id):
     """ Deletes a Climb object (on POST, confirm on GET). """
     return model_delete_view(Climb, id)
+
+
+@admin.route('/region/add', methods=['GET', 'POST'])
+@login_required
+def region_add():
+    """ Creates a new Region object. """
+    return model_add_view(Region, RegionForm)
+
+
+@admin.route('/region/<int:id>', methods=['GET', 'POST'])
+@login_required
+def region_edit(id):
+    """ Edits a Region object. """
+    return model_edit_view(Region, RegionForm, id)
+
+
+@admin.route('/region/<int:id>/delete', methods=['GET', 'POST'])
+@login_required
+def region_delete(id):
+    """ Deletes a Region object (on POST, confirm on GET). """
+    return model_delete_view(Region, id)
 
 
 def model_add_view(model, form):

@@ -34,4 +34,20 @@
         </table>
     {% endif %}
     <a href="{{ url_for('admin.climb_add') }}">Add new climb</a>
+
+    <h2>Region</h2>
+    {% if regions %}
+        <table>
+            {% for region in regions %}
+            <tr>
+                <td>{{ region }}</td>
+                <td>
+                    <a href="{{ url_for('admin.region_edit', id=region.id) }}">Edit</a> |
+                    <a href="{{ url_for('admin.region_delete', id=region.id) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <a href="{{ url_for('admin.region_add') }}">Add new region</a>
 {% endblock %}
