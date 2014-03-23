@@ -1,20 +1,41 @@
+{% macro form_tag() %}
+    <form method="POST">
+        <fieldset>
+            {{ caller() }}
+        </fieldset>
+    </form>
+{% endmacro %}
+
+{% macro render_form(form) %}
+    {% call form_tag() %}
+        {{ render_form_errors(form) }}
+        {{ form.hidden_tag() }}
+        <ul>
+            {% for field in form if field.type != 'HiddenField' and field.type != 'CSRFTokenField' %}
+                <li>{{ render_field(field) }}</li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Submit">
+    {% endcall %}
+{% endmacro %}
 
 {% macro render_field(field) %}
-    <li>
-        {{ field.label }}
+    <div {% if field.errors %}class="error"{% endif %}>
+        <label for="{{ field.id }}">{{ field.label.text }} {% if field.flags.required %}*{% endif %}</label>
         <div>
             {{ field(**kwargs)|safe }}
-
+            {% if field.description %}
+                <p>{{ field.description }}</p>
+            {% endif %}
             {% if field.errors %}
-            <ul class="errors">
-                {% for error in field.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
+                <ul class="errors">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
-        <div>{{ field.description }}</div>
-    </li>
+    </div>
 {% endmacro %}
 
 {% macro render_form_errors(form) %}

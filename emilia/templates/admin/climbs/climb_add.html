@@ -1,25 +1,11 @@
 {% extends 'admin/index.html' %}
 
-{% from "macros/form.html" import render_field, render_form_errors %}
+{% from "macros/form.html" import render_form %}
 
 {% block content %}
     <h1>{% block form_title %}Add climb{% endblock %}</h1>
-
     <a href="{{ url_for('admin.index') }}">Admin home</a>
 
-    <form method="POST">
-        {{ render_form_errors(form) }}
-        {{ form.hidden_tag() }}
-        <ul>
-            {{ render_field(form.slug) }}
-            {{ render_field(form.number) }}
-            {{ render_field(form.name) }}
-            {{ render_field(form.location) }}
-            {{ render_field(form.latitude) }}
-            {{ render_field(form.longitude) }}
-            {{ render_field(form.strava_id) }}
-        </ul>
-        <input type="submit" value="Save climb">
-    </form>
+    {{ render_form(form) }}
 </div>
 {% endblock %}
