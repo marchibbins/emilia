@@ -6,6 +6,15 @@ from wtforms.validators import DataRequired, Length, NumberRange
 from emilia.climbs.models import Book, Climb, Region
 
 
+class BookForm(Form):
+
+    """ Primary Book create and edit form. """
+
+    slug = TextField(u'Slug', [DataRequired(), Length(max=Book.SLUG_STR_MAX)], description=u'Url-safe identifier, for example: "100-climbs"')
+    short_name = TextField(u'Short name', [DataRequired(), Length(max=Book.NAME_STR_MAX)], description=u'For example: "100 Climbs"')
+    long_name = TextField(u'Long name', [DataRequired(), Length(max=Book.NAME_STR_MAX)], description=u'For example: "100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills"')
+
+
 class ClimbForm(Form):
 
     """ Primary Climb create and edit form. """
