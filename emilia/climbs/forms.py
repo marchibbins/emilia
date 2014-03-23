@@ -1,8 +1,9 @@
 from flask.ext.wtf import Form
 from wtforms import FloatField, IntegerField, TextField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, NumberRange
 
-from emilia.climbs.models import Climb
+from emilia.climbs.models import Book, Climb, Region
 
 
 class ClimbForm(Form):
@@ -16,3 +17,6 @@ class ClimbForm(Form):
     latitude = FloatField(u'Latitude', [DataRequired()])
     longitude = FloatField(u'Latitude', [DataRequired()])
     strava_id = IntegerField(u'Strava segment id', [DataRequired()], description='For example: "944629"')
+
+    book = QuerySelectField(query_factory=lambda:Book.query.all())
+    region = QuerySelectField(query_factory=lambda:Region.query.all())
