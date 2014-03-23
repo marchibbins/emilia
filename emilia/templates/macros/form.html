@@ -1,5 +1,5 @@
-{% macro render_form(form=None, submit_value="Submit", cancel_url=None) %}
-    <form method="POST">
+{% macro render_form(form=None, action='', submit_value='Submit', cancel_url=None) %}
+    <form action="{{ action }}" method="POST">
         <fieldset>
             {% if form %}
                 {{ render_form_errors(form) }}
