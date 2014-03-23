@@ -1,22 +1,23 @@
-{% macro form_tag() %}
+{% macro render_form(form=None, submit_value="Submit", cancel_url=None) %}
     <form method="POST">
         <fieldset>
-            {{ caller() }}
+            {% if form %}
+                {{ render_form_errors(form) }}
+                {{ form.hidden_tag() }}
+                <ul>
+                    {% for field in form if field.type != 'HiddenField' and field.type != 'CSRFTokenField' %}
+                        <li>{{ render_field(field) }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div>
+                <input type="submit" value="{{ submit_value }}">
+                {% if cancel_url %}
+                    <a href="{{ cancel_url }}">Cancel</a>
+                {% endif %}
+            </div>
         </fieldset>
     </form>
-{% endmacro %}
-
-{% macro render_form(form) %}
-    {% call form_tag() %}
-        {{ render_form_errors(form) }}
-        {{ form.hidden_tag() }}
-        <ul>
-            {% for field in form if field.type != 'HiddenField' and field.type != 'CSRFTokenField' %}
-                <li>{{ render_field(field) }}</li>
-            {% endfor %}
-        </ul>
-        <input type="submit" value="Submit">
-    {% endcall %}
 {% endmacro %}
 
 {% macro render_field(field) %}

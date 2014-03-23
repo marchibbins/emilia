@@ -1,12 +1,10 @@
 {% extends 'admin/index.html' %}
 
-{% from "macros/form.html" import form_tag %}
+{% from 'macros/form.html' import render_form %}
 
 {% block content %}
     <h1>Delete climb '{{ climb.name }}'?</h1>
 
-    {% call form_tag() %}
-        <input type="submit" value="Confirm"> or <a href="{{ url_for('admin.index') }}">cancel</a>
-    {% endcall %}
+    {{ render_form(submit_value='Confirm', cancel_url=url_for('admin.index')) }}
 </div>
 {% endblock %}

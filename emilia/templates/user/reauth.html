@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% from "macros/form.html" import render_form %}
+{% from 'macros/form.html' import render_form %}
 
 {% block content %}
     <h1>Reauthenticate</h1>
 
-    {{ render_form(form) }}
+    {{ render_form(form, submit_value='Reauthenticate') }}
 {% endblock %}
