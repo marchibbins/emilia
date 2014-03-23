@@ -1,9 +1,19 @@
-from emilia.climbs.models import Book, Climb
+from emilia.climbs.models import Book, Climb, Region
 from emilia.extensions import db
 
 
 def install():
-    """ Adds Book and Climb data to database. """
+    """ Adds Book, Climb and Region data to database. """
+    regions = [
+        ('south-west', 'South-west'),
+        ('south-east', 'South-east'),
+        ('midlands', 'Midlands'),
+    ]
+
+    for obj in regions:
+        region = Region(*obj)
+        db.session.add(region)
+
     fixtures = [
         {
             'book': ("greatest",

@@ -91,3 +91,36 @@ class Climb(db.Model):
     def __unicode__(self):
         """ Returns a string representation of the Climb object. """
         return '%s. %s' % (self.number, self.name)
+
+
+class Region(db.Model):
+
+    """ Represents a single Region object. """
+
+    SLUG_STR_MAX = 32
+    NAME_STR_MAX = 64
+
+    id = Column(db.Integer, primary_key=True)
+    slug = Column(db.String(SLUG_STR_MAX), unique=True)
+    name = Column(db.String(NAME_STR_MAX))
+
+    def serialize(self):
+        """ Returns the object as an easily serializeable object. """
+        return {
+            'id': self.id,
+            'slug': self.slug,
+            'name': self.name,
+        }
+
+    def __init__(self, slug, name):
+        """ Populates model properties. """
+        self.slug = slug
+        self.name = name
+
+    def __repr__(self):
+        """ Returns the Region object representation. """
+        return '<Region %r>' % self.name
+
+    def __unicode__(self):
+        """ Returns a string representation of the Region object. """
+        return '%s' % self.name
