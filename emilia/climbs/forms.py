@@ -29,3 +29,11 @@ class ClimbForm(Form):
 
     book = QuerySelectField(query_factory=lambda:Book.query.all())
     region = QuerySelectField(query_factory=lambda:Region.query.all())
+
+
+class RegionForm(Form):
+
+    """ Primary Region create and edit form. """
+
+    slug = TextField(u'Slug', [DataRequired(), Length(max=Region.SLUG_STR_MAX)], description=u'Url-safe identifier, for example: "south-west"')
+    name = TextField(u'Name', [DataRequired(), Length(max=Region.NAME_STR_MAX)], description=u'For example: "South-west"')
