@@ -4,16 +4,6 @@ from emilia.extensions import db
 
 def install():
     """ Adds Book, Climb and Region data to database. """
-    regions = [
-        ('south-west', 'South-west'),
-        ('south-east', 'South-east'),
-        ('midlands', 'Midlands'),
-    ]
-
-    for obj in regions:
-        region = Region(*obj)
-        db.session.add(region)
-
     fixtures = [
         {
             'book': ("greatest",
@@ -43,6 +33,41 @@ def install():
 
         for climb in obj['climbs']:
             climb = Climb(*climb, book=book)
+            db.session.add(climb)
+
+    db.session.commit()
+
+    fixtures = [
+        {
+            'region': ('south-west', 'South-west'),
+            'climbs': [
+                'cheddar-gorge',
+                'weston-hill',
+            ],
+        },
+        {
+            'region': ('south-east', 'South-east'),
+            'climbs': [
+                'crowcombe-combe',
+                'gold-hill',
+            ],
+        },
+        {
+            'region': ('midlands', 'Midlands'),
+            'climbs': [
+                'zig-zag-hill',
+                'park-hill',
+            ],
+        },
+    ]
+
+    for obj in fixtures:
+        region = Region(*obj['region'])
+        db.session.add(region)
+
+        for slug in obj['climbs']:
+            climb = Climb.query.filter_by(slug=slug).first()
+            climb.region = region
             db.session.add(climb)
 
     db.session.commit()

@@ -59,6 +59,9 @@ class Climb(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('climbs', lazy='dynamic'))
 
+    region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    region = db.relationship('Region', backref=db.backref('climbs', lazy='dynamic'))
+
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
         return {
@@ -71,9 +74,10 @@ class Climb(db.Model):
             'longitude': self.longitude,
             'strava_id': self.strava_id,
             'book_id': self.book_id,
+            'region_id': self.region_id,
         }
 
-    def __init__(self, number, slug, name, location, latitude, longitude, strava_id, book):
+    def __init__(self, number, slug, name, location, latitude, longitude, strava_id, book=None, region=None):
         """ Populates model properties. """
         self.slug = slug
         self.number = number
@@ -83,6 +87,7 @@ class Climb(db.Model):
         self.longitude = longitude
         self.strava_id = strava_id
         self.book = book
+        self.region = region
 
     def __repr__(self):
         """ Returns the Climb object representation. """
