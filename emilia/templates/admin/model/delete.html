@@ -3,7 +3,9 @@
 {% from 'macros/form.html' import render_form %}
 
 {% block content %}
-    <h1>Delete climb '{{ climb.name }}'?</h1>
+    <h1>Delete {{ name }}?</h1>
+
+    <p>{{ obj }}</p>
 
     {{ render_form(submit_value='Confirm', cancel_url=url_for('admin.index')) }}
 </div>

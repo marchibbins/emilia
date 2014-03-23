@@ -3,9 +3,9 @@
 {% from 'macros/form.html' import render_form %}
 
 {% block content %}
-    <h1>{% block form_title %}Add climb{% endblock %}</h1>
+    <h1>{% block form_title %}Add {{ name }}{% endblock %}</h1>
     <a href="{{ url_for('admin.index') }}">Admin home</a>
 
-    {{ render_form(form, submit_value='Add climb', cancel_url=url_for('admin.index')) }}
+    {{ render_form(form, submit_value='Add %s' % name, cancel_url=url_for('admin.index')) }}
 </div>
 {% endblock %}

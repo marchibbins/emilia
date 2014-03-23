@@ -21,25 +21,26 @@ def index():
 @login_required
 def climb_add():
     """ Creates a new Climb object. """
-    return model_add_view('Climb', Climb, ClimbForm, 'admin/climbs/climb_add.html')
+    return model_add_view(Climb, ClimbForm)
 
 
 @admin.route('/climb/<int:id>', methods=['GET', 'POST'])
 @login_required
 def climb_edit(id):
     """ Edits a Climb object. """
-    return model_edit_view('Climb', id, Climb, ClimbForm, 'admin/climbs/climb_edit.html')
+    return model_edit_view(Climb, ClimbForm, id)
 
 
 @admin.route('/climb/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
 def climb_delete(id):
     """ Deletes a Climb object (on POST, confirm on GET). """
-    return model_delete_view('Climb', id, Climb, 'admin/climbs/climb_delete.html', 'climb')
+    return model_delete_view(Climb, id)
 
 
-def model_add_view(name, model, form, template):
+def model_add_view(model, form):
     """ Renders a generic form-based model create view. """
+    name = model.__name__
     form = form()
 
     if form.validate_on_submit():
@@ -49,11 +50,12 @@ def model_add_view(name, model, form, template):
         flash('%s created.' % name, 'success')
         return redirect(url_for('admin.index'))
 
-    return render_template(template, form=form)
+    return render_template('admin/model/add.html', name=name, form=form)
 
 
-def model_edit_view(name, id, model, form, template):
+def model_edit_view(model, form, id):
     """ Renders a generic form-based model edit view. """
+    name = model.__name__
     obj = model.query.get_or_404(id)
     form = form(obj=obj)
 
@@ -63,11 +65,12 @@ def model_edit_view(name, id, model, form, template):
         db.session.commit()
         flash('%s updated.' % name, 'success')
 
-    return render_template(template, form=form)
+    return render_template('admin/model/edit.html', name=name, form=form)
 
 
-def model_delete_view(name, id, model, template, obj_name):
+def model_delete_view(model, id):
     """ Renders a generic form-based model delete view. """
+    name = model.__name__
     obj = model.query.get_or_404(id)
 
     if request.method == 'POST':
@@ -76,4 +79,4 @@ def model_delete_view(name, id, model, template, obj_name):
         flash('%s deleted.' % name, 'success')
         return redirect(url_for('admin.index'))
 
-    return render_template(template, **{obj_name: obj})
+    return render_template('admin/model/delete.html', name=name, obj=obj)
