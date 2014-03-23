@@ -19,6 +19,7 @@ class Book(db.Model):
         """ Returns the object as an easily serializeable object. """
         return {
             'id': self.id,
+            'slug': self.slug,
             'short_name': self.short_name,
             'long_name': self.long_name,
         }
@@ -60,6 +61,7 @@ class Climb(db.Model):
         """ Returns the object as an easily serializeable object. """
         return {
             'id': self.id,
+            'slug': self.slug,
             'number': self.number,
             'name': self.name,
             'location': self.location,
