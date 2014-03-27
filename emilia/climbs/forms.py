@@ -1,33 +1,10 @@
 from flask.ext.wtf import Form
 from wtforms import FloatField, IntegerField, TextField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from wtforms.validators import DataRequired, Length, NumberRange, ValidationError
+from wtforms.validators import DataRequired, Length, NumberRange
 
 from emilia.climbs.models import Book, Climb, Region
-
-
-class UniqueValidator(object):
-
-    """ Validates uniqueness of field on model. """
-
-    def __init__(self, model, field, message=None):
-        self.model = model
-        self.field = field
-        if not message:
-            message = u'%s with this %s already exists.' % (model.__name__, field.name)
-        self.message = message
-
-    def __call__(self, form, field):
-        if self.model.query.filter(self.field == field.data).count() > 0:
-            raise ValidationError(self.message)
-
-
-def lowercase_filter(data):
-    """ Converts string data to lowercase. """
-    if data:
-        return data.lower()
-    else:
-        return data
+from emilia.utils import lowercase_filter, UniqueValidator
 
 
 class BookForm(Form):
