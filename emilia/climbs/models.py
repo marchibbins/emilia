@@ -11,9 +11,9 @@ class Book(db.Model):
     NAME_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
-    slug = Column(db.String(SLUG_STR_MAX), unique=True)
-    short_name = Column(db.String(NAME_STR_MAX))
-    long_name = Column(db.String(NAME_STR_MAX))
+    slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
+    short_name = Column(db.String(NAME_STR_MAX), nullable=False)
+    long_name = Column(db.String(NAME_STR_MAX), nullable=False)
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
@@ -48,13 +48,13 @@ class Climb(db.Model):
     LENGTH_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
-    slug = Column(db.String(SLUG_STR_MAX), unique=True)
-    number = Column(db.Integer)
-    name = Column(db.String(NAME_STR_MAX))
-    location = Column(db.String(LENGTH_STR_MAX))
-    latitude = Column(db.Float)
-    longitude = Column(db.Float)
-    strava_id = Column(db.Integer)
+    slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
+    number = Column(db.Integer, nullable=False)
+    name = Column(db.String(NAME_STR_MAX), nullable=False)
+    location = Column(db.String(LENGTH_STR_MAX), nullable=False)
+    latitude = Column(db.Float, nullable=False)
+    longitude = Column(db.Float, nullable=False)
+    strava_id = Column(db.Integer, nullable=False)
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('climbs', lazy='dynamic'))
@@ -106,8 +106,8 @@ class Region(db.Model):
     NAME_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
-    slug = Column(db.String(SLUG_STR_MAX), unique=True)
-    name = Column(db.String(NAME_STR_MAX))
+    slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
+    name = Column(db.String(NAME_STR_MAX), nullable=False)
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
