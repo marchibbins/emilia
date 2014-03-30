@@ -69,7 +69,7 @@ class ClimbModelTests(unittest.TestCase):
 
     def test_init(self):
         """ Tests init takes correct arguments. """
-        list = ['number', 'slug', 'name', 'location', 'latitude', 'longitude', 'strava_id', 'book', 'region']
+        list = ['slug', 'number', 'name', 'location', 'latitude', 'longitude', 'strava_id', 'book', 'region']
         args = inspect.getargspec(Climb.__init__).args[1:]
         self.assertEqual(args, list)
 
@@ -105,7 +105,7 @@ class ClimbModelTests(unittest.TestCase):
         serialized = climb.serialize()
         serialized_keys = serialized.keys()
         serialized_keys.sort()
-        keys = ['id', 'number', 'slug', 'name', 'location', 'latitude', 'longitude', 'strava_id', 'book_id', 'region_id']
+        keys = ['id', 'slug', 'number', 'name', 'location', 'latitude', 'longitude', 'strava_id', 'book_id', 'region_id']
         keys.sort()
         self.assertEqual(serialized_keys, keys)
         for key in keys:

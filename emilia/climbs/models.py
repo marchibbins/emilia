@@ -77,7 +77,7 @@ class Climb(db.Model):
             'region_id': self.region_id,
         }
 
-    def __init__(self, number, slug, name, location, latitude, longitude, strava_id, book=None, region=None):
+    def __init__(self, slug, number, name, location, latitude, longitude, strava_id, book=None, region=None):
         """ Populates model properties. """
         self.slug = slug
         self.number = number
