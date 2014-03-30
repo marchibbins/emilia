@@ -1,7 +1,7 @@
 import inspect
 import unittest
 
-from emilia.climbs.models import Book, Climb
+from emilia.climbs.models import Book, Climb, Region
 
 
 class BookModelTests(unittest.TestCase):
@@ -125,3 +125,60 @@ class ClimbModelTests(unittest.TestCase):
     def climb(self):
         """ Creates a new Climb object for tests. """
         return Climb(1, 'slug', 'name', 'location', 0, 0, 1)
+
+
+class RegionModelTests(unittest.TestCase):
+
+    """ Tests for Region model. """
+
+    def test_init(self):
+        """ Tests init takes correct arguments. """
+        list = ['slug', 'name']
+        args = inspect.getargspec(Region.__init__).args[1:]
+        self.assertEqual(args, list)
+
+    def test_required_fields(self):
+        """ Tests required fields cannot be blank. """
+        self.assertFalse(Region.slug.property.columns[0].nullable)
+        self.assertFalse(Region.name.property.columns[0].nullable)
+
+    def test_unique_fields(self):
+        """ Tests slug is unique. """
+        self.assertTrue(Region.slug.property.columns[0].unique)
+
+    def test_field_length_defaults(self):
+        """ Tests model default string lengths are set. """
+        self.assertEqual(Region.SLUG_STR_MAX, 32)
+        self.assertEqual(Region.NAME_STR_MAX, 64)
+
+    def test_field_lengths(self):
+        """ Tests slug, name and location string lengths are set. """
+        self.assertEqual(Region.slug.property.columns[0].type.length, Region.SLUG_STR_MAX)
+        self.assertEqual(Region.name.property.columns[0].type.length, Region.NAME_STR_MAX)
+
+    def test_serialize(self):
+        """ Test serialize returns correct object. """
+        region = self.region()
+        serialized = region.serialize()
+        serialized_keys = serialized.keys()
+        serialized_keys.sort()
+        keys = ['id', 'slug', 'name']
+        keys.sort()
+        self.assertEqual(serialized_keys, keys)
+        for key in keys:
+            self.assertEqual(serialized[key], getattr(region, key))
+
+    def test_repr(self):
+        """ Tests repr contains class and name. """
+        region = self.region()
+        self.assertIn(Region.__name__, region.__repr__())
+        self.assertIn(region.name, region.__repr__())
+
+    def test_unicode(self):
+        """ Tests unicode matches name. """
+        region = self.region()
+        self.assertEqual(region.name, region.__unicode__())
+
+    def region(self):
+        """ Creates a new Region object for tests. """
+        return Region('slug', 'name')
