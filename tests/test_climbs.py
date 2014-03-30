@@ -35,8 +35,12 @@ class BookModelTests(unittest.TestCase):
         self.assertEqual(Book.short_name.property.columns[0].type.length, Book.NAME_STR_MAX)
         self.assertEqual(Book.long_name.property.columns[0].type.length, Book.NAME_STR_MAX)
 
+    def test_serializable(self):
+        """ Tests model has serialize method. """
+        self.assertIsNotNone(getattr(Book, 'serialize', None))
+
     def test_serialize(self):
-        """ Test serialize returns correct object. """
+        """ Tests serialize returns correct object. """
         book = self.book()
         serialized = book.serialize()
         serialized_keys = serialized.keys()
@@ -99,8 +103,12 @@ class ClimbModelTests(unittest.TestCase):
         self.assertEqual(Climb.name.property.columns[0].type.length, Climb.NAME_STR_MAX)
         self.assertEqual(Climb.location.property.columns[0].type.length, Climb.LENGTH_STR_MAX)
 
+    def test_serializable(self):
+        """ Tests model has serialize method. """
+        self.assertIsNotNone(getattr(Climb, 'serialize', None))
+
     def test_serialize(self):
-        """ Test serialize returns correct object. """
+        """ Tests serialize returns correct object. """
         climb = self.climb()
         serialized = climb.serialize()
         serialized_keys = serialized.keys()
@@ -156,8 +164,12 @@ class RegionModelTests(unittest.TestCase):
         self.assertEqual(Region.slug.property.columns[0].type.length, Region.SLUG_STR_MAX)
         self.assertEqual(Region.name.property.columns[0].type.length, Region.NAME_STR_MAX)
 
+    def test_serializable(self):
+        """ Tests model has serialize method. """
+        self.assertIsNotNone(getattr(Region, 'serialize', None))
+
     def test_serialize(self):
-        """ Test serialize returns correct object. """
+        """ Tests serialize returns correct object. """
         region = self.region()
         serialized = region.serialize()
         serialized_keys = serialized.keys()
