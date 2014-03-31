@@ -39,9 +39,9 @@ def shell():
 
 
 @task
-def test():
+def test(pattern=''):
     """ Run tests. """
-    honcho_run('python test.py')
+    honcho_run('python test.py %s' % pattern)
 
 
 @task

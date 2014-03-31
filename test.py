@@ -1,4 +1,5 @@
 from coverage import coverage
+import sys
 import unittest
 
 
@@ -12,16 +13,26 @@ def start_coverage():
 def stop_coverage(cov):
     """ Stops measuring code coverage. """
     # cov.report()
+    print 'Generating HTML Coverage report ...'
     cov.html_report(directory='coverage')
     cov.erase()
 
 
-def run():
+def run(pattern='*'):
     """ Runs unittest runner and coverage. """
-    coverage = start_coverage()
-    suite = unittest.TestLoader().discover('tests')
+    if len(sys.argv) > 1:
+        pattern = sys.argv[1]
+
+    # Only run Coverage (generating HTML report) if testing everything
+    run_coverage = pattern == '*'
+    if run_coverage:
+        coverage = start_coverage()
+
+    suite = unittest.TestLoader().discover('tests', pattern='test_%s.py' % pattern)
     unittest.runner.TextTestRunner(verbosity=2).run(suite)
-    stop_coverage(coverage)
+
+    if run_coverage:
+        stop_coverage(coverage)
 
 
 if __name__ == '__main__':
