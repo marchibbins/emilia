@@ -45,13 +45,13 @@ class Climb(db.Model):
 
     SLUG_STR_MAX = 32
     NAME_STR_MAX = 64
-    LENGTH_STR_MAX = 64
+    LOCATION_STR_MAX = 64
 
     id = Column(db.Integer, primary_key=True)
     slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
     number = Column(db.Integer, nullable=False)
     name = Column(db.String(NAME_STR_MAX), nullable=False)
-    location = Column(db.String(LENGTH_STR_MAX), nullable=False)
+    location = Column(db.String(LOCATION_STR_MAX), nullable=False)
     latitude = Column(db.Float, nullable=False)
     longitude = Column(db.Float, nullable=False)
     strava_id = Column(db.Integer, nullable=False)

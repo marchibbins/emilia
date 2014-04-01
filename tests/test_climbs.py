@@ -95,13 +95,13 @@ class ClimbModelTests(unittest.TestCase):
         """ Tests model default string lengths are set. """
         self.assertEqual(Climb.SLUG_STR_MAX, 32)
         self.assertEqual(Climb.NAME_STR_MAX, 64)
-        self.assertEqual(Climb.LENGTH_STR_MAX, 64)
+        self.assertEqual(Climb.LOCATION_STR_MAX, 64)
 
     def test_field_lengths(self):
         """ Tests slug, name and location string lengths are set. """
         self.assertEqual(Climb.slug.property.columns[0].type.length, Climb.SLUG_STR_MAX)
         self.assertEqual(Climb.name.property.columns[0].type.length, Climb.NAME_STR_MAX)
-        self.assertEqual(Climb.location.property.columns[0].type.length, Climb.LENGTH_STR_MAX)
+        self.assertEqual(Climb.location.property.columns[0].type.length, Climb.LOCATION_STR_MAX)
 
     def test_serializable(self):
         """ Tests model has serialize method. """
