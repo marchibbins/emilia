@@ -26,7 +26,6 @@ class AppTests(unittest.TestCase):
     def init_app(self):
         """ Reloads config module, attempts to init application. """
         reload(config)
-        self.app = init()
 
     def test_server_name_requirement(self):
         """ Tests that KeyError is thrown when SERVER_NAME environ is not set. """
