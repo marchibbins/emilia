@@ -5,5 +5,19 @@
 
     <p>{{ climb }}. {{ climb.location }} ({{ climb.strava_id }})</p>
 
+    <dl>
+        <dt>Distance:</dt>
+        <dd>{{ segment.distance }}</dd>
+
+        <dt>Average grade:</dt>
+        <dd>{{ segment.average_grade }}</dd>
+
+        <dt>Maximum grade:</dt>
+        <dd>{{ segment.maximum_grade }}</dd>
+
+        <dt>Elevation difference:</dt>
+        <dd>{{ segment.total_elevation_gain }}</dd>
+    </dl>
+
     <a href="{{ url_for('frontend.book_detail', slug=climb.book.slug) }}" title="">Back to book</a>
 {% endblock %}
