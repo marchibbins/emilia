@@ -4,6 +4,7 @@ import logging
 
 from emilia.admin import admin
 from emilia.api import api
+from emilia.climbs import strava
 from emilia.config import Config
 from emilia.extensions import cache, db, login_manager
 from emilia.frontend import frontend
@@ -47,6 +48,9 @@ def configure_extensions(app):
     login_manager.refresh_message = u'Please reauthenticate to access this page.'
     login_manager.refresh_view = 'user.reauth'
     login_manager.setup_app(app)
+
+    # stravalib
+    strava.init_app(app)
 
 
 def configure_blueprints(app):

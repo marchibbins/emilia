@@ -37,3 +37,6 @@ class Config(object):
 
     # Flask-Login: http://flask.pocoo.org/docs/quickstart/#sessions
     SECRET_KEY = env_var('SECRET_KEY', required=True)
+
+    # Stravalib: https://github.com/hozn/stravalib
+    STRAVA_ACCESS_TOKEN = env_var('STRAVA_ACCESS_TOKEN', required=True)
