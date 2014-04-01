@@ -29,7 +29,7 @@ class Config(object):
 
     # Flask-Cache: http://pythonhosted.org/Flask-Cache/
     CACHE_TYPE = env_var('CACHE_TYPE', default='simple')
-    CACHE_DEFAULT_TIMEOUT = env_var('CACHE_DEFAULT_TIMEOUT', default=60)
+    CACHE_DEFAULT_TIMEOUT = env_var('CACHE_DEFAULT_TIMEOUT', default=60, integer=True)
 
     # Flask-SQLAlchemy: http://packages.python.org/Flask-SQLAlchemy/config.html
     SQLALCHEMY_DATABASE_URI = env_var('SQLALCHEMY_DATABASE_URI', required=True)

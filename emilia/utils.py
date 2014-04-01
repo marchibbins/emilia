@@ -18,7 +18,7 @@ class UniqueValidator(object):
             raise ValidationError(self.message)
 
 
-def env_var(key, default=None, required=False):
+def env_var(key, default=None, required=False, integer=False):
     """ Parses environment variables based on type and requirement, used in configuration. """
     if required:
         # Throw KeyError for missing requirements
@@ -33,7 +33,10 @@ def env_var(key, default=None, required=False):
     elif val == 'False':
         val = False
 
-    return val
+    if integer:
+        return int(val)
+    else:
+        return val
 
 
 def lowercase_filter(data):
