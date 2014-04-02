@@ -248,7 +248,7 @@ def install():
             ],
         },
         {
-            'region': ('nort-west', 'Nort-West'),
+            'region': ('nort-west', 'Nort-west'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'cat-and-fiddle',
