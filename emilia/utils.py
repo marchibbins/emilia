@@ -6,15 +6,14 @@ class UniqueValidator(object):
 
     """ Validates uniqueness of field on model, used by forms. """
 
-    def __init__(self, model, field, message=None):
+    def __init__(self, model, field):
         self.model = model
         self.field = field
-        if not message:
-            message = u'%s with this %s already exists.' % (model.__name__, field.name)
-        self.message = message
+        self.message = u'%s with this %s already exists.' % (model.__name__, field.name)
 
     def __call__(self, form, field):
-        if self.model.query.filter(self.field == field.data).count() > 0:
+        obj_id = form.data.get('id')
+        if self.model.query.filter(self.model.id != obj_id, self.field == field.data).count() > 0:
             raise ValidationError(self.message)
 
 

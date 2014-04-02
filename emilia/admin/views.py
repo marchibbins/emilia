@@ -88,7 +88,8 @@ def model_add_view(model, form):
     form = form()
 
     if form.validate_on_submit():
-        obj = model(**form.data)
+        data = dict((k, v) for k, v in form.data.iteritems() if v)
+        obj = model(**data)
         db.session.add(obj)
         db.session.commit()
         flash('%s created.' % name, 'success')
