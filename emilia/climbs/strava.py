@@ -1,5 +1,5 @@
 from stravalib import Client
-from stravalib.model import Segment
+from stravalib.model import Segment, SegmentLeaderboard, SegmentLeaderboardEntry
 import requests
 
 from emilia.utils import env_var
@@ -27,7 +27,7 @@ class Stravalib(object):
 
 
 def serialize_segment(self):
-    """ Returns basic object data for serialization. """
+    """ Returns basic Segment data for serialization. """
     return {
         'distance': self.distance.num,
         'average_grade': self.average_grade,
@@ -35,7 +35,28 @@ def serialize_segment(self):
         'total_elevation_gain': self.total_elevation_gain.num,
     }
 
+
+def serialize_segment_leaderboard(self):
+    """ Returns basic SegmentLeaderboard data for serialization. """
+    obj = {
+        'entry_count': self.entry_count,
+        'entries': [],
+    }
+    for entry in self.entries:
+        obj['entries'].append(entry.serialize())
+    return obj
+
+
+def serialize_segment_leaderboard_entry(self):
+    """ Returns basic SegmentLeaderboardEntry data for serialization. """
+    return {
+        'athlete_name': self.athlete_name,
+        'elapsed_time': str(self.elapsed_time)
+    }
+
 Segment.serialize = serialize_segment
+SegmentLeaderboard.serialize = serialize_segment_leaderboard
+SegmentLeaderboardEntry.serialize = serialize_segment_leaderboard_entry
 
 
 strava = Stravalib()

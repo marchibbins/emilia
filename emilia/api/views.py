@@ -53,7 +53,9 @@ def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404().serialize()
     segment = strava.get_segment(climb['strava_id']).serialize()
-    return json_response(climb=climb, segment=segment)
+    leaderboard_men = strava.get_segment_leaderboard(climb['strava_id'], gender='M').serialize()
+    leaderboard_women = strava.get_segment_leaderboard(climb['strava_id'], gender='F').serialize()
+    return json_response(climb=climb, segment=segment, leaderboard_men=leaderboard_men, leaderboard_women=leaderboard_women)
 
 
 @api.errorhandler(404)
