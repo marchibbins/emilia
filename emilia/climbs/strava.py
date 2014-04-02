@@ -18,4 +18,11 @@ class Stravalib(object):
         except requests.exceptions.HTTPError, error:
             raise RuntimeError(error)
 
+    def get_segment_leaderboard(self, *args, **kwargs):
+        try:
+            return self.client.get_segment_leaderboard(*args, **kwargs)
+        except requests.exceptions.HTTPError, error:
+            raise RuntimeError(error)
+
+
 strava = Stravalib()

@@ -37,4 +37,6 @@ def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
     segment = strava.get_segment(climb.strava_id)
-    return render_template('frontend/climbs/climb_detail.html', climb=climb, segment=segment)
+    leaderboard_men = strava.get_segment_leaderboard(climb.strava_id, gender='M')
+    leaderboard_women = strava.get_segment_leaderboard(climb.strava_id, gender='F')
+    return render_template('frontend/climbs/climb_detail.html', climb=climb, segment=segment, leaderboard_men=leaderboard_men, leaderboard_women=leaderboard_women)
