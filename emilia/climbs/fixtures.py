@@ -10,9 +10,9 @@ def install():
                      "100 Greatest Cycling Climbs",
                      "100 Greatest Cycling Climbs: A Road Cyclist's Guide to Britain's Hills"),
             'climbs': [
-                ("cheddar-gorge", 1, "Cheddar Gorge", "Cheddar, Somerset", 51.5072, -0.1275, 944629),
-                ("weston-hill", 2, "Weston Hill", "Weston, Bath", 51.5072, -0.1275, 944629),
-                ("crowcombe-combe", 3, "Crowcombe Combe", "Crowcombe, Somerset", 51.5072, -0.1275, 944629),
+                ("cheddar-gorge", 1, "Cheddar Gorge", "Cheddar, Somerset", 944629),
+                ("weston-hill", 2, "Weston Hill", "Weston, Bath", 944629),
+                ("crowcombe-combe", 3, "Crowcombe Combe", "Crowcombe, Somerset", 944629),
             ]
         },
         {
@@ -20,9 +20,9 @@ def install():
                      "Another 100 Greatest Cycling Climbs",
                      "Another 100 Greatest Cycling Climbs: A Road Cyclist's Guide to Britain's Hills"),
             'climbs': [
-                ("gold-hill", 101, "Gold Hill", "Shaftesbury, Dorset", 51.5072, -0.1275, 944629),
-                ("zig-zag-hill", 102, "Zig Zag Hill", "Shaftesbury, Dorset", 51.5072, -0.1275, 944629),
-                ("park-hill", 103, "Park Hill", "Longleat, Dorset", 51.5072, -0.1275, 944629),
+                ("gold-hill", 101, "Gold Hill", "Shaftesbury, Dorset", 944629),
+                ("zig-zag-hill", 102, "Zig Zag Hill", "Shaftesbury, Dorset", 944629),
+                ("park-hill", 103, "Park Hill", "Longleat, Dorset", 944629),
             ]
         },
     ]

@@ -73,7 +73,7 @@ class ClimbModelTests(unittest.TestCase):
 
     def test_init(self):
         """ Tests init takes correct arguments. """
-        list = ['slug', 'number', 'name', 'location', 'latitude', 'longitude', 'strava_id', 'book', 'region']
+        list = ['slug', 'number', 'name', 'location', 'strava_id', 'book', 'region']
         args = inspect.getargspec(Climb.__init__).args[1:]
         self.assertEqual(args, list)
 
@@ -83,8 +83,6 @@ class ClimbModelTests(unittest.TestCase):
         self.assertFalse(Climb.number.property.columns[0].nullable)
         self.assertFalse(Climb.name.property.columns[0].nullable)
         self.assertFalse(Climb.location.property.columns[0].nullable)
-        self.assertFalse(Climb.latitude.property.columns[0].nullable)
-        self.assertFalse(Climb.longitude.property.columns[0].nullable)
         self.assertFalse(Climb.strava_id.property.columns[0].nullable)
 
     def test_unique_fields(self):
@@ -113,7 +111,7 @@ class ClimbModelTests(unittest.TestCase):
         serialized = climb.serialize()
         serialized_keys = serialized.keys()
         serialized_keys.sort()
-        keys = ['id', 'slug', 'number', 'name', 'location', 'latitude', 'longitude', 'strava_id', 'book_id', 'region_id']
+        keys = ['id', 'slug', 'number', 'name', 'location', 'strava_id', 'book_id', 'region_id']
         keys.sort()
         self.assertEqual(serialized_keys, keys)
         for key in keys:
@@ -132,7 +130,7 @@ class ClimbModelTests(unittest.TestCase):
 
     def climb(self):
         """ Creates a new Climb object for tests. """
-        return Climb(1, 'slug', 'name', 'location', 0, 0, 1)
+        return Climb(1, 'slug', 'name', 'location', 1)
 
 
 class RegionModelTests(unittest.TestCase):

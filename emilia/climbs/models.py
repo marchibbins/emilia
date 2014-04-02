@@ -52,8 +52,6 @@ class Climb(db.Model):
     number = Column(db.Integer, nullable=False)
     name = Column(db.String(NAME_STR_MAX), nullable=False)
     location = Column(db.String(LOCATION_STR_MAX), nullable=False)
-    latitude = Column(db.Float, nullable=False)
-    longitude = Column(db.Float, nullable=False)
     strava_id = Column(db.Integer, nullable=False)
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
@@ -70,21 +68,17 @@ class Climb(db.Model):
             'number': self.number,
             'name': self.name,
             'location': self.location,
-            'latitude': self.latitude,
-            'longitude': self.longitude,
             'strava_id': self.strava_id,
             'book_id': self.book_id,
             'region_id': self.region_id,
         }
 
-    def __init__(self, slug, number, name, location, latitude, longitude, strava_id, book=None, region=None):
+    def __init__(self, slug, number, name, location, strava_id, book=None, region=None):
         """ Populates model properties. """
         self.slug = slug
         self.number = number
         self.name = name
         self.location = location
-        self.latitude = latitude
-        self.longitude = longitude
         self.strava_id = strava_id
         self.book = book
         self.region = region
