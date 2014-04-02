@@ -117,9 +117,10 @@ def install():
                      "Another 100 Greatest Cycling Climbs",
                      "Another 100 Greatest Cycling Climbs: A Road Cyclist's Guide to Britain's Hills"),
             'climbs': [
-                ("gold-hill", 101, "Gold Hill", "Shaftesbury, Dorset", 944629),
-                ("zig-zag-hill", 102, "Zig Zag Hill", "Shaftesbury, Dorset", 944629),
-                ("park-hill", 103, "Park Hill", "Longleat, Dorset", 944629),
+                ("gold-hill", 101, "Gold Hill", "Shaftesbury, Dorset", 689528),
+                ("zig-zag-hill", 102, "Zig Zag Hill", "Shaftesbury, Dorset", 772570),
+                ("park-hill", 103, "Park Hill", "Longleat, Dorset", 700550),
+                ("frocester-hill", 104, "Frocester Hill", "Frocester, Gloucestershire", 667813),
             ]
         },
     ]
@@ -152,6 +153,12 @@ def install():
                 'rundlestone',
                 'salcombe-hill',
                 'dovers-hill',
+
+                # Another 100 Greatest Cycling Climbs
+                'gold-hill',
+                'zig-zag-hill',
+                'park-hill',
+                'frocester-hill',
             ],
         },
         {
