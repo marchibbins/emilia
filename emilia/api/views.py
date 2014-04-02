@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from itertools import chain
 
 from emilia.climbs.models import Book, Climb
+from emilia.extensions import cache
 
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -23,12 +24,14 @@ def json_response(code=200, **kwargs):
 
 
 @api.route('/')
+@cache.cached()
 def index():
     """ Renders API index. """
     return json_response()
 
 
 @api.route('/books')
+@cache.cached()
 def book_list():
     """ Renders a full list of Books as JSON. """
     books = [item.serialize() for item in Book.query.all()]
@@ -36,6 +39,7 @@ def book_list():
 
 
 @api.route('/books/<slug>')
+@cache.cached()
 def book_detail(slug):
     """ Renders a detail view for the Book, matching slug, as JSON. """
     book = Book.query.filter_by(slug=slug).first_or_404().serialize()
@@ -43,6 +47,7 @@ def book_detail(slug):
 
 
 @api.route('/climbs/<slug>')
+@cache.cached()
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404().serialize()
