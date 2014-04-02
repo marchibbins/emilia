@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from itertools import chain
 
 from emilia.climbs.models import Book, Climb
+from emilia.climbs.strava import strava
 from emilia.extensions import cache
 
 
@@ -51,7 +52,8 @@ def book_detail(slug):
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404().serialize()
-    return json_response(climb=climb)
+    segment = strava.get_segment(climb['strava_id']).serialize()
+    return json_response(climb=climb, segment=segment)
 
 
 @api.errorhandler(404)

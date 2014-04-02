@@ -1,4 +1,5 @@
 from stravalib import Client
+from stravalib.model import Segment
 import requests
 
 from emilia.utils import env_var
@@ -23,6 +24,18 @@ class Stravalib(object):
             return self.client.get_segment_leaderboard(*args, **kwargs)
         except requests.exceptions.HTTPError, error:
             raise RuntimeError(error)
+
+
+def serialize_segment(self):
+    """ Returns basic object data for serialization. """
+    return {
+        'distance': self.distance.num,
+        'average_grade': self.average_grade,
+        'maximum_grade': self.maximum_grade,
+        'total_elevation_gain': self.total_elevation_gain.num,
+    }
+
+Segment.serialize = serialize_segment
 
 
 strava = Stravalib()
