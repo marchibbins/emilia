@@ -19,12 +19,14 @@
         <dd>{{ segment.total_elevation_gain }}</dd>
     </dl>
 
+    <p>Men ({{ leaderboard_men.entry_count }})</p>
     <ol>
         {% for entry in leaderboard_men.entries %}
             <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
         {% endfor %}
     </ol>
 
+    <p>Women ({{ leaderboard_women.entry_count }})</p>
     <ol>
         {% for entry in leaderboard_women.entries %}
             <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
