@@ -34,11 +34,15 @@ class Stravalib(object):
         """ Retrives Segment info from cache or Strava. """
         return self.get_or_cache_call(Segment, 'get_segment', *args, **kwargs)
 
+    def get_segment_leaders(self, *args, **kwargs):
+        """ Retrives Segment Leaderboard info from cache or Strava. """
+        kwargs['top_results_limit'] = self.NUMBER_OF_LEADERS
+        return self.get_or_cache_call(SegmentLeaderboard, 'get_segment_leaderboard', *args, **kwargs)
+
     def get_segment_club_leaders(self, *args, **kwargs):
         """ Retrives Segment Leaderboard info from cache or Strava. """
         kwargs['club_id'] = self.CLUB_ID
-        kwargs['top_results_limit'] = self.NUMBER_OF_LEADERS
-        return self.get_or_cache_call(SegmentLeaderboard, 'get_segment_leaderboard', *args, **kwargs)
+        return self.get_segment_leaders(*args, **kwargs)
 
 
 def serialize_segment(self):
