@@ -43,7 +43,7 @@ def climb_detail(slug):
     context = {
         'climb': climb,
         'segment': strava.get_segment(climb.strava_id),
-        'male_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M'),
-        'female_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F'),
+        'male_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M'),
+        'female_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F'),
     }
     return render_template('frontend/climbs/climb_detail.html', **context)

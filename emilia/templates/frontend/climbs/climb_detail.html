@@ -19,16 +19,16 @@
         <dd>{{ segment.total_elevation_gain }}</dd>
     </dl>
 
-    <p>Male club leaders (of {{ male_leaders.entry_count }} total)</p>
+    <p>Male club leaders (of {{ male_club_leaders.entry_count }} total)</p>
     <ol>
-        {% for entry in male_leaders.entries %}
+        {% for entry in male_club_leaders.entries %}
             <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
         {% endfor %}
     </ol>
 
-    <p>Female club leaders (of {{ female_leaders.entry_count }} total)</p>
+    <p>Female club leaders (of {{ female_club_leaders.entry_count }} total)</p>
     <ol>
-        {% for entry in female_leaders.entries %}
+        {% for entry in female_club_leaders.entries %}
             <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
         {% endfor %}
     </ol>

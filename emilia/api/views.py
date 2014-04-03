@@ -59,8 +59,8 @@ def climb_detail(slug):
     context = {
         'climb': climb.serialize(),
         'segment': strava.get_segment(climb.strava_id).serialize(),
-        'male_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M').serialize(),
-        'female_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F').serialize(),
+        'male_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M').serialize(),
+        'female_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F').serialize(),
     }
     return json_response(**context)
 
