@@ -55,12 +55,12 @@ def book_detail(slug):
 @cache.cached()
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug, as JSON. """
-    climb = Climb.query.filter_by(slug=slug).first_or_404().serialize()
+    climb = Climb.query.filter_by(slug=slug).first_or_404()
     context = {
-        'climb': climb,
-        'segment': strava.get_segment(climb['strava_id']).serialize(),
-        'male_leaders': strava.get_segment_club_leaders(climb['strava_id'], gender='M').serialize(),
-        'female_leaders': strava.get_segment_club_leaders(climb['strava_id'], gender='F').serialize(),
+        'climb': climb.serialize(),
+        'segment': strava.get_segment(climb.strava_id).serialize(),
+        'male_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M').serialize(),
+        'female_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F').serialize(),
     }
     return json_response(**context)
 
