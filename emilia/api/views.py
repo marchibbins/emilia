@@ -65,6 +65,19 @@ def climb_detail(slug):
     return json_response(**context)
 
 
+@api.route('/climbs/<slug>/club_leaders')
+@cache.cached()
+def climb_club_leaders(slug):
+    """ Renders top Climb club leaders, matching slug, as JSON. """
+    climb = Climb.query.filter_by(slug=slug).first_or_404()
+    context = {
+        'climb': climb.serialize(),
+        'male_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M').serialize(),
+        'female_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F').serialize(),
+    }
+    return json_response(**context)
+
+
 @api.route('/climbs/<slug>/leaders')
 @cache.cached()
 def climb_leaders(slug):
