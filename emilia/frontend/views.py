@@ -19,16 +19,20 @@ def index():
 @cache.cached()
 def book_list():
     """ Renders a full list of Books. """
-    books = Book.query.all()
-    return render_template('frontend/climbs/book_list.html', books=books)
+    context = {
+        'books': Book.query.all()
+    }
+    return render_template('frontend/climbs/book_list.html', **context)
 
 
 @frontend.route('/books/<slug>')
 @cache.cached()
 def book_detail(slug):
     """ Renders a detail view for the Book, matching slug. """
-    book = Book.query.filter_by(slug=slug).first_or_404()
-    return render_template('frontend/climbs/book_detail.html', book=book)
+    context = {
+        'book': Book.query.filter_by(slug=slug).first_or_404()
+    }
+    return render_template('frontend/climbs/book_detail.html', **context)
 
 
 @frontend.route('/climbs/<slug>')
@@ -36,7 +40,10 @@ def book_detail(slug):
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
-    segment = strava.get_segment(climb.strava_id)
-    leaderboard_men = strava.get_segment_leaderboard(climb.strava_id, gender='M')
-    leaderboard_women = strava.get_segment_leaderboard(climb.strava_id, gender='F')
-    return render_template('frontend/climbs/climb_detail.html', climb=climb, segment=segment, leaderboard_men=leaderboard_men, leaderboard_women=leaderboard_women)
+    context = {
+        'climb': climb,
+        'segment': strava.get_segment(climb.strava_id),
+        'male_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M'),
+        'female_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F'),
+    }
+    return render_template('frontend/climbs/climb_detail.html', **context)

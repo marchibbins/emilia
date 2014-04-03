@@ -35,16 +35,20 @@ def index():
 @cache.cached()
 def book_list():
     """ Renders a full list of Books as JSON. """
-    books = [item.serialize() for item in Book.query.all()]
-    return json_response(books=books)
+    context = {
+        'books': [item.serialize() for item in Book.query.all()]
+    }
+    return json_response(**context)
 
 
 @api.route('/books/<slug>')
 @cache.cached()
 def book_detail(slug):
     """ Renders a detail view for the Book, matching slug, as JSON. """
-    book = Book.query.filter_by(slug=slug).first_or_404().serialize()
-    return json_response(book=book)
+    context = {
+        'book': Book.query.filter_by(slug=slug).first_or_404().serialize()
+    }
+    return json_response(**context)
 
 
 @api.route('/climbs/<slug>')
@@ -52,10 +56,13 @@ def book_detail(slug):
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404().serialize()
-    segment = strava.get_segment(climb['strava_id']).serialize()
-    leaderboard_men = strava.get_segment_leaderboard(climb['strava_id'], gender='M').serialize()
-    leaderboard_women = strava.get_segment_leaderboard(climb['strava_id'], gender='F').serialize()
-    return json_response(climb=climb, segment=segment, leaderboard_men=leaderboard_men, leaderboard_women=leaderboard_women)
+    context = {
+        'climb': climb,
+        'segment': strava.get_segment(climb['strava_id']).serialize(),
+        'male_leaders': strava.get_segment_club_leaders(climb['strava_id'], gender='M').serialize(),
+        'female_leaders': strava.get_segment_club_leaders(climb['strava_id'], gender='F').serialize(),
+    }
+    return json_response(**context)
 
 
 @api.errorhandler(404)
