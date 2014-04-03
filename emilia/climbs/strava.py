@@ -2,6 +2,7 @@ from stravalib import Client
 from stravalib.model import Segment, SegmentLeaderboard, SegmentLeaderboardEntry
 import requests
 
+from emilia.extensions import cache
 from emilia.utils import env_var
 
 
@@ -10,25 +11,39 @@ class Stravalib(object):
     """ Wrapper class for Stravalib Client. """
 
     def init_app(self, app):
+        """ Inits Stravalib client, with token from env. """
         access_token = app.config['STRAVA_ACCESS_TOKEN']
         self.client = Client(access_token=access_token)
 
     def get_segment(self, *args, **kwargs):
-        try:
-            return self.client.get_segment(*args, **kwargs)
-        except requests.exceptions.HTTPError, error:
-            raise RuntimeError(error)
+        """ Retrives Segment info from cache or Strava. """
+        cache_key = 'segment_%s' % args[0]
+        segment = cache.get(cache_key)
+        if segment is None:
+            try:
+                segment = self.client.get_segment(*args, **kwargs).serialize()
+                cache.set(cache_key, segment)
+            except requests.exceptions.HTTPError, error:
+                raise RuntimeError(error)
+        return Segment.deserialize(segment)
 
     def get_segment_leaderboard(self, *args, **kwargs):
-        try:
-            return self.client.get_segment_leaderboard(*args, **kwargs)
-        except requests.exceptions.HTTPError, error:
-            raise RuntimeError(error)
+        """ Retrives Segment Leaderboard info from cache or Strava. """
+        cache_key = 'segment_leaderboard_%s_%s' % (args[0], kwargs.get('gender'))
+        segment_leaderboard = cache.get(cache_key)
+        if segment_leaderboard is None:
+            try:
+                segment_leaderboard = self.client.get_segment_leaderboard(*args, **kwargs).serialize()
+                cache.set(cache_key, segment_leaderboard)
+            except requests.exceptions.HTTPError, error:
+                raise RuntimeError(error)
+        return SegmentLeaderboard.deserialize(segment_leaderboard)
 
 
 def serialize_segment(self):
     """ Returns basic Segment data for serialization. """
     return {
+        'id': self.id,
         'distance': self.distance.num,
         'average_grade': self.average_grade,
         'maximum_grade': self.maximum_grade,
@@ -50,8 +65,10 @@ def serialize_segment_leaderboard(self):
 def serialize_segment_leaderboard_entry(self):
     """ Returns basic SegmentLeaderboardEntry data for serialization. """
     return {
+        'effort_id': self.effort_id,
+        'athlete_id': self.athlete_id,
         'athlete_name': self.athlete_name,
-        'elapsed_time': str(self.elapsed_time)
+        'elapsed_time': self.elapsed_time.seconds,
     }
 
 Segment.serialize = serialize_segment
