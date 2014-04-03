@@ -49,13 +49,10 @@ def serialize_segment(self):
 
 def serialize_segment_leaderboard(self):
     """ Returns basic SegmentLeaderboard data for serialization. """
-    obj = {
+    return {
         'entry_count': self.entry_count,
-        'entries': [],
+        'entries': [entry.serialize() for entry in self.entries],
     }
-    for entry in self.entries:
-        obj['entries'].append(entry.serialize())
-    return obj
 
 
 def serialize_segment_leaderboard_entry(self):
