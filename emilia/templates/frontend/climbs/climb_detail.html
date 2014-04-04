@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Climb detail</h1>
+    <h1>{{ climb.number }}. {{ climb.name }}</h1>
 
-    <p>{{ climb }}. {{ climb.location }} ({{ climb.strava_id }})</p>
+    <p>From <a href="{{ url_for('frontend.book_detail', slug=climb.book.slug) }}" title="">{{ climb.book }}</a></p>
 
     <dl>
         <dt>Distance:</dt>
@@ -19,19 +19,21 @@
         <dd>{{ segment.total_elevation_gain }}</dd>
     </dl>
 
-    <p>Male club leaders (of {{ male_club_leaders.entry_count }} total)</p>
-    <ol>
-        {% for entry in male_club_leaders.entries %}
-            <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
-        {% endfor %}
-    </ol>
+    <div>
+        <h2>Male club leaders (of {{ male_club_leaders.entry_count }} total)</h2>
+        <ol>
+            {% for entry in male_club_leaders.entries %}
+                <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+            {% endfor %}
+        </ol>
+    </div>
 
-    <p>Female club leaders (of {{ female_club_leaders.entry_count }} total)</p>
-    <ol>
-        {% for entry in female_club_leaders.entries %}
-            <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
-        {% endfor %}
-    </ol>
-
-    <a href="{{ url_for('frontend.book_detail', slug=climb.book.slug) }}" title="">Back to book</a>
+    <div>
+        <h2>Female club leaders (of {{ female_club_leaders.entry_count }} total)</h2>
+        <ol>
+            {% for entry in female_club_leaders.entries %}
+                <li>{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+            {% endfor %}
+        </ol>
+    </div>
 {% endblock %}
