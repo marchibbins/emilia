@@ -5,14 +5,13 @@ module.exports = function(grunt) {
             compile: {
                 options: {
                     paths: {
-                        'bonzo': 'lib/bonzo',
-                        'domready': 'lib/ready',
-                        'qwery': 'lib/qwery',
-                        '$': 'amd/$'
+                        'bonzo': '../lib/bonzo',
+                        'domready': '../lib/ready',
+                        'qwery': '../lib/qwery'
                     },
-                    baseUrl: 'emilia/static/js',
-                    name: 'amd/app',
-                    include: 'lib/require.js',
+                    baseUrl: 'emilia/static/js/amd',
+                    name: 'app',
+                    include: '../lib/require.js',
                     out: 'emilia/static/js/app.min.js',
                     optimize: 'uglify2',
                     preserveLicenseComments: false
