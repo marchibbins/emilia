@@ -46,6 +46,11 @@ class Stravalib(object):
         leaderboard.entries = leaderboard.entries[:self.NUMBER_OF_LEADERS]
         return leaderboard
 
+    def get_segment_club_leaderboard(self, *args, **kwargs):
+        """ Retrives Segment Leaderboard info from cache or Strava. """
+        kwargs['club_id'] = self.CLUB_ID
+        return self.get_segment_leaderboard(*args, **kwargs)
+
     def get_segment_club_leaders(self, *args, **kwargs):
         """ Retrives Segment Leaderboard info from cache or Strava. """
         kwargs['club_id'] = self.CLUB_ID
