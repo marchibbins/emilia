@@ -4,7 +4,7 @@
             {% if form %}
                 {{ render_form_errors(form) }}
                 {{ form.hidden_tag() }}
-                <ul>
+                <ul class="unstyled">
                     {% for field in form if field.type != 'HiddenField' and field.type != 'CSRFTokenField' %}
                         <li>{{ render_field(field) }}</li>
                     {% endfor %}
@@ -29,7 +29,7 @@
                 <p>{{ field.description }}</p>
             {% endif %}
             {% if field.errors %}
-                <ul class="errors">
+                <ul class="unstyled errors">
                     {% for error in field.errors %}
                         <li>{{ error }}</li>
                     {% endfor %}
@@ -41,7 +41,7 @@
 
 {% macro render_form_errors(form) %}
     {% if form.non_field_errors %}
-        <ul class="errors">
+        <ul class="unstyled errors">
             {% for error in form.non_field_errors %}
             <li>{{ error }}</li>
             {% endfor %}

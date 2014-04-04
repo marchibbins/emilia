@@ -1,6 +1,6 @@
 
 @import "normalize";
-
-body {
-    padding: 10px;
-}
+@import "vars";
+@import "base";
+@import "type";
+@import "forms";

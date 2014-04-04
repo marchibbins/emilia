@@ -1,0 +1,42 @@
+// Base
+body {
+    background-color: #fff;
+    padding: 10px;
+}
+
+a {
+    color: $linkColour;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+       text-decoration: underline;
+    }
+
+    &:active {
+        color: $linkAccentColour;
+        text-decoration: none;
+    }
+}
+
+// Addresses paddings set differently in IE6/7
+ol,
+ul {
+    padding: 0;
+    margin-left: 25px;
+}
+
+blockquote {
+    margin: 0;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: $baseline;
+}
+
+.unstyled {
+    margin: 0;
+    list-style: none;
+}
