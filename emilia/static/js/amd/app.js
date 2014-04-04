@@ -1,4 +1,4 @@
-/*global emilia:true */
-require([], function() {
-    document.documentElement.className = document.documentElement.className.replace(/\bjs-off\b/g, '') + 'js-on';
+require(['$'], function($) {
+    // Remove noscript class
+    $('html').removeClass('js-off');
 });

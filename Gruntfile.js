@@ -4,6 +4,11 @@ module.exports = function(grunt) {
         requirejs: {
             compile: {
                 options: {
+                    paths: {
+                        'bonzo': 'lib/bonzo',
+                        'qwery': 'lib/qwery',
+                        '$': 'amd/$'
+                    },
                     baseUrl: 'emilia/static/js',
                     name: 'amd/app',
                     include: 'lib/require.js',
