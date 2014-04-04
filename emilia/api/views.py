@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import abort, Blueprint, jsonify, request
 from itertools import chain
 
 from emilia.climbs.models import Book, Climb
@@ -66,82 +66,41 @@ def climb_detail(slug):
     return json_response(**context)
 
 
-@api.route('/climbs/<slug>/club_leaders')
-@api.route('/climbs/<slug>/club_leaders/<gender>')
-@cache.cached()
-def climb_club_leaders(slug, gender=None):
+@api.route('/climbs/<slug>/<leaderboard>')
+@api.route('/climbs/<slug>/<leaderboard>/<gender>')
+@cache.cached(key_prefix=full_path_cache_key_prefix)
+def climb_leaderboard(slug, leaderboard, gender=None):
     """ Renders top Climb club leaders, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
     context = {
         'climb': climb.serialize()
     }
 
-    if gender != 'female':
-        context['male_club_leaders'] = strava.get_segment_club_leaders(climb.strava_id, gender='M').serialize()
-
-    if gender != 'male':
-        context['female_club_leaders'] = strava.get_segment_club_leaders(climb.strava_id, gender='F').serialize()
-
-    return json_response(**context)
-
-
-@api.route('/climbs/<slug>/leaders')
-@api.route('/climbs/<slug>/leaders/<gender>')
-@cache.cached()
-def climb_leaders(slug, gender=None):
-    """ Renders top Climb leaders, matching slug, as JSON. """
-    climb = Climb.query.filter_by(slug=slug).first_or_404()
-    context = {
-        'climb': climb.serialize()
+    resources = {
+        'club_leaders': 'get_segment_club_leaders',
+        'club_leaderboard': 'get_segment_club_leaderboard',
+        'leaders': 'get_segment_leaders',
+        'leaderboard': 'get_segment_leaderboard',
     }
 
-    if gender != 'female':
-        context['male_leaders'] = strava.get_segment_leaders(climb.strava_id, gender='M').serialize()
+    try:
+        resource = getattr(strava, resources[leaderboard])
+    except KeyError:
+        abort(404)
 
-    if gender != 'male':
-        context['female_leaders'] = strava.get_segment_leaders(climb.strava_id, gender='F').serialize()
+    if gender and gender not in ('male', 'female'):
+        abort(404) # Enforce options
 
-    return json_response(**context)
-
-
-@api.route('/climbs/<slug>/club_leaderboard')
-@api.route('/climbs/<slug>/club_leaderboard/<gender>')
-@cache.cached(key_prefix=full_path_cache_key_prefix)
-def climb_club_leaderboard(slug, gender=None):
-    """ Renders overall Climb club leaderboard, matching slug, as JSON. """
-    climb = Climb.query.filter_by(slug=slug).first_or_404()
-    page = request.args.get('page')
-
-    context = {
-        'climb': climb.serialize()
-    }
+    if leaderboard not in ('club_leaders', 'leaders'):
+        page = request.args.get('page')
+    else:
+        page = None # Pagination not allowed
 
     if gender != 'female':
-        context['male_club_leaderboard'] = strava.get_segment_club_leaderboard(climb.strava_id, page=page, gender='M').serialize()
+        context['male_%s' % leaderboard] = resource(climb.strava_id, page=page, gender='M').serialize()
 
     if gender != 'male':
-        context['female_club_leaderboard'] = strava.get_segment_club_leaderboard(climb.strava_id, page=page, gender='F').serialize()
-
-    return json_response(**context)
-
-
-@api.route('/climbs/<slug>/leaderboard')
-@api.route('/climbs/<slug>/leaderboard/<gender>')
-@cache.cached(key_prefix=full_path_cache_key_prefix)
-def climb_leaderboard(slug, gender=None):
-    """ Renders overall Climb leaderboard, matching slug, as JSON. """
-    climb = Climb.query.filter_by(slug=slug).first_or_404()
-    page = request.args.get('page')
-
-    context = {
-        'climb': climb.serialize()
-    }
-
-    if gender != 'female':
-        context['male_leaderboard'] = strava.get_segment_leaderboard(climb.strava_id, page=page, gender='M').serialize()
-
-    if gender != 'male':
-        context['female_leaderboard'] = strava.get_segment_leaderboard(climb.strava_id, page=page, gender='F').serialize()
+        context['female_%s' % leaderboard] = resource(climb.strava_id, page=page, gender='F').serialize()
 
     return json_response(**context)
 
