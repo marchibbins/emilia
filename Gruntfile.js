@@ -3,6 +3,9 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         sass: {
             dist: {
+                options: {
+                    style: 'compressed'
+                },
                 files: {
                     'emilia/static/css/style.css': 'emilia/static/sass/style.scss'
                 }
