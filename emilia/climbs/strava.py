@@ -20,7 +20,7 @@ class Stravalib(object):
 
     def get_or_cache_call(self, cls, resource, *args, **kwargs):
         """ Retrives object from cache or Strava, marshalling as required. """
-        cache_key = '%s_%s_%s' % (resource, '_'.join(str(i) for i in args), '_'.join(str(i) for i in kwargs.itervalues()))
+        cache_key = '%s_%s_%s' % (resource, '_'.join('%s' % i for i in args), '_'.join('%s:%s' % (k, v) for k, v in kwargs.items() if v))
         obj = cache.get(cache_key)
         if obj is None:
             try:
