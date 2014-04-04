@@ -91,6 +91,19 @@ def climb_leaders(slug):
     return json_response(**context)
 
 
+@api.route('/climbs/<slug>/leaderboard')
+@cache.cached()
+def climb_leaderboard(slug):
+    """ Renders overall Climb leaderboard, matching slug, as JSON. """
+    climb = Climb.query.filter_by(slug=slug).first_or_404()
+    context = {
+        'climb': climb.serialize(),
+        'male_leaderboard': strava.get_segment_leaderboard(climb.strava_id, gender='M').serialize(),
+        'female_leaderboard': strava.get_segment_leaderboard(climb.strava_id, gender='F').serialize(),
+    }
+    return json_response(**context)
+
+
 @api.errorhandler(404)
 def page_not_found(error):
     """ Custom 404 for this blueprint. Note: only handles exceptions
