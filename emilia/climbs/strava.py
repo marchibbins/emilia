@@ -8,7 +8,7 @@ from emilia.utils import env_var
 
 class Stravalib(object):
 
-    """ Wrapper class for Stravalib Client. """
+    """ Wrapper class for Stravalib Client - patches some unfinished methods, adds some serialization helpers. """
 
     CLUB_ID = 52733
     NUMBER_OF_LEADERS = 3
@@ -49,6 +49,26 @@ class Stravalib(object):
         return self.get_segment_leaders(*args, **kwargs)
 
 
+def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=None, top_results_limit=None):
+    """ Gets the leaderboard for a segment. Overrides default method to take page parameter, ignoring unused others. """
+    params = {}
+    if gender is not None:
+        if gender.upper() not in ('M', 'F'):
+            raise ValueError("Invalid gender: {0}. Possible values: 'M' or 'F'".format(gender))
+        params['gender'] = gender
+
+    if club_id is not None:
+        params['club_id'] = club_id
+
+    if page is not None:
+        params['page'] = page
+
+    if top_results_limit is not None:
+        params['per_page'] = top_results_limit
+
+    return SegmentLeaderboard.deserialize(self.protocol.get('/segments/{id}/leaderboard', id=segment_id, **params), bind_client=self)
+
+
 def serialize_segment(self):
     """ Returns basic Segment data for serialization. """
     return {
@@ -78,6 +98,7 @@ def serialize_segment_leaderboard_entry(self):
     }
 
 
+Client.get_segment_leaderboard = get_segment_leaderboard
 Segment.serialize = serialize_segment
 SegmentLeaderboard.serialize = serialize_segment_leaderboard
 SegmentLeaderboardEntry.serialize = serialize_segment_leaderboard_entry

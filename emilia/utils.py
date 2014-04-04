@@ -1,3 +1,4 @@
+from flask import request
 from wtforms.validators import ValidationError
 import os
 
@@ -36,6 +37,10 @@ def env_var(key, default=None, required=False, integer=False):
         return int(val)
     else:
         return val
+
+
+def full_path_cache_key_prefix():
+    return 'view/%s' % request.full_path
 
 
 def lowercase_filter(data):

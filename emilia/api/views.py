@@ -1,9 +1,10 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from itertools import chain
 
 from emilia.climbs.models import Book, Climb
 from emilia.climbs.strava import strava
 from emilia.extensions import cache
+from emilia.utils import full_path_cache_key_prefix
 
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -92,14 +93,15 @@ def climb_leaders(slug):
 
 
 @api.route('/climbs/<slug>/leaderboard')
-@cache.cached()
+@cache.cached(key_prefix=full_path_cache_key_prefix)
 def climb_leaderboard(slug):
     """ Renders overall Climb leaderboard, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
+    page = request.args.get('page')
     context = {
         'climb': climb.serialize(),
-        'male_leaderboard': strava.get_segment_leaderboard(climb.strava_id, gender='M').serialize(),
-        'female_leaderboard': strava.get_segment_leaderboard(climb.strava_id, gender='F').serialize(),
+        'male_leaderboard': strava.get_segment_leaderboard(climb.strava_id, page=page, gender='M').serialize(),
+        'female_leaderboard': strava.get_segment_leaderboard(climb.strava_id, page=page, gender='F').serialize(),
     }
     return json_response(**context)
 
