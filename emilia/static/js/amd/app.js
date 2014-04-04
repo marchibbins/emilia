@@ -1,4 +1,4 @@
 /*global emilia:true */
 require([], function() {
-    console.log("JS ready! isModernBrowser: " + emilia.isModernBrowser);
+    document.documentElement.className = document.documentElement.className.replace(/\bjs-off\b/g, '') + 'js-on';
 });
