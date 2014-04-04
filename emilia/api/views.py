@@ -93,30 +93,44 @@ def climb_leaders(slug):
 
 
 @api.route('/climbs/<slug>/club_leaderboard')
+@api.route('/climbs/<slug>/club_leaderboard/<gender>')
 @cache.cached(key_prefix=full_path_cache_key_prefix)
-def climb_club_leaderboard(slug):
+def climb_club_leaderboard(slug, gender=None):
     """ Renders overall Climb club leaderboard, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
     page = request.args.get('page')
+
     context = {
-        'climb': climb.serialize(),
-        'male_club_leaderboard': strava.get_segment_club_leaderboard(climb.strava_id, page=page, gender='M').serialize(),
-        'female_club_leaderboard': strava.get_segment_club_leaderboard(climb.strava_id, page=page, gender='F').serialize(),
+        'climb': climb.serialize()
     }
+
+    if gender != 'female':
+        context['male_club_leaderboard'] = strava.get_segment_club_leaderboard(climb.strava_id, page=page, gender='M').serialize()
+
+    if gender != 'male':
+        context['female_club_leaderboard'] = strava.get_segment_club_leaderboard(climb.strava_id, page=page, gender='F').serialize()
+
     return json_response(**context)
 
 
 @api.route('/climbs/<slug>/leaderboard')
+@api.route('/climbs/<slug>/leaderboard/<gender>')
 @cache.cached(key_prefix=full_path_cache_key_prefix)
-def climb_leaderboard(slug):
+def climb_leaderboard(slug, gender=None):
     """ Renders overall Climb leaderboard, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
     page = request.args.get('page')
+
     context = {
-        'climb': climb.serialize(),
-        'male_leaderboard': strava.get_segment_leaderboard(climb.strava_id, page=page, gender='M').serialize(),
-        'female_leaderboard': strava.get_segment_leaderboard(climb.strava_id, page=page, gender='F').serialize(),
+        'climb': climb.serialize()
     }
+
+    if gender != 'female':
+        context['male_leaderboard'] = strava.get_segment_leaderboard(climb.strava_id, page=page, gender='M').serialize()
+
+    if gender != 'male':
+        context['female_leaderboard'] = strava.get_segment_leaderboard(climb.strava_id, page=page, gender='F').serialize()
+
     return json_response(**context)
 
 
