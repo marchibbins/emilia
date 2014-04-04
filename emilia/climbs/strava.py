@@ -40,8 +40,11 @@ class Stravalib(object):
 
     def get_segment_leaders(self, *args, **kwargs):
         """ Retrives Segment Leaderboard info from cache or Strava. """
-        kwargs['top_results_limit'] = self.NUMBER_OF_LEADERS
-        return self.get_segment_leaderboard(*args, **kwargs)
+        leaderboard = self.get_segment_leaderboard(*args, **kwargs)
+        # Prune entries for desired number rather than specify top_results_limit, meaning
+        # data for page one of leaderboard is cached for (almost certain) subsequent request
+        leaderboard.entries = leaderboard.entries[:self.NUMBER_OF_LEADERS]
+        return leaderboard
 
     def get_segment_club_leaders(self, *args, **kwargs):
         """ Retrives Segment Leaderboard info from cache or Strava. """
