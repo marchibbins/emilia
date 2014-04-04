@@ -6,6 +6,7 @@ module.exports = function(grunt) {
                 options: {
                     paths: {
                         'bonzo': 'lib/bonzo',
+                        'domready': 'lib/ready',
                         'qwery': 'lib/qwery',
                         '$': 'amd/$'
                     },
