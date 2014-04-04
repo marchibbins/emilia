@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="js-off">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>100 Climbs</title>
@@ -24,5 +24,16 @@
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+
+    <script>
+        var emilia = {
+            isModernBrowser: 'querySelector' in document && 'localStorage' in window && 'addEventListener' in window
+        };
+        if (emilia.isModernBrowser) {
+            document.documentElement.className = document.documentElement.className.replace(/\bjs-off\b/g, '') + 'js-on';
+        }
+    </script>
+
+    <script async="async" src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
