@@ -6,7 +6,8 @@
     "devDependencies": {
         "grunt": "~0.4.4",
         "grunt-contrib-sass": "~0.7.3",
-        "grunt-contrib-watch": "~0.6.1"
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-contrib-requirejs": "~0.4.3"
     },
     "repository": {
         "type": "git",
