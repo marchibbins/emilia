@@ -22,7 +22,7 @@
 
     <div class="js-leaders">
         <div class="leaderboard js-leaderboard">
-            <h2 class="leaderboard__title">Male club leaders (of {{ male_club_leaders.entry_count }} total)</h2>
+            <h2 class="leaderboard__title">Male club leaders</h2>
             <ol class="leaderboard__entries">
                 {% for entry in male_club_leaders.entries %}
                     <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="leaderboard js-leaderboard">
-            <h2 class="leaderboard__title">Female club leaders (of {{ female_club_leaders.entry_count }} total)</h2>
+            <h2 class="leaderboard__title">Female club leaders</h2>
             <ol class="leaderboard__entries">
                 {% for entry in female_club_leaders.entries %}
                     <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>

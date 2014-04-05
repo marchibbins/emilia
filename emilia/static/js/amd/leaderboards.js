@@ -9,13 +9,19 @@ function(
     $
 ) {
     var classes = {
+            hidden: 'is-hidden',
             leaderboard: 'js-leaderboard',
             loading: 'js-leaderboard-loading',
             toggle: 'js-leaderboard-toggle'
         },
+        data = {
+            toggleText: 'data-toggle-text'
+        },
         dom = {},
         labels = {
             loading: 'Loading',
+            maleOverallLeaders: 'Male overall leaders',
+            femaleOverallLeaders: 'Female overall leaders',
             showClubLeaders: 'Show club leaders',
             showOverallLeaders: 'Show overall leaders'
         },
@@ -30,8 +36,8 @@ function(
     }
 
     function handleApiResponse(response) {
-        var maleHtml = createLeaderboardHtml('Male leaders', response.male_leaders),
-            femaleHtml = createLeaderboardHtml('Female leaders', response.female_leaders);
+        var maleHtml = createLeaderboardHtml(labels.maleOverallLeaders, response.male_leaders),
+            femaleHtml = createLeaderboardHtml(labels.femaleOverallLeaders, response.female_leaders);
 
         $(dom.el).append(maleHtml + femaleHtml);
         apiPending = false;
@@ -57,23 +63,22 @@ function(
             }
         }
 
-        return '<div class="leaderboard js-leaderboard is-hidden">' +
-                   '<h2>' + label +' (of ' + data.entry_count + ' total)</h2>' +
-                   '<ol>' + items + '</ol>' +
+        return '<div class="leaderboard ' + classes.leaderboard + ' ' + classes.hidden + '">' +
+                   '<h2>' + label + '</h2>' + '<ol>' + items + '</ol>' +
                '</div>';
     }
 
     function toggleLeaderboards() {
-        $('.' + classes.leaderboard).toggleClass('is-hidden');
+        $('.' + classes.leaderboard).toggleClass(classes.hidden);
 
-        var toggleText = dom.toggle.attr('data-toggle-text'),
+        var toggleText = dom.toggle.attr(data.toggleText),
             text = dom.toggle.text();
 
-        dom.toggle.text(toggleText).attr('data-toggle-text', text);
+        dom.toggle.text(toggleText).attr(data.toggleText, text);
     }
 
     function addToggle() {
-        dom.toggle = $.create('<a href="#toggle-leaders" title="" class="' + classes.toggle + '" data-toggle-text="' + labels.showClubLeaders + '">' + labels.showOverallLeaders + '</a>');
+        dom.toggle = $.create('<a href="#toggle-leaders" title="" class="' + classes.toggle + '" ' + data.toggleText + '="' + labels.showClubLeaders + '">' + labels.showOverallLeaders + '</a>');
         $(dom.el).prepend(dom.toggle);
 
         bean.on(dom.toggle[0], 'click', function (event) {
