@@ -15,6 +15,7 @@ function(
             toggle: 'js-leaderboard-toggle'
         },
         data = {
+            climbSlug: 'data-climb-slug',
             toggleText: 'data-toggle-text'
         },
         dom = {},
@@ -31,7 +32,11 @@ function(
 
     function init(el) {
         dom.el = el;
-        reqwest('/api/climbs/cheddar-gorge/leaders', handleApiResponse);
+
+        var slug = dom.el.getAttribute(data.climbSlug),
+            url = '/api/climbs/:slug/leaders'.replace(':slug', slug);
+
+        reqwest(url, handleApiResponse);
         addToggle();
     }
 
