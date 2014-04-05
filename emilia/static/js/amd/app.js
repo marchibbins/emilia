@@ -8,8 +8,8 @@ function(
     domready,
     ClimbLeaders
 ) {
-    // Remove noscript class
-    $('html').removeClass('js-off');
+    // Remove no-js class
+    document.documentElement.className = "js-on";
 
     domready(function () {
         $('.js-climb-leaders').each(function (el) {
