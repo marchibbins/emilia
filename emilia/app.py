@@ -9,6 +9,7 @@ from emilia.config import Config
 from emilia.extensions import cache, db, login_manager
 from emilia.frontend import frontend
 from emilia.user import user, user_loader
+from emilia.utils import format_time_filter
 
 
 def init():
@@ -19,6 +20,7 @@ def init():
     configure_extensions(app)
     configure_blueprints(app)
     configure_logging(app)
+    configure_template_filters(app)
     configure_error_handlers(app)
 
     return app
@@ -75,6 +77,13 @@ def configure_logging(app):
     log_file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
 
     app.logger.addHandler(log_file_handler)
+
+
+def configure_template_filters(app):
+    """ Configure Jinja template filters. """
+    @app.template_filter()
+    def format_time(*args, **kwargs):
+        return format_time_filter(*args, **kwargs)
 
 
 def configure_error_handlers(app):

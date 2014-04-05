@@ -49,3 +49,12 @@ def lowercase_filter(data):
         return data.lower()
     else:
         return data
+
+
+def format_time_filter(seconds):
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    if h > 0:
+        return '%d:%02d:%02d' % (h, m, s)
+    else:
+        return '%02d:%02d' % (m, s)

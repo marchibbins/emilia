@@ -27,7 +27,7 @@
                 {% for num in range(3) %}
                     {% set entry = male_club_leaders.entries[num] %}
                     {% if entry %}
-                        <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+                        <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time.seconds|format_time }}</li>
                     {% else %}
                         <li class="leaderboard__entry">None</li>
                     {% endif %}
@@ -41,7 +41,7 @@
                 {% for num in range(3) %}
                     {% set entry = female_club_leaders.entries[num] %}
                     {% if entry %}
-                        <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+                        <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time.seconds|format_time }}</li>
                     {% else %}
                         <li class="leaderboard__entry">None</li>
                     {% endif %}
