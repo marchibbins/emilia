@@ -8,16 +8,16 @@
     <h2>Factfile</h2>
     <dl>
         <dt>Distance:</dt>
-        <dd>{{ segment.distance }}</dd>
+        <dd>{{ segment.distance.num }}{{ segment.distance.unit }}</dd>
 
         <dt>Average grade:</dt>
-        <dd>{{ segment.average_grade }}</dd>
+        <dd>{{ segment.average_grade }}%</dd>
 
         <dt>Maximum grade:</dt>
-        <dd>{{ segment.maximum_grade }}</dd>
+        <dd>{{ segment.maximum_grade }}%</dd>
 
         <dt>Elevation difference:</dt>
-        <dd>{{ segment.total_elevation_gain }}</dd>
+        <dd>{{ segment.total_elevation_gain.num }}{{ segment.total_elevation_gain.unit }}</dd>
     </dl>
 
     <div class="js-leaders" data-climb-slug="{{ climb.slug }}">
