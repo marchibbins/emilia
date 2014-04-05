@@ -24,8 +24,13 @@
         <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Male club leaders</h2>
             <ol class="leaderboard__entries">
-                {% for entry in male_club_leaders.entries %}
-                    <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+                {% for num in range(3) %}
+                    {% set entry = male_club_leaders.entries[num] %}
+                    {% if entry %}
+                        <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+                    {% else %}
+                        <li class="leaderboard__entry">None</li>
+                    {% endif %}
                 {% endfor %}
             </ol>
         </div>
@@ -33,8 +38,13 @@
         <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Female club leaders</h2>
             <ol class="leaderboard__entries">
-                {% for entry in female_club_leaders.entries %}
-                    <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+                {% for num in range(3) %}
+                    {% set entry = female_club_leaders.entries[num] %}
+                    {% if entry %}
+                        <li class="leaderboard__entry">{{ entry.athlete_name }}: {{ entry.elapsed_time }}</li>
+                    {% else %}
+                        <li class="leaderboard__entry">None</li>
+                    {% endif %}
                 {% endfor %}
             </ol>
         </div>
