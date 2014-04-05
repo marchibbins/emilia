@@ -57,7 +57,7 @@ function(
         for (index; index < count; ++index) {
             entry = data.entries[index];
             if (entry) {
-                items += '<li>' + entry.athlete_name + ': ' + entry.elapsed_time + '</li>';
+                items += '<li>' + entry.athlete_name + ': ' + formatTime(entry.elapsed_time) + '</li>';
             } else {
                 items += '<li>None</li>';
             }
@@ -100,6 +100,13 @@ function(
     function removeLoading() {
         dom.toggle.show();
         dom.loading.hide();
+    }
+
+    function formatTime(time) {
+        var hours = parseInt(time / 3600, 10) % 24,
+            minutes = parseInt(time / 60, 10) % 60,
+            seconds = parseInt(time, 10) % 60;
+        return (hours > 0 ? hours + ":" : '') + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
     }
 
     return {
