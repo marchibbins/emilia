@@ -20,8 +20,8 @@
         <dd>{{ segment.total_elevation_gain }}</dd>
     </dl>
 
-    <div class="js-leaderboard">
-        <div class="leaderboard">
+    <div class="js-leaders">
+        <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Male club leaders (of {{ male_club_leaders.entry_count }} total)</h2>
             <ol class="leaderboard__entries">
                 {% for entry in male_club_leaders.entries %}
@@ -30,7 +30,7 @@
             </ol>
         </div>
 
-        <div class="leaderboard">
+        <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Female club leaders (of {{ female_club_leaders.entry_count }} total)</h2>
             <ol class="leaderboard__entries">
                 {% for entry in female_club_leaders.entries %}

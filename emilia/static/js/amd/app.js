@@ -12,8 +12,8 @@ function(
     $('html').removeClass('js-off');
 
     domready(function () {
-        $('.js-leaderboard').each(function (el) {
-            leaderboards.render(el);
+        $('.js-leaders').each(function (el) {
+            leaderboards.init(el);
         });
     });
 });

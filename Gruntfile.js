@@ -5,8 +5,10 @@ module.exports = function(grunt) {
             compile: {
                 options: {
                     paths: {
+                        'bean': '../lib/bean',
                         'bonzo': '../lib/bonzo',
                         'domready': '../lib/ready',
+                        'reqwest': '../lib/reqwest',
                         'qwery': '../lib/qwery'
                     },
                     baseUrl: 'emilia/static/js/amd',
