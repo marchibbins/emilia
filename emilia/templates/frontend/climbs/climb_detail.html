@@ -20,8 +20,8 @@
         <dd>{{ segment.total_elevation_gain.num }}{{ segment.total_elevation_gain.unit }}</dd>
     </dl>
 
-    <div class="js-leaders" data-climb-slug="{{ climb.slug }}">
-        <div class="leaderboard js-leaderboard">
+    <div class="js-climb-leaders" data-climb-slug="{{ climb.slug }}">
+        <div class="leaderboard js-leaders">
             <h2 class="leaderboard__title">Male club leaders</h2>
             <ol class="leaderboard__entries">
                 {% for num in range(3) %}
@@ -35,7 +35,7 @@
             </ol>
         </div>
 
-        <div class="leaderboard js-leaderboard">
+        <div class="leaderboard js-leaders">
             <h2 class="leaderboard__title">Female club leaders</h2>
             <ol class="leaderboard__entries">
                 {% for num in range(3) %}

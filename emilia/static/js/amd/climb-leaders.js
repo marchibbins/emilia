@@ -10,9 +10,9 @@ function(
 ) {
     var classes = {
             hidden: 'is-hidden',
-            leaderboard: 'js-leaderboard',
-            loading: 'js-leaderboard-loading',
-            toggle: 'js-leaderboard-toggle'
+            leaderboard: 'js-leaders',
+            loading: 'js-leaders-loading',
+            toggle: 'js-leaders-toggle'
         },
         data = {
             climbSlug: 'data-climb-slug',
@@ -44,7 +44,7 @@ function(
         var maleHtml = createLeaderboardHtml(labels.maleOverallLeaders, response.male_leaders),
             femaleHtml = createLeaderboardHtml(labels.femaleOverallLeaders, response.female_leaders);
 
-        $(dom.el).append(maleHtml + femaleHtml);
+        $('.' + classes.leaderboard).last().after(maleHtml + femaleHtml);
         apiPending = false;
 
         if (togglePending) {
@@ -84,7 +84,7 @@ function(
 
     function addToggle() {
         dom.toggle = $.create('<a href="#toggle-leaders" title="" class="' + classes.toggle + '" ' + data.toggleText + '="' + labels.showClubLeaders + '">' + labels.showOverallLeaders + '</a>');
-        $(dom.el).prepend(dom.toggle);
+        $(dom.el).append(dom.toggle);
 
         bean.on(dom.toggle[0], 'click', function (event) {
             event.preventDefault();

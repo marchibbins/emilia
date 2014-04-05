@@ -1,19 +1,19 @@
 require([
     '$',
     'domready',
-    'leaderboards'
+    'climb-leaders'
 ],
 function(
     $,
     domready,
-    leaderboards
+    ClimbLeaders
 ) {
     // Remove noscript class
     $('html').removeClass('js-off');
 
     domready(function () {
-        $('.js-leaders').each(function (el) {
-            leaderboards.init(el);
+        $('.js-climb-leaders').each(function (el) {
+            ClimbLeaders.init(el);
         });
     });
 });
