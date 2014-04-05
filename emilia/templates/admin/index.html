@@ -10,14 +10,14 @@
             <tr>
                 <td>{{ book }}</td>
                 <td>
-                    <a href="{{ url_for('admin.book_edit', id=book.id) }}">Edit</a> |
-                    <a href="{{ url_for('admin.book_delete', id=book.id) }}">Delete</a>
+                    <a href="{{ url_for('admin.book_edit', id=book.id) }}" title="">Edit</a> |
+                    <a href="{{ url_for('admin.book_delete', id=book.id) }}" title="">Delete</a>
                 </td>
             </tr>
             {% endfor %}
         </table>
     {% endif %}
-    <a href="{{ url_for('admin.book_add') }}">Add new book</a>
+    <a href="{{ url_for('admin.book_add') }}" title="">Add new book</a>
 
     <h2>Climbs</h2>
     {% if climbs %}
@@ -26,14 +26,14 @@
             <tr>
                 <td>{{ climb }}</td>
                 <td>
-                    <a href="{{ url_for('admin.climb_edit', id=climb.id) }}">Edit</a> |
-                    <a href="{{ url_for('admin.climb_delete', id=climb.id) }}">Delete</a>
+                    <a href="{{ url_for('admin.climb_edit', id=climb.id) }}" title="">Edit</a> |
+                    <a href="{{ url_for('admin.climb_delete', id=climb.id) }}" title="">Delete</a>
                 </td>
             </tr>
             {% endfor %}
         </table>
     {% endif %}
-    <a href="{{ url_for('admin.climb_add') }}">Add new climb</a>
+    <a href="{{ url_for('admin.climb_add') }}" title="">Add new climb</a>
 
     <h2>Region</h2>
     {% if regions %}
@@ -42,12 +42,12 @@
             <tr>
                 <td>{{ region }}</td>
                 <td>
-                    <a href="{{ url_for('admin.region_edit', id=region.id) }}">Edit</a> |
-                    <a href="{{ url_for('admin.region_delete', id=region.id) }}">Delete</a>
+                    <a href="{{ url_for('admin.region_edit', id=region.id) }}" title="">Edit</a> |
+                    <a href="{{ url_for('admin.region_delete', id=region.id) }}" title="">Delete</a>
                 </td>
             </tr>
             {% endfor %}
         </table>
     {% endif %}
-    <a href="{{ url_for('admin.region_add') }}">Add new region</a>
+    <a href="{{ url_for('admin.region_add') }}" title="">Add new region</a>
 {% endblock %}

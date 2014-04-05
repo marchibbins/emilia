@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>{% block form_title %}Add {{ name }}{% endblock %}</h1>
-    <a href="{{ url_for('admin.index') }}">Admin home</a>
+    <a href="{{ url_for('admin.index') }}" title="">Admin home</a>
 
     {{ render_form(form, submit_value='Add %s' % name, cancel_url=url_for('admin.index')) }}
 </div>
