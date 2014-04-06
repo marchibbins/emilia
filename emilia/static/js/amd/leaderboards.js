@@ -65,7 +65,7 @@ function(
         this.createHtml = function(label, data) {
             var index = 0,
                 items = '',
-                count = config.limit || data.entries.length,
+                count = config.limit || Math.max(data.entries.length, 1),
                 entry;
 
             for (index; index < count; index++) {
