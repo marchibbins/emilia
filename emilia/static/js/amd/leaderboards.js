@@ -65,6 +65,7 @@ function(
         this.createHtml = function(label, data) {
             var index = 0,
                 items = '',
+                pagination = '',
                 count = config.limit || Math.max(data.entries.length, 1),
                 entry;
 
@@ -77,8 +78,12 @@ function(
                 }
             }
 
+            if (data.entry_count > count) {
+                pagination = '<div>Showing ' + count + ' of ' + data.entry_count + '</div>';
+            }
+
             return '<div class="js-leaderboard leaderboard ' + config.classes + '">' +
-                       '<h2>' + label + '</h2>' + '<ol>' + items + '</ol>' +
+                       '<h2>' + label + '</h2>' + '<ol>' + items + '</ol>' + pagination +
                    '</div>';
         };
 
