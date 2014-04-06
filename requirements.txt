@@ -10,3 +10,4 @@ Fabric==1.8.2
 ipython==1.2.1
 coverage==3.7.1
 stravalib==0.2.2
+psycopg2==2.4.4
