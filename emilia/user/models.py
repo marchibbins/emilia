@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
 
     id = Column(db.Integer, primary_key=True)
     username = Column(db.String(64), nullable=False, unique=True)
-    password_store = Column('password', db.String(64), nullable=False)
+    password_store = Column('password', db.String(), nullable=False)
 
     def get_password(self):
         return self.password_store
