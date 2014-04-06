@@ -23,7 +23,7 @@ function(
         dom.leaderboards = new Leaderboards({
             type: 'leaders',
             slug: slug,
-            pageSize: 3,
+            limit: 3,
             classes: 'is-hidden'
         }).create();
 

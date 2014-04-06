@@ -11,12 +11,12 @@ function(
 
         var el,
             config = {
-                type: '',
-                slug: '',
-                classes: '',
-                label: '',
-                page: 1,
-                pageSize: 10
+                type: null,
+                slug: null,
+                classes: null,
+                label: null,
+                limit: null,
+                page: 1
             };
 
         for (var prop in settings) {
@@ -65,9 +65,10 @@ function(
         this.createHtml = function(label, data) {
             var index = 0,
                 items = '',
+                count = config.limit || data.entries.length,
                 entry;
 
-            for (index; index < config.pageSize; index++) {
+            for (index; index < count; index++) {
                 entry = data.entries[index];
                 if (entry) {
                     items += '<li>' + entry.athlete_name + ': ' + this.formatTime(entry.elapsed_time) + '</li>';

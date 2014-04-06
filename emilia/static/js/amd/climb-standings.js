@@ -12,12 +12,21 @@ function(
 
     function init(el) {
         var slug = el.getAttribute(data.climbSlug),
+
             leaderboards = new Leaderboards({
                 type: 'leaderboard',
-                slug: slug
+                slug: slug,
+                label: 'overall standings'
+            }).create(),
+
+            club_leaderboards = new Leaderboards({
+                type: 'club_leaderboard',
+                slug: slug,
+                label: 'club standings'
             }).create();
 
-        $(el).html(leaderboards);
+        $(el).prepend(leaderboards);
+        $(el).prepend(club_leaderboards);
     }
 
     return {
