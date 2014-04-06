@@ -8,7 +8,7 @@ class Book(db.Model):
     """ Represents a single Book object. """
 
     SLUG_STR_MAX = 32
-    NAME_STR_MAX = 64
+    NAME_STR_MAX = 128
 
     id = Column(db.Integer, primary_key=True)
     slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
