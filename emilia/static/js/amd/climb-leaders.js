@@ -13,11 +13,11 @@ function(
 
     function init(el) {
         dom.el = el;
-        addLeaderboard();
+        addLeaderboards();
         addToggle();
     }
 
-    function addLeaderboard() {
+    function addLeaderboards() {
         var slug = dom.el.getAttribute('data-climb-slug');
 
         dom.leaderboards = new Leaderboards({

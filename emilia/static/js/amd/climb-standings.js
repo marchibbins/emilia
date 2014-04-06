@@ -1,32 +1,75 @@
 define([
     'leaderboards',
+    'bean',
     '$'
 ],
 function(
     Leaderboards,
+    bean,
     $
 ) {
-    var data = {
-            climbSlug: 'data-climb-slug'
-        };
+    var dom = {},
+        togglePending = false;
 
     function init(el) {
-        var slug = el.getAttribute(data.climbSlug),
+        dom.el = el;
+        addLeaderboards();
+        addToggle();
+    }
 
-            leaderboards = new Leaderboards({
-                type: 'leaderboard',
-                slug: slug,
-                label: 'overall standings'
-            }).create(),
+    function addLeaderboards() {
+        var slug = dom.el.getAttribute('data-climb-slug');
 
-            club_leaderboards = new Leaderboards({
-                type: 'club_leaderboard',
-                slug: slug,
-                label: 'club standings'
-            }).create();
+        dom.leaderboards = new Leaderboards({
+            type: 'leaderboard',
+            slug: slug,
+            classes: 'is-hidden',
+            label: 'overall standings'
+        }).create();
 
-        $(el).prepend(leaderboards);
-        $(el).prepend(club_leaderboards);
+        dom.club_leaderboards = new Leaderboards({
+            type: 'club_leaderboard',
+            slug: slug,
+            label: 'club standings'
+        }).create();
+
+        $(dom.el).prepend(dom.leaderboards);
+        $(dom.el).prepend(dom.club_leaderboards);
+    }
+
+    function addToggle() {
+        dom.toggle = $.create('<a href="#toggle-standings" title="" class="js-standings-toggle" data-toggle-text="Show club standings">Show overall standings</a>');
+        $(dom.el).append(dom.toggle);
+        bean.on(dom.toggle[0], 'click', clickToggle);
+    }
+
+    function clickToggle(event) {
+        event.preventDefault();
+        if (dom.leaderboards.loading === true) {
+            togglePending = true;
+            addLoading();
+        } else {
+            toggleLeaderboards();
+        }
+    }
+
+    function toggleLeaderboards() {
+        $('.js-leaderboard', dom.el).toggleClass('is-hidden');
+
+        var toggleText = dom.toggle.attr('data-toggle-text'),
+            text = dom.toggle.text();
+
+        dom.toggle.text(toggleText).attr('data-toggle-text', text);
+    }
+
+    function addLoading() {
+        dom.loading = $.create('<div class="js-standings-loading">Loading</div>');
+        dom.toggle.after(dom.loading).hide();
+    }
+
+    function removeLoading() {
+        dom.toggle.show();
+        dom.loading.hide();
     }
 
     return {
