@@ -11,10 +11,10 @@ function(
 
         var el,
             config = {
-                type: null,
-                slug: null,
-                classes: null,
-                label: null,
+                type: '',
+                slug: '',
+                classes: '',
+                label: '',
                 limit: null,
                 page: 1
             };
