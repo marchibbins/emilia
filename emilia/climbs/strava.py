@@ -44,6 +44,7 @@ class Stravalib(object):
         # Prune entries for desired number rather than specify top_results_limit, meaning
         # data for page one of leaderboard is cached for (almost certain) subsequent request
         leaderboard.entries = leaderboard.entries[:self.NUMBER_OF_LEADERS]
+        leaderboard.entry_count = len(leaderboard.entries)
         return leaderboard
 
     def get_segment_club_leaderboard(self, *args, **kwargs):
