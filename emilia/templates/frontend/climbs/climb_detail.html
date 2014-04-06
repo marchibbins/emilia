@@ -21,7 +21,7 @@
     </dl>
 
     <div class="js-climb-leaders" data-climb-slug="{{ climb.slug }}">
-        <div class="leaderboard js-leaders">
+        <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Male club leaders</h2>
             <ol class="leaderboard__entries">
                 {% for num in range(3) %}
@@ -35,7 +35,7 @@
             </ol>
         </div>
 
-        <div class="leaderboard js-leaders">
+        <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Female club leaders</h2>
             <ol class="leaderboard__entries">
                 {% for num in range(3) %}
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="js-leaderboard" data-climb-slug="{{ climb.slug }}" data-page="1">
+    <div class="js-climb-standings" data-climb-slug="{{ climb.slug }}">
         <a href="http://www.strava.com/segments/{{ climb.strava_id }}" title="" class="js-hidden">View full leaderboard on Strava</a>
     </div>
 {% endblock %}

@@ -1,117 +1,68 @@
 define([
+    'leaderboards',
     'bean',
-    'reqwest',
     '$'
 ],
 function(
+    Leaderboards,
     bean,
-    reqwest,
     $
 ) {
-    var classes = {
-            hidden: 'is-hidden',
-            leaderboard: 'js-leaders',
-            loading: 'js-leaders-loading',
-            toggle: 'js-leaders-toggle'
-        },
-        data = {
-            climbSlug: 'data-climb-slug',
-            toggleText: 'data-toggle-text'
-        },
-        dom = {},
-        labels = {
-            loading: 'Loading',
-            maleOverallLeaders: 'Male overall leaders',
-            femaleOverallLeaders: 'Female overall leaders',
-            showClubLeaders: 'Show club leaders',
-            showOverallLeaders: 'Show overall leaders'
-        },
-        leadersCount = 3,
-        apiPending = true,
+    var dom = {},
         togglePending = false;
 
     function init(el) {
         dom.el = el;
-
-        var slug = dom.el.getAttribute(data.climbSlug),
-            url = '/api/climbs/:slug/leaders'.replace(':slug', slug);
-
-        reqwest(url, handleApiResponse);
+        addLeaderboard();
         addToggle();
     }
 
-    function handleApiResponse(response) {
-        var maleHtml = createLeaderboardHtml(labels.maleOverallLeaders, response.male_leaders),
-            femaleHtml = createLeaderboardHtml(labels.femaleOverallLeaders, response.female_leaders);
+    function addLeaderboard() {
+        var slug = dom.el.getAttribute('data-climb-slug');
 
-        $('.' + classes.leaderboard).last().after(maleHtml + femaleHtml);
-        apiPending = false;
+        dom.leaderboards = new Leaderboards({
+            type: 'leaders',
+            slug: slug,
+            pageSize: 3,
+            classes: 'is-hidden'
+        }).create();
 
-        if (togglePending) {
-            toggleLeaderboards();
-            removeLoading();
-        }
-    }
-
-    function createLeaderboardHtml(label, data) {
-        var index = 0,
-            items = '',
-            count = Math.max(data.entries.length, leadersCount),
-            entry;
-
-        for (index; index < count; ++index) {
-            entry = data.entries[index];
-            if (entry) {
-                items += '<li>' + entry.athlete_name + ': ' + formatTime(entry.elapsed_time) + '</li>';
-            } else {
-                items += '<li>None</li>';
-            }
-        }
-
-        return '<div class="leaderboard ' + classes.leaderboard + ' ' + classes.hidden + '">' +
-                   '<h2>' + label + '</h2>' + '<ol>' + items + '</ol>' +
-               '</div>';
-    }
-
-    function toggleLeaderboards() {
-        $('.' + classes.leaderboard).toggleClass(classes.hidden);
-
-        var toggleText = dom.toggle.attr(data.toggleText),
-            text = dom.toggle.text();
-
-        dom.toggle.text(toggleText).attr(data.toggleText, text);
+        $(dom.el).append(dom.leaderboards);
     }
 
     function addToggle() {
-        dom.toggle = $.create('<a href="#toggle-leaders" title="" class="' + classes.toggle + '" ' + data.toggleText + '="' + labels.showClubLeaders + '">' + labels.showOverallLeaders + '</a>');
+        dom.toggle = $.create('<a href="#toggle-leaders" title="" class="js-leaders-toggle" data-toggle-text="Show club leaders">Show overall leaders</a>');
         $(dom.el).append(dom.toggle);
+        bean.on(dom.toggle[0], 'click', clickToggle);
+    }
 
-        bean.on(dom.toggle[0], 'click', function (event) {
-            event.preventDefault();
-            if (apiPending === true) {
-                togglePending = true;
-                addLoading();
-            } else {
-                toggleLeaderboards();
-            }
-        });
+    function clickToggle(event) {
+        event.preventDefault();
+        if (dom.leaderboards.loading === true) {
+            togglePending = true;
+            addLoading();
+        } else {
+            toggleLeaderboards();
+        }
+    }
+
+    function toggleLeaderboards() {
+        $('.js-leaderboard', dom.el).toggleClass('is-hidden');
+
+        var toggleText = dom.toggle.attr('data-toggle-text'),
+            text = dom.toggle.text();
+
+        dom.toggle.text(toggleText).attr('data-toggle-text', text);
     }
 
     function addLoading() {
-        dom.loading = $.create('<div class="' + classes.loading + '">' + labels.loading + '</div>');
+        dom.loading = $.create('<div class="js-leaders-loading">Loading</div>');
         dom.toggle.after(dom.loading).hide();
     }
 
     function removeLoading() {
         dom.toggle.show();
         dom.loading.hide();
-    }
-
-    function formatTime(time) {
-        var hours = parseInt(time / 3600, 10) % 24,
-            minutes = parseInt(time / 60, 10) % 60,
-            seconds = parseInt(time, 10) % 60;
-        return (hours > 0 ? hours + ":" : '') + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
     }
 
     return {
