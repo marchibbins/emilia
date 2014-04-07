@@ -27,7 +27,7 @@ class BookModelTests(unittest.TestCase):
     def test_field_length_defaults(self):
         """ Tests model default string lengths are set. """
         self.assertEqual(Book.SLUG_STR_MAX, 32)
-        self.assertEqual(Book.NAME_STR_MAX, 64)
+        self.assertEqual(Book.NAME_STR_MAX, 128)
 
     def test_field_lengths(self):
         """ Tests slug, short name and long name string lengths are set. """
