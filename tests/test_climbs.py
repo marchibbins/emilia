@@ -73,7 +73,7 @@ class ClimbModelTests(unittest.TestCase):
 
     def test_init(self):
         """ Tests init takes correct arguments. """
-        list = ['slug', 'number', 'name', 'location', 'strava_id', 'book', 'region']
+        list = ['slug', 'number', 'name', 'location', 'strava_id', 'latitude', 'longitude', 'book', 'region']
         args = inspect.getargspec(Climb.__init__).args[1:]
         self.assertEqual(args, list)
 
