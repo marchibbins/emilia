@@ -53,8 +53,9 @@ class Climb(db.Model):
     name = Column(db.String(NAME_STR_MAX), nullable=False)
     location = Column(db.String(LOCATION_STR_MAX), nullable=False)
     strava_id = Column(db.Integer, nullable=False)
-    latitude = Column(db.Float)
-    longitude = Column(db.Float)
+
+    segment_id = Column(db.Integer, db.ForeignKey("segment.id"))
+    segment = db.relationship("Segment", uselist=False, backref="climb")
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('climbs', lazy='dynamic'))
@@ -75,15 +76,13 @@ class Climb(db.Model):
             'region_id': self.region_id,
         }
 
-    def __init__(self, slug, number, name, location, strava_id, latitude=None, longitude=None, book=None, region=None):
+    def __init__(self, slug, number, name, location, strava_id, book=None, region=None):
         """ Populates model properties. """
         self.slug = slug
         self.number = number
         self.name = name
         self.location = location
         self.strava_id = strava_id
-        self.latitude = latitude
-        self.longitude = longitude
         self.book = book
         self.region = region
 
@@ -94,6 +93,23 @@ class Climb(db.Model):
     def __unicode__(self):
         """ Returns a string representation of the Climb object. """
         return '%s' % self.name
+
+
+class Segment(db.Model):
+
+    """ Represents stored Segment data from Strava. """
+
+    id = Column(db.Integer, primary_key=True)
+    distance = Column(db.Float)
+    average_grade = Column(db.Float)
+    maximum_grade = Column(db.Float)
+    elevation_high = Column(db.Float)
+    elevation_low = Column(db.Float)
+    total_elevation_gain = Column(db.Float)
+    start_latitude = Column(db.Float)
+    start_longitude = Column(db.Float)
+    end_latitude = Column(db.Float)
+    end_longitude = Column(db.Float)
 
 
 class Region(db.Model):
