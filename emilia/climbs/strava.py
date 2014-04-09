@@ -85,7 +85,13 @@ def serialize_segment(self):
         'distance': self.distance.num,
         'average_grade': self.average_grade,
         'maximum_grade': self.maximum_grade,
+        'elevation_high': self.elevation_high.num,
+        'elevation_low': self.elevation_low.num,
         'total_elevation_gain': self.total_elevation_gain.num,
+        'start_latitude': self.start_latitude,
+        'start_longitude': self.start_longitude,
+        'end_latitude': self.end_latitude,
+        'end_longitude': self.end_longitude,
     }
 
 

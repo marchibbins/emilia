@@ -5,20 +5,40 @@
 
     <p>From <a href="{{ url_for('frontend.book_detail', slug=climb.book.slug) }}" title="">{{ climb.book }}</a></p>
 
-    <h2>Factfile</h2>
-    <dl>
-        <dt>Distance:</dt>
-        <dd>{{ segment.distance.num }}{{ segment.distance.unit }}</dd>
+    {% if climb.segment %}
+        <h2>Factfile</h2>
+        <dl>
+            <dt>Distance:</dt>
+            <dd>{{ climb.segment.distance }}m</dd>
 
-        <dt>Average grade:</dt>
-        <dd>{{ segment.average_grade }}%</dd>
+            <dt>Average grade:</dt>
+            <dd>{{ climb.segment.average_grade }}%</dd>
 
-        <dt>Maximum grade:</dt>
-        <dd>{{ segment.maximum_grade }}%</dd>
+            <dt>Maximum grade:</dt>
+            <dd>{{ climb.segment.maximum_grade }}%</dd>
 
-        <dt>Elevation difference:</dt>
-        <dd>{{ segment.total_elevation_gain.num }}{{ segment.total_elevation_gain.unit }}</dd>
-    </dl>
+            <dt>Elevation high</dt>
+            <dd>{{ climb.segment.elevation_high }}m</dd>
+
+            <dt>Elevation low</dt>
+            <dd>{{ climb.segment.elevation_low }}m</dd>
+
+            <dt>Total elevation gain</dt>
+            <dd>{{ climb.segment.total_elevation_gain }}m</dd>
+
+            <dt>Start latitude</dt>
+            <dd>{{ climb.segment.start_latitude }}</dd>
+
+            <dt>Start longitude</dt>
+            <dd>{{ climb.segment.start_longitude }}</dd>
+
+            <dt>End latitude</dt>
+            <dd>{{ climb.segment.end_latitude }}</dd>
+
+            <dt>End longitude</dt>
+            <dd>{{ climb.segment.end_longitude }}</dd>
+        </dl>
+    {% endif %}
 
     <div class="js-climb-leaders" data-climb-slug="{{ climb.slug }}">
         <div class="leaderboard js-leaderboard">

@@ -59,7 +59,6 @@ def climb_detail(slug):
     climb = Climb.query.filter_by(slug=slug).first_or_404()
     context = {
         'climb': climb.serialize(),
-        'segment': strava.get_segment(climb.strava_id).serialize(),
         'male_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='M').serialize(),
         'female_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F').serialize(),
     }
