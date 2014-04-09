@@ -124,6 +124,7 @@ class Segment(db.Model):
     start_longitude = Column(db.Float)
     end_latitude = Column(db.Float)
     end_longitude = Column(db.Float)
+    map_polyline = Column(db.String())
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """

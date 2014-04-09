@@ -1,5 +1,5 @@
 from stravalib import Client
-from stravalib.model import Segment, SegmentLeaderboard, SegmentLeaderboardEntry
+from stravalib.model import Map, Segment, SegmentLeaderboard, SegmentLeaderboardEntry
 import requests
 
 from emilia.extensions import cache
@@ -78,6 +78,12 @@ def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=No
     return SegmentLeaderboard.deserialize(self.protocol.get('/segments/{id}/leaderboard', id=segment_id, **params), bind_client=self)
 
 
+def segment_from_dict(self, d):
+    super(Segment, self).from_dict(d)
+    if d.get('map_polyline'):
+        self.map = Map(polyline=d['map_polyline'])
+
+
 def serialize_segment(self):
     """ Returns basic Segment data for serialization. """
     return {
@@ -92,6 +98,7 @@ def serialize_segment(self):
         'start_longitude': self.start_longitude,
         'end_latitude': self.end_latitude,
         'end_longitude': self.end_longitude,
+        'map_polyline': str(self.map.polyline),
     }
 
 
@@ -115,6 +122,7 @@ def serialize_segment_leaderboard_entry(self):
 
 Client.get_segment_leaderboard = get_segment_leaderboard
 Segment.serialize = serialize_segment
+Segment.from_dict = segment_from_dict
 SegmentLeaderboard.serialize = serialize_segment_leaderboard
 SegmentLeaderboardEntry.serialize = serialize_segment_leaderboard_entry
 

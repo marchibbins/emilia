@@ -38,10 +38,14 @@
 
             <dt>End longitude</dt>
             <dd>{{ segment.end_longitude }}</dd>
+
+            <dt>Map</dt>
+            <dd>{{ segment.map_polyline }}</dd>
         </dl>
     {% endif %}
 
     <div class="js-climb-leaders" data-climb-slug="{{ climb.slug }}">
+        {% if male_club_leaders %}
         <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Male club leaders</h2>
             <ol class="leaderboard__entries">
@@ -55,7 +59,9 @@
                 {% endfor %}
             </ol>
         </div>
+        {% endif %}
 
+        {% if female_club_leaders %}
         <div class="leaderboard js-leaderboard">
             <h2 class="leaderboard__title">Female club leaders</h2>
             <ol class="leaderboard__entries">
@@ -69,6 +75,7 @@
                 {% endfor %}
             </ol>
         </div>
+        {% endif %}
     </div>
 
     <div class="js-climb-standings" data-climb-slug="{{ climb.slug }}">
