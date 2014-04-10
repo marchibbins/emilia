@@ -1,5 +1,5 @@
 from stravalib import Client
-from stravalib.model import Map, Segment, SegmentLeaderboard, SegmentLeaderboardEntry
+from stravalib.model import BaseEntity, Map, Segment, SegmentLeaderboard, SegmentLeaderboardEntry
 import requests
 
 from emilia.extensions import cache
@@ -58,6 +58,15 @@ class Stravalib(object):
         return self.get_segment_leaders(*args, **kwargs)
 
 
+class SegmentStream(BaseEntity):
+    """ Simple class for Segment Stream data. """
+    def from_dict(self, d):
+        for item in d:
+            obj_type = item.get('type')
+            obj_data = item.get('data')
+            setattr(self, obj_type, obj_data)
+
+
 def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=None, top_results_limit=None):
     """ Gets the leaderboard for a segment. Overrides default method to take page parameter, ignoring unused others. """
     params = {}
@@ -76,6 +85,12 @@ def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=No
         params['per_page'] = top_results_limit
 
     return SegmentLeaderboard.deserialize(self.protocol.get('/segments/{id}/leaderboard', id=segment_id, **params), bind_client=self)
+
+
+def get_segment_stream(self, segment_id, types='distance,altitude,latlng'):
+    """ Gets basic Stream data for segment. """
+    raw = self.protocol.get('/segments/{id}/streams/{types}', id=segment_id, types=types)
+    return SegmentStream.deserialize(raw)
 
 
 def segment_from_dict(self, d):
@@ -121,6 +136,7 @@ def serialize_segment_leaderboard_entry(self):
 
 
 Client.get_segment_leaderboard = get_segment_leaderboard
+Client.get_segment_stream = get_segment_stream
 Segment.serialize = serialize_segment
 Segment.from_dict = segment_from_dict
 SegmentLeaderboard.serialize = serialize_segment_leaderboard
