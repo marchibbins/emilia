@@ -57,14 +57,16 @@ class Stravalib(object):
         kwargs['club_id'] = self.CLUB_ID
         return self.get_segment_leaders(*args, **kwargs)
 
+    def get_segment_stream(self, *args, **kwargs):
+        """ Retrives Segment Steam data from cache or Strava. """
+        return self.get_or_cache_call(SegmentStream, 'get_segment_stream', *args, **kwargs)
+
 
 class SegmentStream(BaseEntity):
     """ Simple class for Segment Stream data. """
     def from_dict(self, d):
         for item in d:
-            obj_type = item.get('type')
-            obj_data = item.get('data')
-            setattr(self, obj_type, obj_data)
+            setattr(self, item['type'], item['data'])
 
 
 def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=None, top_results_limit=None):
@@ -87,9 +89,9 @@ def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=No
     return SegmentLeaderboard.deserialize(self.protocol.get('/segments/{id}/leaderboard', id=segment_id, **params), bind_client=self)
 
 
-def get_segment_stream(self, segment_id, types='distance,altitude,latlng'):
+def get_segment_stream(self, segment_id):
     """ Gets basic Stream data for segment. """
-    raw = self.protocol.get('/segments/{id}/streams/{types}', id=segment_id, types=types)
+    raw = self.protocol.get('/segments/{id}/streams/{types}', id=segment_id, types='distance,altitude,latlng')
     return SegmentStream.deserialize(raw)
 
 
@@ -135,12 +137,31 @@ def serialize_segment_leaderboard_entry(self):
     }
 
 
+def serialize_segment_stream(self):
+    """ """
+    return [
+        {
+            'type': 'distance',
+            'data': [item for item in self.distance],
+        },
+        {
+            'type': 'altitude',
+            'data': [item for item in self.altitude],
+        },
+        {
+            'type': 'latlng',
+            'data': [item for item in self.latlng],
+        }
+    ]
+
+
 Client.get_segment_leaderboard = get_segment_leaderboard
 Client.get_segment_stream = get_segment_stream
 Segment.serialize = serialize_segment
 Segment.from_dict = segment_from_dict
 SegmentLeaderboard.serialize = serialize_segment_leaderboard
 SegmentLeaderboardEntry.serialize = serialize_segment_leaderboard_entry
+SegmentStream.serialize = serialize_segment_stream
 
 
 strava = Stravalib()

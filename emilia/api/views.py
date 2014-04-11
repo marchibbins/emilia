@@ -104,6 +104,18 @@ def climb_leaderboard(slug, leaderboard, gender=None):
     return json_response(**context)
 
 
+@api.route('/climbs/<slug>/stream')
+@cache.cached()
+def climb_stream(slug):
+    """ Renders a segment stream the Climb, matching slug, as JSON. """
+    climb = Climb.query.filter_by(slug=slug).first_or_404()
+    context = {
+        'climb': climb.serialize(),
+        'stream': strava.get_segment_stream(climb.strava_id).serialize(),
+    }
+    return json_response(**context)
+
+
 @api.errorhandler(404)
 def page_not_found(error):
     """ Custom 404 for this blueprint. Note: only handles exceptions
