@@ -63,7 +63,9 @@ class Stravalib(object):
 
 
 class SegmentStream(BaseEntity):
+
     """ Simple class for Segment Stream data. """
+
     def from_dict(self, d):
         for item in d:
             setattr(self, item['type'], item['data'])
