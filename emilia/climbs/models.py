@@ -71,10 +71,10 @@ class Climb(db.Model):
     segment = db.synonym('climb_segment', descriptor=property(get_segment))
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    book = db.relationship('Book', backref=db.backref('climbs', lazy='dynamic'))
-
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
-    region = db.relationship('Region', backref=db.backref('climbs', lazy='dynamic'))
+
+    book = db.relationship('Book', backref=db.backref('climbs', lazy='dynamic', order_by=region_id))
+    region = db.relationship('Region', backref=db.backref('climbs', lazy='dynamic', order_by=book_id))
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
