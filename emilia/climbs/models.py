@@ -86,6 +86,18 @@ class Climb(db.Model):
             'location': self.location,
             'strava_id': self.strava_id,
             'segment': self.segment.serialize(),
+            'book': self.book.serialize(),
+            'region': self.region.serialize(),
+        }
+
+    def serialize_summary(self):
+        """ Returns an easily serializeable summary of the object. """
+        return {
+            'id': self.id,
+            'slug': self.slug,
+            'number': self.number,
+            'name': self.name,
+            'segment': self.segment.serialize_summary(),
             'book_id': self.book_id,
             'region_id': self.region_id,
         }
@@ -140,6 +152,14 @@ class Segment(db.Model):
             'start_longitude': self.start_longitude,
             'end_latitude': self.end_latitude,
             'end_longitude': self.end_longitude,
+        }
+
+    def serialize_summary(self):
+        """ Returns an easily serializeable summary of the object. """
+        return {
+            'id': self.id,
+            'start_latitude': self.start_latitude,
+            'start_longitude': self.start_longitude,
         }
 
     def __init__(self, obj):
