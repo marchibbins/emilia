@@ -52,6 +52,16 @@ def book_detail(slug):
     return json_response(**context)
 
 
+@api.route('/climbs')
+@cache.cached()
+def climb_list():
+    """ Renders a full list of Climbs as JSON. """
+    context = {
+        'climbs': [item.serialize_summary() for item in Climb.query.all()]
+    }
+    return json_response(**context)
+
+
 @api.route('/climbs/<slug>')
 @cache.cached()
 def climb_detail(slug):
