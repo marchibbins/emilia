@@ -46,3 +46,13 @@ def climb_detail(slug):
         'female_club_leaders': strava.get_segment_club_leaders(climb.strava_id, gender='F'),
     }
     return render_template('frontend/climbs/climb_detail.html', **context)
+
+
+@frontend.route('/map')
+# @cache.cached()
+def map():
+    """ """
+    context = {
+        'books': Book.query.all()
+    }
+    return render_template('frontend/map.html', **context)
