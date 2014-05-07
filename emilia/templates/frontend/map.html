@@ -2,19 +2,8 @@
 
 {% block content %}
     {% if books %}
-        <ul>
-            {% for book in books %}
-                <li><a href="{{ url_for('frontend.book_detail', slug=book.slug) }}" title="">{{ book }}</a>
-                {% if book.climbs %}
-                    <ul>
-                        {% for climb in book.climbs in watchchanges(book.climbs, 'region') %}
-                            {% if changed %}<h3>Changed</h3>{% endif %}
-                            <li>{{ climb.region }}: {{ climb }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+        {% for book in books %}
+            <button data-id="{{ book.id }}" title="">{{ book.short_name }}</button>
+        {% endfor %}
     {% endif %}
 {% endblock %}
