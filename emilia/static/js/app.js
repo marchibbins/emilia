@@ -29299,5 +29299,5 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   this.label.setMap(theMap);
 };;angular.module('emilia', ['google-maps'])
     .controller('emilia-map', function ($scope) {
-        alert('Ready');
+        console.log('Ready');
     });
