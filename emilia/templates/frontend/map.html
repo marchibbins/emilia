@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if books %}
-        {% for book in books %}
-            <button data-id="{{ book.id }}" title="">{{ book.short_name }}</button>
-        {% endfor %}
-    {% endif %}
+    <div ng-app="emilia" ng-controller="emilia-map">
+        {% if books %}
+            {% for book in books %}
+                <button data-id="{{ book.id }}" title="">{{ book.short_name }}</button>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
