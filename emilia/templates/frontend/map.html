@@ -7,5 +7,11 @@
                 <button data-id="{{ book.id }}" title="">{{ book.short_name }}</button>
             {% endfor %}
         {% endif %}
+
+        {% raw %}
+            <google-map center="map.center" draggable="{{ map.draggable }}" zoom="map.zoom">
+                <markers models="currentBook.climbs" coords="'coords'" click="clickMarker"></markers>
+            </google-map>
+        {% endraw %}
     </div>
 {% endblock %}
