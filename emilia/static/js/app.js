@@ -29342,11 +29342,11 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
         $scope.selectClimb = function(climbId) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
-            $scope.$apply();
         };
 
         $scope.clickMarker = function($markerModel) {
             $scope.selectClimb($markerModel.id);
+            $scope.$apply();
         };
 
         var init = function(data) {
