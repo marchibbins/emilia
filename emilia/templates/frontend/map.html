@@ -12,6 +12,17 @@
             <google-map center="map.center" draggable="{{ map.draggable }}" zoom="map.zoom">
                 <markers models="currentBook.climbs" coords="'coords'" click="clickMarker"></markers>
             </google-map>
+
+            <div ng-if="currentBook">
+                <h1>Book {{ currentBook.id }}</h1>
+                <ul ng-if="currentBook.climbs">
+                    <li ng-repeat="climb in currentBook.climbs"><a href ng-click="selectClimb(climb.id)" title="">{{ climb.name }}</a></li>
+                </ul>
+            </div>
+
+            <div ng-if="currentClimb">
+                <h2>{{ currentClimb.name }}</h2>
+            </div>
         {% endraw %}
     </div>
 {% endblock %}
