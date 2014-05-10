@@ -2,6 +2,22 @@
 
 {% block content %}
     <div ng-app="emilia" ng-controller="emilia-map">
+        {% if regions %}
+            <script type="text/javascript">
+                var Emilia = Emilia || {};
+                Emilia.regions = [
+                    {%- for region in regions -%}
+                        {
+                            id: {{ region.id }},
+                            name: "{{ region.name }}",
+                            slug: "{{ region.slug }}"
+                        }
+                        {%- if not loop.last -%},{%- endif -%}
+                    {%- endfor -%}
+                ];
+            </script>
+        {% endif %}
+
         {% if books %}
             {% for book in books %}
                 <button data-book-id="{{ book.id }}" title="">{{ book.short_name }}</button>
@@ -15,6 +31,9 @@
 
             <div ng-if="currentBook">
                 <h1>{{ currentBook.short_name }}</h1>
+                <ul ng-if="currentBook.regions">
+                    <li ng-repeat="region in currentBook.regions">{{ region.name }}</li>
+                </ul>
                 <ul ng-if="currentBook.climbs">
                     <li ng-repeat="climb in currentBook.climbs"><a href ng-click="selectClimb(climb.id)" title="">{{ climb.name }}</a></li>
                 </ul>

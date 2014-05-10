@@ -62,7 +62,8 @@ angular.module('emilia', ['google-maps'])
                 $scope.books[bookId] = {
                     id: bookId,
                     short_name: bookName,
-                    climbs: []
+                    climbs: [],
+                    regions: []
                 };
 
                 // Bind buttons
@@ -79,7 +80,14 @@ angular.module('emilia', ['google-maps'])
                     latitude: climb.segment.start_latitude,
                     longitude: climb.segment.start_longitude
                 };
-                $scope.books[climb.book_id].climbs.push(climb);
+
+                book = $scope.books[climb.book_id];
+                book.climbs.push(climb);
+
+                // Add region object to book (without duplicates)
+                if (!_.findWhere(book.regions, {id: climb.region_id})) {
+                    book.regions.push(_.findWhere(Emilia.regions, {id: climb.region_id}));
+                }
             });
 
             $scope.selectBook(DEFAULT_BOOK_ID);

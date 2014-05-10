@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from emilia.climbs.models import Book, Climb
+from emilia.climbs.models import Book, Climb, Region
 from emilia.climbs.strava import strava
 from emilia.extensions import cache
 
@@ -53,6 +53,7 @@ def climb_detail(slug):
 def map():
     """ """
     context = {
-        'books': Book.query.all()
+        'books': Book.query.all(),
+        'regions': Region.query.all()
     }
     return render_template('frontend/map.html', **context)
