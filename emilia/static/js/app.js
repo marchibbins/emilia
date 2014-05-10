@@ -29333,7 +29333,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                 init(data);
             })
             .error(function(data, status, headers, config) {
-                console.log("Error:", status);
+                console.log('Error:', status);
             });
 
         $scope.selectBook = function(bookId) {
@@ -29352,13 +29352,23 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         var init = function(data) {
             $scope.climbs = data.climbs;
 
-            // Create book objects
-            var bookIds = _.uniq(_.pluck($scope.climbs, 'book_id'));
-            _.each(bookIds, function(id) {
-                $scope.books[id] = {
-                    id: id,
+            // Book data is already on page
+            _.each(document.querySelectorAll('[data-book-id]'), function(el) {
+                var bookId = el.getAttribute('data-book-id'),
+                    bookName = el.textContent;
+
+                // Create book objects
+                $scope.books[bookId] = {
+                    id: bookId,
+                    short_name: bookName,
                     climbs: []
                 };
+
+                // Bind buttons
+                angular.element(el).on('click', function() {
+                    $scope.selectBook(bookId);
+                    $scope.$apply();
+                });
             });
 
             // Assign climbs to book

@@ -4,7 +4,7 @@
     <div ng-app="emilia" ng-controller="emilia-map">
         {% if books %}
             {% for book in books %}
-                <button data-id="{{ book.id }}" title="">{{ book.short_name }}</button>
+                <button data-book-id="{{ book.id }}" title="">{{ book.short_name }}</button>
             {% endfor %}
         {% endif %}
 
@@ -14,7 +14,7 @@
             </google-map>
 
             <div ng-if="currentBook">
-                <h1>Book {{ currentBook.id }}</h1>
+                <h1>{{ currentBook.short_name }}</h1>
                 <ul ng-if="currentBook.climbs">
                     <li ng-repeat="climb in currentBook.climbs"><a href ng-click="selectClimb(climb.id)" title="">{{ climb.name }}</a></li>
                 </ul>
