@@ -29298,7 +29298,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   // ... then deal with the label:
   this.label.setMap(theMap);
 };;angular.module('emilia', ['google-maps'])
-    .controller('emilia-map', function ($scope, $http) {
+    .controller('emilia-map', ['$scope', '$http', function ($scope, $http) {
         // Settings
         var DEFAULT_CENTER = {
                 latitude: 54.5,
@@ -29344,10 +29344,12 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
         };
 
-        $scope.clickMarker = function($markerModel) {
-            $scope.selectClimb($markerModel.id);
+        $scope.clickMarker = function(marker) {
+            $scope.selectClimb(marker.id);
             $scope.$apply();
         };
+
+        $scope.clickMarker.$inject = ['$markerModel'];
 
         var init = function(data) {
             $scope.climbs = data.climbs;
@@ -29391,4 +29393,4 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
             $scope.selectBook(DEFAULT_BOOK_ID);
         };
-    });
+    }]);

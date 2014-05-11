@@ -1,5 +1,5 @@
 angular.module('emilia', ['google-maps'])
-    .controller('emilia-map', function ($scope, $http) {
+    .controller('emilia-map', ['$scope', '$http', function ($scope, $http) {
         // Settings
         var DEFAULT_CENTER = {
                 latitude: 54.5,
@@ -45,10 +45,12 @@ angular.module('emilia', ['google-maps'])
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
         };
 
-        $scope.clickMarker = function($markerModel) {
-            $scope.selectClimb($markerModel.id);
+        $scope.clickMarker = function(marker) {
+            $scope.selectClimb(marker.id);
             $scope.$apply();
         };
+
+        $scope.clickMarker.$inject = ['$markerModel'];
 
         var init = function(data) {
             $scope.climbs = data.climbs;
@@ -92,4 +94,4 @@ angular.module('emilia', ['google-maps'])
 
             $scope.selectBook(DEFAULT_BOOK_ID);
         };
-    });
+    }]);
