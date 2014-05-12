@@ -16,7 +16,7 @@
             <button ng-repeat="book in books" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">{{ book.short_name }}</button>
 
             <google-map center="map.center" draggable="{{ map.draggable }}" zoom="map.zoom">
-                <markers models="currentBook.climbs" coords="'coords'" click="clickMarker"></markers>
+                <markers models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true"></markers>
             </google-map>
 
             <div ng-if="currentBook">
