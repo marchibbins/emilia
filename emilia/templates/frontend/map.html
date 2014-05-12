@@ -22,10 +22,12 @@
             <div ng-if="currentBook">
                 <h1>{{ currentBook.short_name }}</h1>
                 <ul ng-if="currentBook.regions">
-                    <li ng-repeat="region in currentBook.regions">{{ region.name }}</li>
-                </ul>
-                <ul ng-if="currentBook.climbs">
-                    <li ng-repeat="climb in currentBook.climbs"><a href ng-click="selectClimb(climb.id)" title="">{{ climb.name }}</a></li>
+                    <li ng-repeat="region in currentBook.regions">
+                        <h2>{{ region.name }}</h2>
+                        <ul ng-if="region.climbs.length">
+                            <li ng-repeat="climb in region.climbs"><a href ng-click="selectClimb(climb.id)" title="">{{ climb.name }}</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 

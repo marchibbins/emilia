@@ -70,7 +70,10 @@ angular.module('emilia', ['google-maps'])
             _.each(Emilia.books, function (book) {
                 var climbs = _.where($scope.climbs, {book_id: book.id}),
                     regions = _.map(_.uniq(_.pluck(climbs, 'region_id')), function (region_id) {
-                        return _.findWhere(Emilia.regions, {id: region_id});
+                        var region = _.findWhere(Emilia.regions, {id: region_id});
+                        return _.extend({
+                            climbs: _.where(climbs, {region_id: region_id}),
+                        }, region);
                     });
 
                 $scope.books[book.id] = _.extend({
