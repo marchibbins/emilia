@@ -41,6 +41,7 @@ angular.module('emilia', ['google-maps'])
             });
 
         $scope.selectBook = function (bookId) {
+            $scope.currentClimb = {};
             $scope.currentBook = $scope.books[bookId];
         };
 
