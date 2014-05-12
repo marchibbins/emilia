@@ -1,30 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div ng-app="emilia" ng-controller="emilia-map">
-        {% if regions %}
-            <script type="text/javascript">
-                var Emilia = Emilia || {};
-                Emilia.regions = [
-                    {%- for region in regions -%}
-                        {
-                            id: {{ region.id }},
-                            name: "{{ region.name }}",
-                            slug: "{{ region.slug }}"
-                        }
-                        {%- if not loop.last -%},{%- endif -%}
-                    {%- endfor -%}
-                ];
-            </script>
-        {% endif %}
-
+    <script type="text/javascript">
+        var Emilia = Emilia || {};
         {% if books %}
-            {% for book in books %}
-                <button data-book-id="{{ book.id }}" title="">{{ book.short_name }}</button>
-            {% endfor %}
+            Emilia.books = {{ books|tojson }};
         {% endif %}
+        {% if regions %}
+            Emilia.regions = {{ regions|tojson }};
+        {% endif %}
+    </script>
 
+    <div ng-app="emilia" ng-controller="emilia-map">
         {% raw %}
+            <button ng-repeat="book in books" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">{{ book.short_name }}</button>
+
             <google-map center="map.center" draggable="{{ map.draggable }}" zoom="map.zoom">
                 <markers models="currentBook.climbs" coords="'coords'" click="clickMarker"></markers>
             </google-map>

@@ -53,7 +53,7 @@ def climb_detail(slug):
 def map():
     """ """
     context = {
-        'books': Book.query.all(),
-        'regions': Region.query.all()
+        'books': [item.serialize() for item in Book.query.all()],
+        'regions': [item.serialize() for item in Region.query.all()]
     }
     return render_template('frontend/map.html', **context)

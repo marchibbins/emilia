@@ -29298,7 +29298,10 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   // ... then deal with the label:
   this.label.setMap(theMap);
 };;angular.module('emilia', ['google-maps'])
-    .controller('emilia-map', ['$scope', '$http', function ($scope, $http) {
+    .controller('emilia-map', ['$scope', '$window', '$http', function ($scope, $window, $http) {
+        // Global namespace
+        $scope.Emilia = $window.Emilia;
+
         // Settings
         var DEFAULT_CENTER = {
                 latitude: 54.5,
@@ -29329,66 +29332,50 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
         // Load all the data
         $http({method: 'GET', url: '/api/climbs'})
-            .success(function(data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                 init(data);
             })
-            .error(function(data, status, headers, config) {
+            .error(function (data, status, headers, config) {
                 console.log('Error:', status);
             });
 
-        $scope.selectBook = function(bookId) {
+        $scope.selectBook = function (bookId) {
             $scope.currentBook = $scope.books[bookId];
         };
 
-        $scope.selectClimb = function(climbId) {
+        $scope.selectClimb = function (climbId) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
         };
 
-        $scope.clickMarker = function(marker) {
+        $scope.clickMarker = function (marker) {
             $scope.selectClimb(marker.id);
             $scope.$apply();
         };
 
         $scope.clickMarker.$inject = ['$markerModel'];
 
-        var init = function(data) {
+        var init = function (data) {
             $scope.climbs = data.climbs;
 
-            // Book data is already on page
-            _.each(document.querySelectorAll('[data-book-id]'), function(el) {
-                var bookId = el.getAttribute('data-book-id'),
-                    bookName = el.textContent;
-
-                // Create book objects
-                $scope.books[bookId] = {
-                    id: bookId,
-                    short_name: bookName,
-                    climbs: [],
-                    regions: []
-                };
-
-                // Bind buttons
-                angular.element(el).on('click', function() {
-                    $scope.selectBook(bookId);
-                    $scope.$apply();
-                });
-            });
-
-            // Assign climbs to book
-            _.each($scope.climbs, function(climb) {
-                // Parse coords for markers
+            // Parse coords for markers
+            _.each($scope.climbs, function (climb) {
                 climb.coords = {
                     latitude: climb.segment.start_latitude,
                     longitude: climb.segment.start_longitude
                 };
+            });
 
-                book = $scope.books[climb.book_id];
-                book.climbs.push(climb);
+            // Create books object, same data different grouping
+            _.each(Emilia.books, function (book) {
+                var climbs = _.where($scope.climbs, {book_id: book.id}),
+                    regions = _.map(_.uniq(_.pluck(climbs, 'region_id')), function (region_id) {
+                        return _.findWhere(Emilia.regions, {id: region_id});
+                    });
 
-                // Add region object to book (without duplicates)
-                if (!_.findWhere(book.regions, {id: climb.region_id})) {
-                    book.regions.push(_.findWhere(Emilia.regions, {id: climb.region_id}));
-                }
+                $scope.books[book.id] = _.extend({
+                    climbs: climbs,
+                    regions: regions
+                }, book);
             });
 
             $scope.selectBook(DEFAULT_BOOK_ID);
