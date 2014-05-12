@@ -10,6 +10,7 @@ angular.module('emilia', ['google-maps'])
             },
 
             DEFAULT_DRAGGABLE = true,
+            DEFAULT_MIN_ZOOM = 6,
             DEFAULT_ZOOM = 6,
 
             DEFAULT_BOOK_ID = 1;
@@ -18,6 +19,9 @@ angular.module('emilia', ['google-maps'])
         $scope.map = {
             center: DEFAULT_CENTER,
             draggable: DEFAULT_DRAGGABLE,
+            options: {
+                minZoom: DEFAULT_MIN_ZOOM
+            },
             zoom: DEFAULT_ZOOM
         };
 

@@ -29309,6 +29309,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             },
 
             DEFAULT_DRAGGABLE = true,
+            DEFAULT_MIN_ZOOM = 6,
             DEFAULT_ZOOM = 6,
 
             DEFAULT_BOOK_ID = 1;
@@ -29317,6 +29318,9 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         $scope.map = {
             center: DEFAULT_CENTER,
             draggable: DEFAULT_DRAGGABLE,
+            options: {
+                minZoom: DEFAULT_MIN_ZOOM
+            },
             zoom: DEFAULT_ZOOM
         };
 
