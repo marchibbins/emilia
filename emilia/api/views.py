@@ -53,7 +53,7 @@ def book_detail(slug):
 
 
 @api.route('/climbs')
-@cache.cached()
+# @cache.cached()
 def climb_list():
     """ Renders a full list of Climbs as JSON. """
     context = {
