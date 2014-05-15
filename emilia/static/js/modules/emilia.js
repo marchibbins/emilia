@@ -52,6 +52,7 @@ angular.module('emilia', ['google-maps'])
 
         $scope.selectClimb = function (climbId) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
+            $scope.selectRegion($scope.currentClimb.region_id);
         };
 
         $scope.selectRegion = function (regionId) {

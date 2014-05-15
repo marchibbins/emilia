@@ -53,7 +53,7 @@
     }
 }
 
-.map-info__pane {
+.book-info__pane {
     bottom: 0;
     overflow-y: auto;
     position: absolute;
@@ -61,7 +61,7 @@
     width: 100%;
 }
 
-.map-info__region {
+.book-info__region {
     background: $bgGrey;
     color: #fff;
     display: block;
@@ -71,9 +71,13 @@
     padding-left: $gutter;
 }
 
-.map-info__climb {
+.book-info__climb {
     font-size: 20px;
     font-size: 2rem;
     line-height: $baseline*2;
     margin-left: $gutter;
+}
+
+.climb-info__pane {
+    padding: $baseline $gutter;
 }

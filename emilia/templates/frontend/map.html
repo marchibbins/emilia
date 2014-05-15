@@ -20,20 +20,20 @@
                     <button ng-repeat="book in books" class="btn map-info__btn" ng-class="{'active': book.id === currentBook.id}" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
                 </div>
 
-                <div class="map-info__pane" ng-if="currentBook && currentClimb === null">
+                <div class="book-info__pane" ng-if="currentBook && currentClimb === null">
                     <ul class="unstyled" ng-if="currentBook.regions">
                         <li ng-repeat="region in currentBook.regions">
-                            <h2><a class="map-info__region" href ng-click="selectRegion(region.id)" title="View climbs for {{ region.name }}">{{ region.name }}</a></h2>
+                            <h2><a class="book-info__region" href ng-click="selectRegion(region.id)" title="View climbs for {{ region.name }}">{{ region.name }}</a></h2>
                             <ul class="unstyled" ng-if="region.climbs.length" ng-show="currentRegion.id === region.id">
                                 <li ng-repeat="climb in region.climbs">
-                                    <a class="map-info__climb" href ng-click="selectClimb(climb.id)" title="">{{ climb.number }}. {{ climb.name }}</a>
+                                    <a class="book-info__climb" href ng-click="selectClimb(climb.id)" title="">{{ climb.number }}. {{ climb.name }}</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
 
-                <div ng-if="currentClimb">
+                <div class="climb-info__pane" ng-if="currentClimb">
                     <h2>{{ currentClimb.name }}</h2>
                     <a href ng-click="selectBook(currentBook.id)">Back to regions</a>
                 </div>
