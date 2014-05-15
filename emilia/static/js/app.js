@@ -29345,8 +29345,10 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             });
 
         $scope.selectBook = function (bookId) {
+            if (bookId !== $scope.currentBook.id) {
+                $scope.currentRegion = {};
+            }
             $scope.currentClimb = null;
-            $scope.currentRegion = {};
             $scope.currentBook = $scope.books[bookId];
         };
 
