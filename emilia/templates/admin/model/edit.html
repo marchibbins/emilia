@@ -1,3 +1,11 @@
-{% extends 'admin/model/add.html' %}
+{% extends 'admin/index.html' %}
 
-{% block form_title %}Edit {{ name }}{% endblock %}
+{% from 'macros/form.html' import render_form %}
+
+{% block content %}
+    <h1>{% block form_title %}Edit {{ name }}{% endblock %}</h1>
+    <a href="{{ url_for('admin.index') }}" title="">Admin home</a>
+
+    {{ render_form(form, submit_value='Update %s' % name, cancel_url=url_for('admin.index')) }}
+</div>
+{% endblock %}
