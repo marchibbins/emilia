@@ -39,3 +39,5 @@ class RegionForm(Form):
     id = HiddenField(u'Id', [Optional()])
     slug = TextField(u'Slug', [DataRequired(), UniqueValidator(Region, Region.slug), Length(max=Region.SLUG_STR_MAX)], filters=[lowercase_filter], description=u'Url-safe identifier, for example: "south-west"')
     name = TextField(u'Name', [DataRequired(), Length(max=Region.NAME_STR_MAX)], description=u'For example: "South-west"')
+    bg_colour = TextField(u'Background colour', [DataRequired(), Length(max=Region.COLOUR_STR_MAX)], description=u'Hex value without #, for example: "d76e2c"')
+    text_colour = TextField(u'Text colour', [DataRequired(), Length(max=Region.COLOUR_STR_MAX)], description=u'Hex value without #, for example: "ffffff"')

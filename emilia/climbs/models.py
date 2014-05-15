@@ -181,10 +181,13 @@ class Region(db.Model):
 
     SLUG_STR_MAX = 32
     NAME_STR_MAX = 64
+    COLOUR_STR_MAX = 6
 
     id = Column(db.Integer, primary_key=True)
     slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
     name = Column(db.String(NAME_STR_MAX), nullable=False)
+    bg_colour = Column(db.String(COLOUR_STR_MAX), nullable=False)
+    text_colour = Column(db.String(COLOUR_STR_MAX), nullable=False)
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
@@ -192,12 +195,16 @@ class Region(db.Model):
             'id': self.id,
             'slug': self.slug,
             'name': self.name,
+            'bg_colour': self.bg_colour,
+            'text_colour': self.text_colour,
         }
 
-    def __init__(self, slug, name):
+    def __init__(self, slug, name, bg_colour='', text_colour=''):
         """ Populates model properties. """
         self.slug = slug
         self.name = name
+        self.bg_colour = bg_colour
+        self.text_colour = text_colour
 
     def __repr__(self):
         """ Returns the Region object representation. """

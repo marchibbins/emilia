@@ -157,7 +157,7 @@ def install():
 
     fixtures = [
         {
-            'region': ('south-west', u'South-west'),
+            'region': ('south-west', u'South-west', 'd76e2c', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'cheddar-gorge',
@@ -182,7 +182,7 @@ def install():
             ],
         },
         {
-            'region': ('south-east', u'South-east'),
+            'region': ('south-east', u'South-east', 'cc2228', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'box-hill',
@@ -202,7 +202,7 @@ def install():
             ],
         },
         {
-            'region': ('midlands', u'Midlands'),
+            'region': ('midlands', u'Midlands', 'b81188', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'michaelgate',
@@ -220,7 +220,7 @@ def install():
             ],
         },
         {
-            'region': ('yorkshire', u'Yorkshire'),
+            'region': ('yorkshire', u'Yorkshire', '52318e', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'shibden-wall',
@@ -245,7 +245,7 @@ def install():
             ],
         },
         {
-            'region': ('north-east', u'North-east'),
+            'region': ('north-east', u'North-east', '2266af', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'crawleyside',
@@ -255,7 +255,7 @@ def install():
             ],
         },
         {
-            'region': ('scotland', u'Scotland'),
+            'region': ('scotland', u'Scotland', '00acec', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'mennock-pass',
@@ -268,7 +268,7 @@ def install():
             ],
         },
         {
-            'region': ('north-west', u'North-west'),
+            'region': ('north-west', u'North-west', '64b053', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'cat-and-fiddle',
@@ -290,7 +290,7 @@ def install():
             ],
         },
         {
-            'region': ('wales', u'Wales'),
+            'region': ('wales', u'Wales', '37794b', 'ffffff'),
             'climbs': [
                 # 100 Greatest Cycling Climbs
                 'the-shelf',
@@ -311,28 +311,28 @@ def install():
             ],
         },
         {
-            'region': ('flanders', u'Flanders'),
+            'region': ('flanders', u'Flanders', 'ffe400', '000000'),
             'climbs': [
                 # Hellingen: Belgium's Greatest Climbs
                 'kemmelberg',
             ],
         },
         {
-            'region': ('wallonia', u'Wallonia'),
+            'region': ('wallonia', u'Wallonia', 'b3cd0a', '000000'),
             'climbs': [
                 # Hellingen: Belgium's Greatest Climbs
                 'mur-de-huy',
             ],
         },
         {
-            'region': ('alps', u'Alps'),
+            'region': ('alps', u'Alps', '0570B4', 'ffffff'),
             'climbs': [
                 # 100 Greatest Tour de France Climbs
                 'alpe-d-huez',
             ],
         },
         {
-            'region': ('pyrenees', u'Pyrénées'),
+            'region': ('pyrenees', u'Pyrénées', 'e93639', 'ffffff'),
             'climbs': [
                 # 100 Greatest Tour de France Climbs
                 'col-du-tourmalet',
