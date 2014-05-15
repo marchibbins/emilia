@@ -23,7 +23,7 @@
                 <div class="book-info__pane" ng-if="currentBook && currentClimb === null">
                     <ul class="unstyled" ng-if="currentBook.regions">
                         <li ng-repeat="region in currentBook.regions">
-                            <h2><a class="book-info__region" href ng-click="selectRegion(region.id)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h2>
+                            <h2><a class="book-info__region" href ng-click="selectRegion(region.id, true)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h2>
                             <ul class="unstyled" ng-if="region.climbs.length" ng-show="currentRegion.id === region.id">
                                 <li ng-repeat="climb in region.climbs">
                                     <a class="book-info__climb" href ng-click="selectClimb(climb.id)" title="">{{ climb.number }}. {{ climb.name }}</a>

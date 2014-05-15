@@ -47,6 +47,7 @@ angular.module('emilia', ['google-maps'])
 
         $scope.selectBook = function (bookId) {
             $scope.currentClimb = null;
+            $scope.currentRegion = {};
             $scope.currentBook = $scope.books[bookId];
         };
 
@@ -55,8 +56,12 @@ angular.module('emilia', ['google-maps'])
             $scope.selectRegion($scope.currentClimb.region_id);
         };
 
-        $scope.selectRegion = function (regionId) {
-            $scope.currentRegion = _.findWhere($scope.currentBook.regions, {id: regionId});
+        $scope.selectRegion = function (regionId, toggle) {
+            if (toggle === true && regionId === $scope.currentRegion.id) {
+                $scope.currentRegion = {};
+            } else {
+                $scope.currentRegion = _.findWhere($scope.currentBook.regions, {id: regionId});
+            }
         };
 
         $scope.clickMarker = function (marker) {
