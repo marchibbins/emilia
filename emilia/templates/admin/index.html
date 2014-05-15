@@ -8,7 +8,7 @@
         <table>
             {% for book in books %}
             <tr>
-                <td>{{ book }}</td>
+                <td width="300">{{ book }}</td>
                 <td>
                     <a href="{{ url_for('admin.book_edit', id=book.id) }}" title="">Edit</a> |
                     <a href="{{ url_for('admin.book_delete', id=book.id) }}" title="">Delete</a>
@@ -24,7 +24,7 @@
         <table>
             {% for climb in climbs %}
             <tr>
-                <td>{{ climb }}</td>
+                <td width="300">{{ climb }}</td>
                 <td>
                     <a href="{{ url_for('admin.climb_edit', id=climb.id) }}" title="">Edit</a> |
                     <a href="{{ url_for('admin.climb_delete', id=climb.id) }}" title="">Delete</a>
@@ -40,7 +40,7 @@
         <table>
             {% for region in regions %}
             <tr>
-                <td>{{ region }}</td>
+                <td width="300">{{ region }}</td>
                 <td>
                     <a href="{{ url_for('admin.region_edit', id=region.id) }}" title="">Edit</a> |
                     <a href="{{ url_for('admin.region_delete', id=region.id) }}" title="">Delete</a>
