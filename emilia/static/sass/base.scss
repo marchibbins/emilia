@@ -26,7 +26,7 @@ a {
 ol,
 ul {
     padding: 0;
-    margin-left: 25px;
+    margin-left: $gutter;
 }
 
 blockquote {
@@ -36,33 +36,6 @@ blockquote {
 p {
     margin-top: 0;
     margin-bottom: $baseline;
-}
-
-.site-header {
-    background-color: black;
-    height: 50px;
-    padding: 0 10px;
-}
-
-.site-title {
-    color: #fff;
-    display: inline;
-    font-size: 1em;
-    line-height: 50px;
-}
-
-.site-nav {
-    float: right;
-}
-
-.site-nav__item {
-    display: inline-block;
-    line-height: 50px;
-    padding: 0 10px;
-}
-
-.site-nav__link {
-    color: #fff;
 }
 
 .unstyled {
@@ -76,4 +49,58 @@ p {
 
 .js-on .js-hidden {
     display: none !important;
+}
+
+// Header
+.site-header {
+    background-color: black;
+    height: $baseline*3;
+    padding: 0 $gutter;
+}
+
+.site-title {
+    color: #fff;
+    display: inline;
+    font-size: 1em;
+    line-height: $baseline*3;
+}
+
+.site-nav {
+    float: right;
+}
+
+.site-nav__item {
+    display: inline-block;
+    line-height: $baseline*3;
+    padding: 0 $gutter;
+}
+
+.site-nav__link {
+    color: #fff;
+}
+
+// Messages
+.site-messages {
+    margin-bottom: $baseline;
+}
+
+.site-messages__message {
+    background-color: #eee;
+    padding: $baseline/2 $gutter/2;
+}
+
+.site-messages__message--info {
+    background-color: $infoColor;
+}
+
+.site-messages__message--success {
+    background-color: $successColor;
+}
+
+.site-messages__message--warning {
+    background-color: $warningColor;
+}
+
+.site-messages__message--error {
+    background-color: $errorColor;
 }

@@ -30,9 +30,9 @@
     {% block flash_message %}
         {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
-            <div class="content">
+            <div class="site-messages">
                 {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
+                <div class="site-messages__message site-messages__message--{{ category }}">
                     {{ message }}
                 </div>
                 {% endfor %}
