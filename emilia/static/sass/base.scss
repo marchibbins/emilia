@@ -1,7 +1,10 @@
 // Base
+html, body {
+    height: 100%;
+}
+
 body {
     background-color: #fff;
-    padding: 10px;
 }
 
 a {
@@ -20,7 +23,6 @@ a {
     }
 }
 
-// Addresses paddings set differently in IE6/7
 ol,
 ul {
     padding: 0;
@@ -34,6 +36,33 @@ blockquote {
 p {
     margin-top: 0;
     margin-bottom: $baseline;
+}
+
+.site-header {
+    background-color: black;
+    height: 50px;
+    padding: 0 10px;
+}
+
+.site-title {
+    color: #fff;
+    display: inline;
+    font-size: 1em;
+    line-height: 50px;
+}
+
+.site-nav {
+    float: right;
+}
+
+.site-nav__item {
+    display: inline-block;
+    line-height: 50px;
+    padding: 0 10px;
+}
+
+.site-nav__link {
+    color: #fff;
 }
 
 .unstyled {

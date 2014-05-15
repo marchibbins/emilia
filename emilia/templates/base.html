@@ -7,6 +7,26 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
 </head>
 <body>
+    <header class="site-header">
+        <h1 class="site-title">100 Climbs</h1>
+        <nav class="site-nav">
+            <ul class="unstyled">
+                <li class="site-nav__item">
+                    <a class="site-nav__link" href="#" title="View the 100 Climbs Leadersboards on Veloviewer">Leaderboards</a>
+                </li>
+                <li class="site-nav__item">
+                    <a class="site-nav__link" href="http://www.strava.com/clubs/52733" title="Join the 100 Climbs Strava club">Strava</a>
+                </li>
+                <li class="site-nav__item">
+                    <a class="site-nav__link" href="#" title="">Shop</a>
+                </li>
+                <li class="site-nav__item">
+                    <a class="site-nav__link" href="http://www.twitter.com/100Climbs" title="Follow 100 Climbs on Twitter">Twitter</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
     {% block flash_message %}
         {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
