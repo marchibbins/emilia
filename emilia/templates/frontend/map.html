@@ -14,36 +14,38 @@
     </script>
 
     <div ng-app="emilia" ng-controller="emilia-map" ng-cloak>
-        <div class="site-content__main">
+        <div class="map-info">
             {% raw %}
-                <div class="map-view__buttons">
-                    <button ng-repeat="book in books" class="btn map-view__btn" ng-class="{'active': book.id === currentBook.id}" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
+                <div class="map-info__buttons">
+                    <button ng-repeat="book in books" class="btn map-info__btn" ng-class="{'active': book.id === currentBook.id}" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
                 </div>
 
-                <div class="map-view__book" ng-if="currentBook && currentClimb === null">
+                <div class="map-info__pane" ng-if="currentBook && currentClimb === null">
                     <ul class="unstyled" ng-if="currentBook.regions">
-                        <li class="map-view__region" ng-repeat="region in currentBook.regions">
-                            <h2 class="map-view__region-name">{{ region.name }}</h2>
+                        <li ng-repeat="region in currentBook.regions">
+                            <h2><a class="map-info__region" href title="View climbs for {{ region.name }}">{{ region.name }}</a></h2>
                             <ul class="unstyled" ng-if="region.climbs.length">
                                 <li ng-repeat="climb in region.climbs">
-                                    <a class="map-view__climb-name" href ng-click="selectClimb(climb.id)" title="">{{ climb.number }}. {{ climb.name }}</a>
+                                    <a href ng-click="selectClimb(climb.id)" title="">{{ climb.number }}. {{ climb.name }}</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
 
-                <div class="map-view__climb" ng-if="currentClimb">
-                    <h2 class="map-view__climb-title">{{ currentClimb.name }}</h2>
-                    <a class="map-view__climb-close" href ng-click="selectBook(currentBook.id)">Back to regions</a>
+                <div ng-if="currentClimb">
+                    <h2>{{ currentClimb.name }}</h2>
+                    <a href ng-click="selectBook(currentBook.id)">Back to regions</a>
                 </div>
             {% endraw %}
         </div>
 
         {% raw %}
-            <google-map center="map.center" draggable="{{ map.draggable }}" options="map.options" zoom="map.zoom">
-                <markers models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true"></markers>
-            </google-map>
+            <div class="map-container">
+                <google-map center="map.center" draggable="{{ map.draggable }}" options="map.options" zoom="map.zoom"> 
+                    <markers models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true"></markers>
+                </google-map>
+            </div>
         {% endraw %}
     </div>
 {% endblock %}

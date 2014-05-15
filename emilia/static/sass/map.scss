@@ -9,18 +9,7 @@
     z-index: 1;
 }
 
-.site-content__main {
-    background-color: $bgGrey;
-    color: #eee;
-    left: 0;
-    height: 100%;
-    overflow-y: auto;
-    position: absolute;
-    top: 0;
-    width: $leftColWidth;
-}
-
-.angular-google-map-container {
+.map-container {
     bottom: 0;
     left: $leftColWidth;
     position: absolute;
@@ -28,7 +17,23 @@
     top: 0;
 }
 
-.map-view__btn {
+.map-container .angular-google-map-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.map-info {
+    color: #eee;
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: $leftColWidth;
+}
+
+.map-info__btn {
+    background-color: $bgGrey;
     border: 1px solid $bgDarkGrey;
     border-right: none;
     display: inline-block;
@@ -39,23 +44,29 @@
         border-left: none;
     }
 
+    &:hover {
+        background-color: darken($bgGrey, 5%);
+    }
+
     &.active {
         background-color: $bgDarkGrey;
     }
 }
 
-.map-view__book,
-.map-view__climb {
-    padding: $baseline $gutter;
+.map-info__pane {
+    bottom: 0;
+    overflow-y: auto;
+    position: absolute;
+    top: $baseline*3;
+    width: 100%;
 }
 
-.map-view__region {
-    margin-bottom: $baseline;
-}
-
-.map-view__region-name,
-.map-view__climb-name,
-.map-view__climb-title,
-.map-view__climb-close {
+.map-info__region {
+    background: $bgGrey;
     color: #fff;
+    display: block;
+    line-height: $baseline*3;
+    height: $baseline*3;
+    margin: $baseline/2 0;
+    padding-left: $gutter;
 }
