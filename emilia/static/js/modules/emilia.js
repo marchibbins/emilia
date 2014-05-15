@@ -30,10 +30,11 @@ angular.module('emilia', ['google-maps'])
         $scope.climbs = [];
 
         // UI bindings
-        $scope.currentClimb = null;
         $scope.currentBook = {
             climbs: [] // Bound to markers
         };
+        $scope.currentRegion = {};
+        $scope.currentClimb = null;
 
         // Load all the data
         $http({method: 'GET', url: '/api/climbs'})
@@ -51,6 +52,10 @@ angular.module('emilia', ['google-maps'])
 
         $scope.selectClimb = function (climbId) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
+        };
+
+        $scope.selectRegion = function (regionId) {
+            $scope.currentRegion = _.findWhere($scope.currentBook.regions, {id: regionId});
         };
 
         $scope.clickMarker = function (marker) {
