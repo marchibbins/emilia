@@ -59,10 +59,13 @@ p {
 }
 
 .site-title {
-    color: #fff;
     display: inline;
     font-size: 1em;
     line-height: $baseline*3;
+}
+
+.site-title__link {
+    color: #fff;
 }
 
 .site-nav {
