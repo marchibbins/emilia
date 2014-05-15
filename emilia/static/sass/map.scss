@@ -1,4 +1,61 @@
 // Map
+.site-content--map {
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: $headerHeight;
+    z-index: 1;
+}
+
+.site-content__main {
+    background-color: $bgGrey;
+    color: #eee;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    width: $leftColWidth;
+}
+
 .angular-google-map-container {
-    height: 800px;
+    bottom: 0;
+    left: $leftColWidth;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.map-view__btn {
+    border: 1px solid $bgDarkGrey;
+    border-right: none;
+    display: inline-block;
+    height: $baseline*3;
+    width: 25%;
+
+    &:first-child {
+        border-left: none;
+    }
+
+    &.active {
+        background-color: $bgDarkGrey;
+    }
+}
+
+.map-view__book,
+.map-view__climb {
+    padding: $baseline $gutter;
+}
+
+.map-view__region {
+    margin-bottom: $baseline;
+}
+
+.map-view__region-name,
+.map-view__climb-name,
+.map-view__climb-title,
+.map-view__climb-close {
+    color: #fff;
 }

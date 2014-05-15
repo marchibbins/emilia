@@ -5,6 +5,7 @@ html, body {
 
 body {
     background-color: #fff;
+    min-width: $leftColWidth;
 }
 
 a {
@@ -38,6 +39,19 @@ p {
     margin-bottom: $baseline;
 }
 
+.btn {
+    background: transparent;
+    border: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
 .unstyled {
     margin: 0;
     list-style: none;
@@ -53,15 +67,17 @@ p {
 
 // Header
 .site-header {
-    background-color: black;
+    background-color: $bgDarkGrey;
     height: $baseline*3;
     padding: 0 $gutter;
+    position: relative;
+    z-index: 10;
 }
 
 .site-title {
     display: inline;
     font-size: 1em;
-    line-height: $baseline*3;
+    line-height: $headerHeight;
 }
 
 .site-title__link {
@@ -85,10 +101,6 @@ p {
 // Content
 .site-content {
     padding: $baseline $gutter;
-}
-
-.site-content--map {
-    padding: 0;
 }
 
 // Messages

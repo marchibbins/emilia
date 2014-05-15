@@ -1,18 +1,23 @@
 // Layout
-$gutter: 20px;
-$baseline: 16px;
+$gutter:                20px;
+$baseline:              16px;
+
+$headerHeight:          $baseline*3;
+$leftColWidth:          600px;
 
 // Colours
-$bodyTextColour: #333;
-$headingTextColour: #333;
-$linkColour: #005689;
-$linkAccentColour: #4bc6df;
-$errorColour: #de363a;
-$infoColor: #eee;
-$successColor: #73bb73;
-$warningColor: #eeb76a;
-$errorColor: #d96c69;
+$bgDarkGrey:            #3c3c3c;
+$bgGrey:                #5a5a5a;
+$bodyTextColour:        #333;
+$headingTextColour:     #333;
+$linkColour:            #005689;
+$linkAccentColour:      #4bc6df;
+$errorColour:           #de363a;
+$infoColor:             #eee;
+$successColor:          #73bb73;
+$warningColor:          #eeb76a;
+$errorColor:            #d96c69;
 
 // Fonts
-$sans-serif: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$serif: Georgia, serif;
+$sans-serif:            "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$serif:                 Georgia, serif;
