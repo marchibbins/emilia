@@ -26,7 +26,7 @@ a {
 ol,
 ul {
     padding: 0;
-    margin-left: $gutter;
+    margin: 0 0 $baseline $gutter;
 }
 
 blockquote {
@@ -80,6 +80,15 @@ p {
 
 .site-nav__link {
     color: #fff;
+}
+
+// Content
+.site-content {
+    padding: $baseline $gutter;
+}
+
+.site-content--map {
+    padding: 0;
 }
 
 // Messages

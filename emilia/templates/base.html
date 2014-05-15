@@ -41,7 +41,7 @@
         {% endwith %}
     {% endblock %}
 
-    <div class="content">
+    <div class="site-content {% block content_class %}{% endblock %}">
         {% block content %}{% endblock %}
     </div>
 
