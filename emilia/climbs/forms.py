@@ -22,9 +22,9 @@ class ClimbForm(Form):
     """ Primary Climb create and edit form. """
 
     id = HiddenField(u'Id', [Optional()])
-    slug = TextField(u'Slug', [DataRequired(), UniqueValidator(Climb, Climb.slug), Length(max=Climb.SLUG_STR_MAX)], filters=[lowercase_filter], description=u'Url-safe identifier, for example: "zig-zag-hill"')
     number = IntegerField(u'Climb number', [DataRequired(), NumberRange(min=1)], description=u'For example: "101"')
-    name = TextField(u'Climb name', [DataRequired(), Length(max=Climb.NAME_STR_MAX)], description=u'For example: "Leith Hill"')
+    name = TextField(u'Climb name', [DataRequired(), Length(max=Climb.NAME_STR_MAX)], description=u'For example: "Zig Zag Hill"')
+    slug = TextField(u'Slug', [DataRequired(), UniqueValidator(Climb, Climb.slug), Length(max=Climb.SLUG_STR_MAX)], filters=[lowercase_filter], description=u'Url-safe identifier, for example: "zig-zag-hill"')
     location = TextField(u'Full location', [DataRequired(), Length(max=Climb.LOCATION_STR_MAX)], description=u'For example: "Cheddar, Somerset"')
     strava_id = IntegerField(u'Strava segment id', [DataRequired()], description='For example: "944629"')
 
