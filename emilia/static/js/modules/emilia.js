@@ -30,7 +30,7 @@ angular.module('emilia', ['google-maps'])
         $scope.climbs = [];
 
         // UI bindings
-        $scope.currentClimb = {};
+        $scope.currentClimb = null;
         $scope.currentBook = {
             climbs: [] // Bound to markers
         };
@@ -45,7 +45,7 @@ angular.module('emilia', ['google-maps'])
             });
 
         $scope.selectBook = function (bookId) {
-            $scope.currentClimb = {};
+            $scope.currentClimb = null;
             $scope.currentBook = $scope.books[bookId];
         };
 

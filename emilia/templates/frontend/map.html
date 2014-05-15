@@ -19,7 +19,7 @@
                 <markers models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true"></markers>
             </google-map>
 
-            <div ng-if="currentBook">
+            <div ng-if="currentBook && currentClimb === null">
                 <h1>{{ currentBook.short_name }}</h1>
                 <ul ng-if="currentBook.regions">
                     <li ng-repeat="region in currentBook.regions">
@@ -33,6 +33,7 @@
 
             <div ng-if="currentClimb">
                 <h2>{{ currentClimb.name }}</h2>
+                <a href ng-click="selectBook(currentBook.id)">Back to regions</a>
             </div>
         {% endraw %}
     </div>
