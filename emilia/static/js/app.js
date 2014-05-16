@@ -29379,6 +29379,9 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                     latitude: climb.segment.start_latitude,
                     longitude: climb.segment.start_longitude
                 };
+                var region = _.findWhere(Emilia.regions, {id: climb.region_id});
+                climb.icon = '/static/img/marker-' + region.slug + '.png';
+                climb.hiddenIcon = '/static/img/marker-hidden.png';
             });
 
             // Create books object, same data different grouping

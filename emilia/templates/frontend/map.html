@@ -43,8 +43,8 @@
         {% raw %}
             <div class="map-container">
                 <google-map center="map.center" draggable="{{ map.draggable }}" options="map.options" zoom="map.zoom"> 
-                    <markers ng-if="currentBook.climbs" models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true"></markers>
-                    <markers ng-if="currentRegion.climbs" models="currentRegion.climbs" coords="'coords'" fit="true" ng-show="false"></markers>
+                    <markers ng-if="currentBook.climbs" models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true" icon="'icon'"></markers>
+                    <markers ng-if="currentRegion.climbs" models="currentRegion.climbs" coords="'coords'" fit="true" icon="'hiddenIcon'" ng-show="false"></markers>
                 </google-map>
             </div>
         {% endraw %}
