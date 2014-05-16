@@ -29329,9 +29329,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         $scope.climbs = [];
 
         // UI bindings
-        $scope.currentBook = {
-            climbs: [] // Bound to markers
-        };
+        $scope.currentBook = {};
         $scope.currentRegion = {};
         $scope.currentClimb = null;
 
