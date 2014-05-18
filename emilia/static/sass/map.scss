@@ -78,6 +78,13 @@
     margin-left: $gutter;
 }
 
+.book-info__loading {
+    color: $bgGrey;
+    font-size: 20px;
+    font-size: 2rem;
+    padding: $baseline $gutter;
+}
+
 .climb-info__pane {
     padding: $baseline $gutter;
 }

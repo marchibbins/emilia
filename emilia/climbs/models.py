@@ -25,6 +25,13 @@ class Book(db.Model):
             'long_name': self.long_name,
         }
 
+    def serialize_summary(self):
+        """ Returns an easily serializeable summary of the object. """
+        return {
+            'id': self.id,
+            'slug': self.slug,
+        }
+
     def __init__(self, slug, short_name, long_name):
         """ Populates model properties. """
         self.slug = slug
@@ -197,6 +204,13 @@ class Region(db.Model):
             'name': self.name,
             'bg_colour': self.bg_colour,
             'text_colour': self.text_colour,
+        }
+
+    def serialize_summary(self):
+        """ Returns an easily serializeable summary of the object. """
+        return {
+            'id': self.id,
+            'slug': self.slug,
         }
 
     def __init__(self, slug, name, bg_colour='', text_colour=''):

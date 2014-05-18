@@ -21,6 +21,7 @@
                 </div>
 
                 <div class="book-info__pane" ng-if="currentBook && currentClimb === null">
+                    <p class="book-info__loading" ng-if="currentBook.loading">Loading</p>
                     <ul class="unstyled" ng-if="currentBook.regions">
                         <li ng-repeat="region in currentBook.regions">
                             <h2><a class="book-info__region" href ng-click="selectRegion(region.id, true)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h2>

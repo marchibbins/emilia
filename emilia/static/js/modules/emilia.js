@@ -34,15 +34,6 @@ angular.module('emilia', ['google-maps'])
         $scope.currentRegion = {};
         $scope.currentClimb = null;
 
-        // Load all the data
-        $http({method: 'GET', url: '/api/climbs'})
-            .success(function (data, status, headers, config) {
-                init(data);
-            })
-            .error(function (data, status, headers, config) {
-                console.log('Error:', status);
-            });
-
         $scope.selectBook = function (bookId) {
             if (bookId !== $scope.currentBook.id) {
                 $scope.currentRegion = {};
@@ -71,36 +62,66 @@ angular.module('emilia', ['google-maps'])
 
         $scope.clickMarker.$inject = ['$markerModel'];
 
-        var init = function (data) {
-            $scope.climbs = data.climbs;
-
-            // Parse coords for markers
-            _.each($scope.climbs, function (climb) {
-                climb.coords = {
-                    latitude: climb.segment.start_latitude,
-                    longitude: climb.segment.start_longitude
-                };
-                var region = _.findWhere(Emilia.regions, {id: climb.region_id});
-                climb.icon = '/static/img/marker-' + region.slug + '.png';
-                climb.hiddenIcon = '/static/img/marker-hidden.png';
-            });
-
-            // Create books object, same data different grouping
+        var init = function () {
+            // Create books object
             _.each(Emilia.books, function (book) {
-                var climbs = _.where($scope.climbs, {book_id: book.id}),
-                    regions = _.map(_.uniq(_.pluck(climbs, 'region_id')), function (region_id) {
-                        var region = _.findWhere(Emilia.regions, {id: region_id});
-                        return _.extend({
-                            climbs: _.where(climbs, {region_id: region_id}),
-                        }, region);
-                    });
-
                 $scope.books[book.id] = _.extend({
-                    climbs: climbs,
-                    regions: regions
+                    loading: true,
+                    climbs: [],
+                    regions: []
                 }, book);
             });
 
             $scope.selectBook(DEFAULT_BOOK_ID);
+            load(DEFAULT_BOOK_ID);
+        },
+
+        load = function (bookId) {
+            // Load the data book by book
+            var url = '/api/books/' + $scope.books[bookId].slug + '/climbs';
+
+            $http({method: 'GET', url: url})
+                .success(function (data, status, headers, config) {
+                    parse(data);
+
+                    // Load data for next book
+                    var nextBook = _.findWhere($scope.books, {loading: true});
+                    if (nextBook) {
+                        load(nextBook.id);
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('Error:', status);
+                });
+        },
+
+        parse = function (data) {
+            // Parse climbs and attach to book object
+            var book = $scope.books[data.book.id];
+            book.loading = false;
+
+            book.climbs = _.map(data.climbs, function(climb) {
+                var region = _.findWhere(Emilia.regions, {id: climb.region_id});
+                return _.extend({
+                    coords: {
+                        latitude: climb.segment.start_latitude,
+                        longitude: climb.segment.start_longitude
+                    },
+                    icon: '/static/img/marker-' + region.slug + '.png',
+                    hiddenIcon: '/static/img/marker-hidden.png'
+                }, climb);
+            });
+
+            // Attach region data per book
+            book.regions = _.map(_.uniq(_.pluck(book.climbs, 'region_id')), function (region_id) {
+                var region = _.findWhere(Emilia.regions, {id: region_id});
+                return _.extend({
+                    climbs: _.where(book.climbs, {region_id: region_id}),
+                }, region);
+            });
+
+            $scope.climbs = $scope.climbs.concat(book.climbs);
         };
+
+        init();
     }]);
