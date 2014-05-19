@@ -35,7 +35,20 @@
                 </div>
 
                 <div class="climb-info__pane" ng-if="currentClimb">
-                    <h2>{{ currentClimb.name }}</h2>
+                    <h2>{{ currentClimb.number }}. {{ currentClimb.name }}</h2>
+                    <dl>
+                        <dt>Distance:</dt>
+                        <dd>{{ currentClimb.segment.distance }}m</dd>
+
+                        <dt>Average grade:</dt>
+                        <dd>{{ currentClimb.segment.average_grade }}%</dd>
+
+                        <dt>Maximum grade:</dt>
+                        <dd>{{ currentClimb.segment.maximum_grade }}%</dd>
+
+                        <dt>Total elevation gain</dt>
+                        <dd>{{ currentClimb.segment.total_elevation_gain }}m</dd>
+                    </dl>
                     <a href ng-click="selectBook(currentBook.id)">Back to regions</a>
                 </div>
             {% endraw %}

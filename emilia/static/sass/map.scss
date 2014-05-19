@@ -24,7 +24,6 @@
 }
 
 .map-info {
-    color: #eee;
     left: 0;
     height: 100%;
     position: absolute;
@@ -36,6 +35,7 @@
     background-color: $bgGrey;
     border: 1px solid $bgDarkGrey;
     border-right: none;
+    color: #eee;
     display: inline-block;
     height: $baseline*3;
     width: 25%;
