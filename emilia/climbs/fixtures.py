@@ -72,7 +72,7 @@ def install():
                 ('carlton-bank', 58, u'Carlton Bank', u'Yorkshire', 6691019),
                 ('crawleyside', 59, u'Crawleyside', u'North-East', 6681219),
                 ('peth-bank', 60, u'Peth Bank', u'North-East', 6681185),
-                ('winters-gibbet', 61, u'Wintersu Gibbet', u'North-East', 6677593),
+                ('winters-gibbet', 61, u'Winters Gibbet', u'North-East', 6677593),
                 ('chapel-fell', 62, u'Chapel Fell', u'North-East', 6678141),
                 ('mennock-pass', 63, u'Mennock Pass', u'Scotland', 6697054),
                 ('cairn-o-mount', 64, u'Cairn o\' Mount', u'Scotland', 6674408),
