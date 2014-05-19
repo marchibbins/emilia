@@ -48,7 +48,7 @@ angular.module('emilia', ['google-maps'])
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
             $scope.map.control.refresh($scope.currentClimb.coords);
             $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
-            $scope.currentClimb.polyline.visible = true;
+            // $scope.currentClimb.polyline.visible = true;
         };
 
         $scope.selectRegion = function (regionId, toggle) {
@@ -112,8 +112,8 @@ angular.module('emilia', ['google-maps'])
                         longitude: climb.segment.start_longitude
                     },
                     icon: '/static/img/marker-' + region.slug + '.png',
-                    hiddenIcon: '/static/img/marker-hidden.png',
-                    polyline: {
+                    hiddenIcon: '/static/img/marker-hidden.png'
+                    /*polyline: {
                         path: _.map(google.maps.geometry.encoding.decodePath(climb.segment.map_polyline), function(point) {
                             return {
                                 longitude: point.A,
@@ -125,7 +125,7 @@ angular.module('emilia', ['google-maps'])
                             weight: 3
                         },
                         visible: false
-                    }
+                    }*/
                 }, climb);
             });
 
