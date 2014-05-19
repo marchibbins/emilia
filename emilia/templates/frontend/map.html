@@ -59,10 +59,11 @@
                 <google-map center="map.center" control="map.control" draggable="{{ map.draggable }}" options="map.options" zoom="map.zoom">
                     <markers ng-if="currentBook.climbs" models="currentBook.climbs" coords="'coords'" click="clickMarker" fit="true" icon="'icon'" labelAnchor="14 37" labelContent="'number'" labelClass="marker-label"></markers>
                     <markers ng-if="currentRegion.climbs" models="currentRegion.climbs" coords="'coords'" click="clickMarker" fit="true" icon="'hiddenIcon'" ng-show="false"></markers>
+                    <polyline ng-if="currentClimb.polyline.visible" path="currentClimb.polyline.path" stroke="currentClimb.polyline.stroke"></polyline>
                 </google-map>
             </div>
         {% endraw %}
     </div>
 
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
 {% endblock %}
