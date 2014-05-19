@@ -10,6 +10,7 @@ angular.module('emilia', ['google-maps'])
             },
 
             DEFAULT_DRAGGABLE = true,
+            DEFAULT_CLIMB_ZOOM = 14,
             DEFAULT_MIN_ZOOM = 6,
             DEFAULT_ZOOM = 6,
 
@@ -18,6 +19,7 @@ angular.module('emilia', ['google-maps'])
         // Map config
         $scope.map = {
             center: DEFAULT_CENTER,
+            control: {},
             draggable: DEFAULT_DRAGGABLE,
             options: {
                 minZoom: DEFAULT_MIN_ZOOM
@@ -44,7 +46,8 @@ angular.module('emilia', ['google-maps'])
 
         $scope.selectClimb = function (climbId) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
-            $scope.selectRegion($scope.currentClimb.region_id);
+            $scope.map.control.refresh($scope.currentClimb.coords);
+            $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
         };
 
         $scope.selectRegion = function (regionId, toggle) {

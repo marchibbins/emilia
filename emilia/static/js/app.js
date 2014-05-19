@@ -29309,6 +29309,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             },
 
             DEFAULT_DRAGGABLE = true,
+            DEFAULT_CLIMB_ZOOM = 14,
             DEFAULT_MIN_ZOOM = 6,
             DEFAULT_ZOOM = 6,
 
@@ -29317,6 +29318,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         // Map config
         $scope.map = {
             center: DEFAULT_CENTER,
+            control: {},
             draggable: DEFAULT_DRAGGABLE,
             options: {
                 minZoom: DEFAULT_MIN_ZOOM
@@ -29343,7 +29345,8 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
         $scope.selectClimb = function (climbId) {
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
-            $scope.selectRegion($scope.currentClimb.region_id);
+            $scope.map.control.refresh($scope.currentClimb.coords);
+            $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
         };
 
         $scope.selectRegion = function (regionId, toggle) {
