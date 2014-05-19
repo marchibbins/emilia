@@ -149,24 +149,30 @@ class Segment(db.Model):
         """ Returns the object as an easily serializeable object. """
         return {
             'id': self.id,
-            'distance': self.distance,
             'average_grade': self.average_grade,
-            'maximum_grade': self.maximum_grade,
+            'distance': self.distance,
             'elevation_high': self.elevation_high,
             'elevation_low': self.elevation_low,
-            'total_elevation_gain': self.total_elevation_gain,
-            'start_latitude': self.start_latitude,
-            'start_longitude': self.start_longitude,
             'end_latitude': self.end_latitude,
             'end_longitude': self.end_longitude,
+            'map_polyline': self.map_polyline,
+            'maximum_grade': self.maximum_grade,
+            'start_latitude': self.start_latitude,
+            'start_longitude': self.start_longitude,
+            'total_elevation_gain': self.total_elevation_gain,
         }
 
     def serialize_summary(self):
         """ Returns an easily serializeable summary of the object. """
         return {
             'id': self.id,
+            'average_grade': self.average_grade,
+            'distance': self.distance,
+            'map_polyline': self.map_polyline,
+            'maximum_grade': self.maximum_grade,
             'start_latitude': self.start_latitude,
             'start_longitude': self.start_longitude,
+            'total_elevation_gain': self.total_elevation_gain,
         }
 
     def __init__(self, obj):
