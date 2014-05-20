@@ -29344,10 +29344,15 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         };
 
         $scope.selectClimb = function (climbId) {
+            // Force region bounds reset
+            $scope.currentRegion = {};
+
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
+            loadClimb($scope.currentClimb);
+
             $scope.map.control.refresh($scope.currentClimb.coords);
             $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
-            $scope.currentRegion = {};
+
             // $scope.currentClimb.polyline.visible = true;
         };
 
@@ -29364,14 +29369,14 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             }
         };
 
-        $scope.clickMarker = function (marker) {
-            $scope.selectClimb(marker.id);
+        $scope.clickMarker = function (climb) {
+            $scope.selectClimb(climb.id);
             $scope.$apply();
         };
 
         $scope.clickMarker.$inject = ['$markerModel'];
 
-        var init = function () {
+        var allez = function () {
             // Create books object
             _.each(Emilia.books, function (book) {
                 $scope.books[book.id] = _.extend({
@@ -29382,29 +29387,28 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             });
 
             $scope.selectBook(DEFAULT_BOOK_ID);
-            load(DEFAULT_BOOK_ID);
+            loadBook(DEFAULT_BOOK_ID);
         },
 
-        load = function (bookId) {
+        loadBook = function (bookId) {
             // Load the data book by book
             var url = '/api/books/' + $scope.books[bookId].slug + '/climbs';
-
             $http({method: 'GET', url: url})
                 .success(function (data, status, headers, config) {
-                    parse(data);
+                    parseBook(data);
 
                     // Load data for next book
                     var nextBook = _.findWhere($scope.books, {loading: true});
                     if (nextBook) {
-                        load(nextBook.id);
+                        loadBook(nextBook.id);
                     }
                 })
                 .error(function (data, status, headers, config) {
-                    console.log('Error:', status);
+                    console.log('Error loading book ' + bookId, status);
                 });
         },
 
-        parse = function (data) {
+        parseBook = function (data) {
             // Parse climbs and attach to book object
             var book = $scope.books[data.book.id];
             book.loading = false;
@@ -29443,7 +29447,31 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             });
 
             $scope.climbs = $scope.climbs.concat(book.climbs);
+        },
+
+        loadClimb = function (climb) {
+            // Retrieve leaderboards sequentially
+            _.each(['club_leaders', 'club_leaderboard', 'leaders', 'leaderboard'], function(leaderboard) {
+                if (!climb[leaderboard]) {
+                    var url = '/api/climbs/' + climb.slug + '/' + leaderboard;
+                    $http({method: 'GET', url: url})
+                        .success(function (data, status, headers, config) {
+                            parseClimb(data, leaderboard);
+                        })
+                        .error(function (data, status, headers, config) {
+                            console.log('Error loading climb ' + climb.id, status);
+                        });
+                }
+            });
+        },
+
+        parseClimb = function (data, leaderboard) {
+            // Attach leaderboard data to existing object
+            var climb = _.findWhere($scope.climbs, {id: data.climb.id});
+            climb[leaderboard] = true;
+            climb['male_' + leaderboard] = data['male_' + leaderboard];
+            climb['female_' + leaderboard] = data['female_' + leaderboard];
         };
 
-        init();
+        allez();
     }]);

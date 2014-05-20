@@ -95,7 +95,11 @@ def climb_leaderboard(slug, leaderboard, gender=None):
     """ Renders top Climb club leaders, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
     context = {
-        'climb': climb.serialize()
+        'climb': {
+            'id': climb.id,
+            'slug': climb.slug,
+            'strava_id': climb.strava_id,
+        }
     }
 
     resources = {
