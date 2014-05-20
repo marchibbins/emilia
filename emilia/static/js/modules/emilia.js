@@ -35,6 +35,8 @@ angular.module('emilia', ['google-maps'])
         $scope.currentBook = {};
         $scope.currentRegion = {};
         $scope.currentClimb = null;
+        $scope.showClubLeaders = true;
+        $scope.showClubLeaderboard = true;
 
         $scope.selectBook = function (bookId) {
             if (bookId !== $scope.currentBook.id) {
@@ -47,6 +49,8 @@ angular.module('emilia', ['google-maps'])
         $scope.selectClimb = function (climbId) {
             // Force region bounds reset
             $scope.currentRegion = {};
+            $scope.showClubLeaders = true;
+            $scope.showClubLeaderboard = true;
 
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
             loadClimb($scope.currentClimb);
@@ -68,6 +72,10 @@ angular.module('emilia', ['google-maps'])
             } else {
                 $scope.currentRegion = _.findWhere($scope.currentBook.regions, {id: regionId});
             }
+        };
+
+        $scope.toggle = function (variable) {
+            $scope[variable] = !$scope[variable];
         };
 
         $scope.clickMarker = function (climb) {
