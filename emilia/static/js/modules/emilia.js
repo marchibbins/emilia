@@ -123,12 +123,17 @@ angular.module('emilia', ['google-maps'])
             book.loading = false;
 
             book.markers = _.map(data.climbs, function(climb) {
-                // Create coords object from segment properties
+                // Region data already on page
+                var region = _.findWhere(Emilia.regions, {id: climb.region_id});
+
+                // Add some shortcuts
                 climb.coords = {
                     latitude: climb.segment.start_latitude,
                     longitude: climb.segment.start_longitude
                 };
-                var region = _.findWhere(Emilia.regions, {id: climb.region_id});
+                climb.bg_colour = region.bg_colour;
+                climb.text_colour = region.text_colour;
+
                 return {
                     id: climb.id,
                     number: climb.number,
