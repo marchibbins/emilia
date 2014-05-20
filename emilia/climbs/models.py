@@ -104,6 +104,7 @@ class Climb(db.Model):
             'slug': self.slug,
             'number': self.number,
             'name': self.name,
+            'location': self.location,
             'segment': self.segment.serialize_summary(),
             'book_id': self.book_id,
             'region_id': self.region_id,
