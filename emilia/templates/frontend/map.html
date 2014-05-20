@@ -20,7 +20,7 @@
                     <button ng-repeat="book in books" class="btn map-info__btn" ng-class="{'active': book.id === currentBook.id}" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
                 </div>
 
-                <div class="book-info__pane" ng-if="currentBook && currentClimb === null">
+                <div class="book-info__pane" ng-if="currentBook.id && currentClimb === null">
                     <p class="book-info__loading" ng-if="currentBook.loading">Loading</p>
                     <ul class="unstyled" ng-if="currentBook.regions">
                         <li ng-repeat="region in currentBook.regions">
@@ -34,7 +34,7 @@
                     </ul>
                 </div>
 
-                <div class="climb-info__pane" ng-if="currentClimb">
+                <div class="climb-info__pane" ng-if="currentClimb.id">
                     <h2>{{ currentClimb.number }}. {{ currentClimb.name }}</h2>
                     <dl>
                         <dt>Distance:</dt>
@@ -46,7 +46,7 @@
                         <dt>Maximum grade:</dt>
                         <dd>{{ currentClimb.segment.maximum_grade }}%</dd>
 
-                        <dt>Total elevation gain</dt>
+                        <dt>Total elevation gain:</dt>
                         <dd>{{ currentClimb.segment.total_elevation_gain }}m</dd>
                     </dl>
                     <a href ng-click="selectBook(currentBook.id)">Back to regions</a>
