@@ -34,6 +34,7 @@
 .map-info__btn {
     background-color: $bgGrey;
     border: 1px solid $bgDarkGrey;
+    border-bottom: none;
     border-right: none;
     color: #eee;
     display: inline-block;
@@ -53,7 +54,8 @@
     }
 }
 
-.book-info__pane {
+.book-info__pane,
+.climb-info__pane {
     bottom: 0;
     overflow-y: auto;
     position: absolute;
@@ -63,12 +65,16 @@
 
 .book-info__region {
     background: $bgGrey;
+    border-top: 1px solid $bgDarkGrey;
     color: #fff;
     display: block;
     line-height: $baseline*3;
     height: $baseline*3;
-    margin: $baseline/2 0;
     padding-left: $gutter;
+}
+
+.book-info__climb-list {
+    margin: $baseline 0;
 }
 
 .book-info__climb {
@@ -85,7 +91,7 @@
     padding: $baseline $gutter;
 }
 
-.climb-info__pane {
+.climb-info {
     padding: $baseline $gutter;
 }
 
