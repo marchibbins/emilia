@@ -29413,13 +29413,17 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             var book = $scope.books[data.book.id];
             book.loading = false;
 
-            book.climbs = _.map(data.climbs, function(climb) {
+            book.markers = _.map(data.climbs, function(climb) {
+                // Create coords object from segment properties
+                climb.coords = {
+                    latitude: climb.segment.start_latitude,
+                    longitude: climb.segment.start_longitude
+                };
                 var region = _.findWhere(Emilia.regions, {id: climb.region_id});
-                return _.extend({
-                    coords: {
-                        latitude: climb.segment.start_latitude,
-                        longitude: climb.segment.start_longitude
-                    },
+                return {
+                    id: climb.id,
+                    number: climb.number,
+                    coords: climb.coords,
                     icon: '/static/img/marker-' + region.slug + '.png',
                     hiddenIcon: '/static/img/marker-hidden.png'
                     /*polyline: {
@@ -29435,8 +29439,10 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                         },
                         visible: false
                     }*/
-                }, climb);
+                };
             });
+
+            book.climbs = data.climbs;
 
             // Attach region data per book
             book.regions = _.map(_.uniq(_.pluck(book.climbs, 'region_id')), function (region_id) {
