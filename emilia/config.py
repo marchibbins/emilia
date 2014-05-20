@@ -31,6 +31,10 @@ class Config(object):
     CACHE_TYPE = env_var('CACHE_TYPE', default='simple')
     CACHE_DEFAULT_TIMEOUT = env_var('CACHE_DEFAULT_TIMEOUT', default=60, integer=True)
 
+    CACHE_FRONTEND_TIMEOUT = env_var('CACHE_FRONTEND_TIMEOUT', default=CACHE_DEFAULT_TIMEOUT, integer=True)
+    CACHE_API_TIMEOUT = env_var('CACHE_API_TIMEOUT', default=CACHE_DEFAULT_TIMEOUT, integer=True)
+    CACHE_STRAVA_TIMEOUT = env_var('CACHE_STRAVA_TIMEOUT', default=CACHE_DEFAULT_TIMEOUT, integer=True)
+
     # Flask-SQLAlchemy: http://packages.python.org/Flask-SQLAlchemy/config.html
     SQLALCHEMY_DATABASE_URI = env_var('SQLALCHEMY_DATABASE_URI', required=True)
     SQLALCHEMY_ECHO = env_var('SQLALCHEMY_ECHO', default=False)

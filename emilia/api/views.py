@@ -3,6 +3,7 @@ from itertools import chain
 
 from emilia.climbs.models import Book, Climb
 from emilia.climbs.strava import strava
+from emilia.config import Config
 from emilia.extensions import cache
 from emilia.utils import full_path_cache_key_prefix
 
@@ -26,14 +27,14 @@ def json_response(code=200, **kwargs):
 
 
 @api.route('/')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_API_TIMEOUT)
 def index():
     """ Renders API index. """
     return json_response()
 
 
 @api.route('/books')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_API_TIMEOUT)
 def book_list():
     """ Renders a full list of Books as JSON. """
     context = {
@@ -43,7 +44,7 @@ def book_list():
 
 
 @api.route('/books/<slug>')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_API_TIMEOUT)
 def book_detail(slug):
     """ Renders a detail view for the Book, matching slug, as JSON. """
     context = {
@@ -53,7 +54,7 @@ def book_detail(slug):
 
 
 @api.route('/books/<slug>/climbs')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_API_TIMEOUT)
 def book_climbs(slug):
     """ Renders a list of Climbs view for the Book, matching slug, as JSON. """
     book = Book.query.filter_by(slug=slug).first_or_404()
@@ -65,7 +66,7 @@ def book_climbs(slug):
 
 
 @api.route('/climbs')
-# @cache.cached()
+@cache.cached(timeout=Config.CACHE_API_TIMEOUT)
 def climb_list():
     """ Renders a full list of Climbs as JSON. """
     context = {
@@ -75,7 +76,7 @@ def climb_list():
 
 
 @api.route('/climbs/<slug>')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_STRAVA_TIMEOUT)
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
@@ -89,7 +90,7 @@ def climb_detail(slug):
 
 @api.route('/climbs/<slug>/<leaderboard>')
 @api.route('/climbs/<slug>/<leaderboard>/<gender>')
-@cache.cached(key_prefix=full_path_cache_key_prefix)
+@cache.cached(timeout=Config.CACHE_STRAVA_TIMEOUT, key_prefix=full_path_cache_key_prefix)
 def climb_leaderboard(slug, leaderboard, gender=None):
     """ Renders top Climb club leaders, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
@@ -127,7 +128,7 @@ def climb_leaderboard(slug, leaderboard, gender=None):
 
 
 @api.route('/climbs/<slug>/stream')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_STRAVA_TIMEOUT)
 def climb_stream(slug):
     """ Renders a segment stream the Climb, matching slug, as JSON. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()

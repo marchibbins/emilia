@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 
 from emilia.climbs.models import Book, Climb, Region
 from emilia.climbs.strava import strava
+from emilia.config import Config
 from emilia.extensions import cache
 
 
@@ -9,14 +10,14 @@ frontend = Blueprint('frontend', __name__)
 
 
 @frontend.route('/')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_FRONTEND_TIMEOUT)
 def index():
     """ Renders the Home page. """
     return render_template('frontend/index.html')
 
 
 @frontend.route('/books')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_FRONTEND_TIMEOUT)
 def book_list():
     """ Renders a full list of Books. """
     context = {
@@ -26,7 +27,7 @@ def book_list():
 
 
 @frontend.route('/books/<slug>')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_FRONTEND_TIMEOUT)
 def book_detail(slug):
     """ Renders a detail view for the Book, matching slug. """
     context = {
@@ -36,7 +37,7 @@ def book_detail(slug):
 
 
 @frontend.route('/climbs/<slug>')
-@cache.cached()
+@cache.cached(timeout=Config.CACHE_STRAVA_TIMEOUT)
 def climb_detail(slug):
     """ Renders a detail view for the Climb, matching slug. """
     climb = Climb.query.filter_by(slug=slug).first_or_404()
@@ -49,7 +50,7 @@ def climb_detail(slug):
 
 
 @frontend.route('/map')
-# @cache.cached()
+@cache.cached(timeout=Config.CACHE_FRONTEND_TIMEOUT)
 def map():
     """ """
     context = {
