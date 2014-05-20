@@ -48,7 +48,13 @@ angular.module('emilia', ['google-maps'])
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
             $scope.map.control.refresh($scope.currentClimb.coords);
             $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
+            $scope.currentRegion = {};
             // $scope.currentClimb.polyline.visible = true;
+        };
+
+        $scope.deselectClimb = function () {
+            $scope.selectRegion($scope.currentClimb.region_id);
+            $scope.currentClimb = null;
         };
 
         $scope.selectRegion = function (regionId, toggle) {
