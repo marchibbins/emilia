@@ -50,30 +50,31 @@
                         <dd>{{ currentClimb.segment.total_elevation_gain }}m</dd>
                     </dl>
 
-                    <h3 ng-if="!currentClimb.club_leaders">Loading leaders</h3>
-                    <h3 ng-if="currentClimb.male_club_leaders">Male club leaders</h3>
-                    <ol ng-if="currentClimb.male_club_leaders">
-                        <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_club_leaders.entries[num]">
-                            <div ng-if="entry">{{ entry.athlete_name }}</div>
-                            <div ng-if="!entry">None</div>
-                        </li>
-                    </ol>
-                    <h3 ng-if="currentClimb.male_club_leaders">Female club leaders</h3>
-                    <ol ng-if="currentClimb.female_club_leaders">
-                        <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_club_leaders.entries[num]">
-                            <div ng-if="entry">{{ entry.athlete_name }}</div>
-                            <div ng-if="!entry">None</div>
-                        </li>
-                    </ol>
+                    <div ng-if="currentClimb.club_leaders">
+                        <h3>Club leaders</h3>
+                        <ol ng-if="currentClimb.male_club_leaders">
+                            <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_club_leaders.entries[num]">
+                                <div ng-if="entry">{{ entry.athlete_name }}</div>
+                                <div ng-if="!entry">None</div>
+                            </li>
+                        </ol>
+                        <ol ng-if="currentClimb.female_club_leaders">
+                            <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_club_leaders.entries[num]">
+                                <div ng-if="entry">{{ entry.athlete_name }}</div>
+                                <div ng-if="!entry">None</div>
+                            </li>
+                        </ol>
+                    </div>
 
-                    <h3 ng-if="!currentClimb.club_leaderboard">Loading club standings</h3>
-                    <h3 ng-if="currentClimb.club_leaderboard">Club standings</h3>
-                    <ol ng-if="currentClimb.male_club_leaderboard">
-                        <li ng-repeat="entry in currentClimb.male_club_leaderboard.entries">{{ entry.athlete_name }}</li>
-                    </ol>
-                    <ol ng-if="currentClimb.female_club_leaderboard">
-                        <li ng-repeat="entry in currentClimb.female_club_leaderboard.entries">{{ entry.athlete_name }}</li>
-                    </ol>
+                    <div ng-if="currentClimb.club_leaderboard">
+                        <h3>Club standings</h3>
+                        <ol ng-if="currentClimb.male_club_leaderboard">
+                            <li ng-repeat="entry in currentClimb.male_club_leaderboard.entries">{{ entry.athlete_name }}</li>
+                        </ol>
+                        <ol ng-if="currentClimb.female_club_leaderboard">
+                            <li ng-repeat="entry in currentClimb.female_club_leaderboard.entries">{{ entry.athlete_name }}</li>
+                        </ol>
+                    </div>
 
                     <a href ng-click="deselectClimb()">Back to regions</a>
                 </div>
