@@ -38,6 +38,7 @@
                     <div class="climb-header" style="background-color: #{{ currentClimb.bg_colour }}; color: #{{ currentClimb.text_colour }}">
                         <h2 class="climb-header__name">{{ currentClimb.number }}. {{ currentClimb.name }}</h2>
                         <p class="climb-header__location">{{ currentClimb.location }}</p>
+                        <a href ng-click="deselectClimb()" class="climb-header__close">&#10005;</a>
                         <ul class="climb-stats clearfix unstyled">
                             <li class="climb-stats__item">
                                 <span class="climb-stats__label">Distance</span>
@@ -117,8 +118,6 @@
                                 <a href ng-click="toggle('showClubLeaderboard')" class="climb-info__toggle">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} standings</a>
                             </div>
                         </div>
-
-                        <a href ng-click="deselectClimb()">Back to regions</a>
                     </div>
                 </div>
             {% endraw %}

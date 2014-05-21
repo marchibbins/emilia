@@ -111,6 +111,20 @@
     opacity: 0.95;
 }
 
+.climb-header__close {
+    color: #fff;
+    font-weight: $weightBold;
+    position: absolute;
+    right: $gutter;
+    top: $baseline;
+
+    &:hover,
+    &:active {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
 .climb-stats {
     box-shadow: 0 -1px rgba(0, 0, 0, 0.15);
     margin: $baseline*3 0 0;
