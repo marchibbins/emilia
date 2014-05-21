@@ -59,60 +59,50 @@
                     </div>
 
                     <div class="climb-info">
-                        <div ng-if="currentClimb.club_leaderboard && showClubLeaders">
-                            <h3>Club leaders</h3>
-                            <ol ng-if="currentClimb.male_club_leaderboard">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_club_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
-                                    <div ng-if="!entry">None</div>
-                                </li>
-                            </ol>
-                            <ol ng-if="currentClimb.female_club_leaderboard">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_club_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
-                                    <div ng-if="!entry">None</div>
-                                </li>
-                            </ol>
-                            <a href ng-click="toggle('showClubLeaders')">Show overall leaders</a>
+                        <div ng-repeat="leaderboard in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[leaderboard]" ng-show="leaderboard === 'club_leaderboard' ? showClubLeaders : !showClubLeaders">
+                            <h3 class="climb-info__title">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
+                            <table ng-repeat="gender_leaderboard in ['male_' + leaderboard, 'female_' + leaderboard]" ng-if="currentClimb[gender_leaderboard]">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Athlete</th>
+                                        <th>Avg speed</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb[gender_leaderboard].entries[$index]">
+                                        <td>{{ num }}</td>
+                                        <td>{{ entry.athlete_name }}</td>
+                                        <td>{{ parseSeconds(entry.elapsed_time) }}</td>
+                                        <td>{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href ng-click="toggle('showClubLeaders')">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} leaders</a>
                         </div>
 
-                        <div ng-if="currentClimb.leaderboard && !showClubLeaders">
-                            <h3>Overall leaders</h3>
-                            <ol ng-if="currentClimb.male_leaderboard">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
-                                    <div ng-if="!entry">None</div>
-                                </li>
-                            </ol>
-                            <ol ng-if="currentClimb.female_leaderboard">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
-                                    <div ng-if="!entry">None</div>
-                                </li>
-                            </ol>
-                            <a href ng-click="toggle('showClubLeaders')">Show club leaders</a>
-                        </div>
-
-                        <div ng-if="currentClimb.club_leaderboard && showClubLeaderboard">
-                            <h3>Club standings</h3>
-                            <ol ng-if="currentClimb.male_club_leaderboard">
-                                <li ng-repeat="entry in currentClimb.male_club_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
-                            </ol>
-                            <ol ng-if="currentClimb.female_club_leaderboard">
-                                <li ng-repeat="entry in currentClimb.female_club_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
-                            </ol>
-                            <a href ng-click="toggle('showClubLeaderboard')">Show overall standings</a>
-                        </div>
-
-                        <div ng-if="currentClimb.leaderboard && !showClubLeaderboard">
-                            <h3>Overall standings</h3>
-                            <ol ng-if="currentClimb.male_leaderboard">
-                                <li ng-repeat="entry in currentClimb.male_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
-                            </ol>
-                            <ol ng-if="currentClimb.female_leaderboard">
-                                <li ng-repeat="entry in currentClimb.female_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
-                            </ol>
-                            <a href ng-click="toggle('showClubLeaderboard')">Show club standings</a>
+                        <div ng-repeat="leaderboard in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[leaderboard]" ng-show="leaderboard === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard">
+                            <h3 class="climb-info__title">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
+                            <table ng-repeat="gender_leaderboard in ['male_' + leaderboard, 'female_' + leaderboard]" ng-if="currentClimb[gender_leaderboard]">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Athlete</th>
+                                        <th>Avg speed</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="entry in currentClimb[gender_leaderboard].entries">
+                                        <td>{{ entry.rank }}</td>
+                                        <td>{{ entry.athlete_name }}</td>
+                                        <td>{{ parseSeconds(entry.elapsed_time) }}</td>
+                                        <td>{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href ng-click="toggle('showClubLeaderboard')">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} standings</a>
                         </div>
 
                         <a href ng-click="deselectClimb()">Back to regions</a>

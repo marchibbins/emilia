@@ -101,7 +101,7 @@
 .climb-header__name {
     color: inherit;
     font-size: 30px;
-    font-weight: 600;
+    font-weight: $bold;
 }
 
 .climb-header__location {
@@ -140,10 +140,15 @@
     font-size: 22px;
 }
 
+.climb-info__title {
+    font-weight: $bold;
+    text-transform: uppercase;
+}
+
 .marker-label {
     color: #fff;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: $bold;
     line-height: 20px;
     width: 28px;
     text-align: center;

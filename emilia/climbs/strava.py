@@ -132,10 +132,11 @@ def serialize_segment_leaderboard(self):
 def serialize_segment_leaderboard_entry(self):
     """ Returns basic SegmentLeaderboardEntry data for serialization. """
     return {
-        'effort_id': self.effort_id,
         'athlete_id': self.athlete_id,
         'athlete_name': self.athlete_name,
+        'effort_id': self.effort_id,
         'elapsed_time': self.elapsed_time.seconds,
+        'rank': self.rank,
     }
 
 
