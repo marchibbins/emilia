@@ -14,7 +14,7 @@ angular.module('emilia', ['google-maps'])
             },
 
             DEFAULT_DRAGGABLE = true,
-            DEFAULT_CLIMB_ZOOM = 14,
+            DEFAULT_CLIMB_ZOOM = 12,
             DEFAULT_MIN_ZOOM = 6,
             DEFAULT_ZOOM = 6,
 
