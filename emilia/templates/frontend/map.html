@@ -41,7 +41,7 @@
                         <ul class="climb-stats clearfix unstyled">
                             <li class="climb-stats__item">
                                 <span class="climb-stats__label">Distance</span>
-                                <span class="climb-stats__value">{{ currentClimb.segment.distance }}</span>
+                                <span class="climb-stats__value">{{ parseDistance(currentClimb.segment.distance, true) }}</span>
                             </li>
                             <li class="climb-stats__item">
                                 <span class="climb-stats__label">Avg grade</span>
@@ -53,7 +53,7 @@
                             </li>
                             <li class="climb-stats__item">
                                 <span class="climb-stats__label">Height gain</span>
-                                <span class="climb-stats__value">{{ currentClimb.segment.total_elevation_gain }}m</span>
+                                <span class="climb-stats__value">{{ parseDistance(currentClimb.segment.total_elevation_gain) }}</span>
                             </li>
                         </ul>
                     </div>
@@ -63,13 +63,13 @@
                             <h3>Club leaders</h3>
                             <ol ng-if="currentClimb.male_club_leaderboard">
                                 <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_club_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</div>
+                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
                             </ol>
                             <ol ng-if="currentClimb.female_club_leaderboard">
                                 <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_club_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</div>
+                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
                             </ol>
@@ -80,13 +80,13 @@
                             <h3>Overall leaders</h3>
                             <ol ng-if="currentClimb.male_leaderboard">
                                 <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</div>
+                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
                             </ol>
                             <ol ng-if="currentClimb.female_leaderboard">
                                 <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_leaderboard.entries[$index]">
-                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</div>
+                                    <div ng-if="entry">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
                             </ol>
@@ -96,10 +96,10 @@
                         <div ng-if="currentClimb.club_leaderboard && showClubLeaderboard">
                             <h3>Club standings</h3>
                             <ol ng-if="currentClimb.male_club_leaderboard">
-                                <li ng-repeat="entry in currentClimb.male_club_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</li>
+                                <li ng-repeat="entry in currentClimb.male_club_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
                             </ol>
                             <ol ng-if="currentClimb.female_club_leaderboard">
-                                <li ng-repeat="entry in currentClimb.female_club_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</li>
+                                <li ng-repeat="entry in currentClimb.female_club_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
                             </ol>
                             <a href ng-click="toggle('showClubLeaderboard')">Show overall standings</a>
                         </div>
@@ -107,10 +107,10 @@
                         <div ng-if="currentClimb.leaderboard && !showClubLeaderboard">
                             <h3>Overall standings</h3>
                             <ol ng-if="currentClimb.male_leaderboard">
-                                <li ng-repeat="entry in currentClimb.male_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</li>
+                                <li ng-repeat="entry in currentClimb.male_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
                             </ol>
                             <ol ng-if="currentClimb.female_leaderboard">
-                                <li ng-repeat="entry in currentClimb.female_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }}</li>
+                                <li ng-repeat="entry in currentClimb.female_leaderboard.entries">{{ entry.athlete_name }}: {{ parseSeconds(entry.elapsed_time) }} {{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}</li>
                             </ol>
                             <a href ng-click="toggle('showClubLeaderboard')">Show club standings</a>
                         </div>

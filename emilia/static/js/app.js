@@ -29386,12 +29386,29 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             $scope.$apply();
         };
 
+        $scope.parseDistance = function (distance, kms) {
+            var points = 0,
+                units = 'm';
+
+            if (kms && distance > 1000) {
+                distance /= 1000;
+                points = 2;
+                units = 'km';
+            }
+
+            return distance.toFixed(points) + units;
+        };
+
         $scope.parseSeconds = function (seconds) {
             var hours = parseInt(seconds / 3600) % 24,
                 min = parseInt(seconds / 60) % 60,
                 sec = parseInt(seconds % 60, 10);
 
             return (hours > 0 ? hours + ":" : '') + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+        };
+
+        $scope.parseSpeed = function (seconds, distance) {
+            return (distance/seconds * 3.6).toFixed(1) + "km/h"; // 60*60 / 1000
         };
 
         $scope.clickMarker.$inject = ['$markerModel'];
@@ -29444,14 +29461,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                 };
                 climb.bg_colour = region.bg_colour;
                 climb.text_colour = region.text_colour;
-
-                // Format values
-                climb.segment.total_elevation_gain = Math.round(climb.segment.total_elevation_gain);
-                if (climb.segment.distance > 1000) {
-                    climb.segment.distance = (climb.segment.distance/1000).toFixed(2) + "km";
-                } else {
-                    climb.segment.distance = Math.round(climb.segment.distance) + "m";
-                }
 
                 return {
                     id: climb.id,
