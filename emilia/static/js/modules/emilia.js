@@ -53,7 +53,7 @@ angular.module('emilia', ['google-maps'])
             $scope.showClubLeaderboard = true;
 
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
-            loadClimb($scope.currentClimb);
+            loadLeaderboards($scope.currentClimb);
 
             $scope.map.control.refresh($scope.currentClimb.coords);
             $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
@@ -177,14 +177,14 @@ angular.module('emilia', ['google-maps'])
             $scope.climbs = $scope.climbs.concat(book.climbs);
         },
 
-        loadClimb = function (climb) {
+        loadLeaderboards = function (climb) {
             // Retrieve leaderboards sequentially
-            _.each(['club_leaders', 'club_leaderboard', 'leaders', 'leaderboard'], function(leaderboard) {
+            _.each(['club_leaderboard', 'leaderboard'], function(leaderboard) {
                 if (!climb[leaderboard]) {
                     var url = '/api/climbs/' + climb.slug + '/' + leaderboard;
                     $http({method: 'GET', url: url})
                         .success(function (data, status, headers, config) {
-                            parseClimb(data, leaderboard);
+                            parseLeaderboard(data, leaderboard);
                         })
                         .error(function (data, status, headers, config) {
                             console.log('Error loading climb ' + climb.id, status);
@@ -193,7 +193,7 @@ angular.module('emilia', ['google-maps'])
             });
         },
 
-        parseClimb = function (data, leaderboard) {
+        parseLeaderboard = function (data, leaderboard) {
             // Attach leaderboard data to existing object
             var climb = _.findWhere($scope.climbs, {id: data.climb.id});
             climb[leaderboard] = true;

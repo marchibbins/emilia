@@ -59,16 +59,16 @@
                     </div>
 
                     <div class="climb-info">
-                        <div ng-if="currentClimb.club_leaders && showClubLeaders">
+                        <div ng-if="currentClimb.club_leaderboard && showClubLeaders">
                             <h3>Club leaders</h3>
-                            <ol ng-if="currentClimb.male_club_leaders">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_club_leaders.entries[$index]">
+                            <ol ng-if="currentClimb.male_club_leaderboard">
+                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_club_leaderboard.entries[$index]">
                                     <div ng-if="entry">{{ entry.athlete_name }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
                             </ol>
-                            <ol ng-if="currentClimb.female_club_leaders">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_club_leaders.entries[$index]">
+                            <ol ng-if="currentClimb.female_club_leaderboard">
+                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_club_leaderboard.entries[$index]">
                                     <div ng-if="entry">{{ entry.athlete_name }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
@@ -76,16 +76,16 @@
                             <a href ng-click="toggle('showClubLeaders')">Show overall leaders</a>
                         </div>
 
-                        <div ng-if="currentClimb.leaders && !showClubLeaders">
+                        <div ng-if="currentClimb.leaderboard && !showClubLeaders">
                             <h3>Overall leaders</h3>
-                            <ol ng-if="currentClimb.male_leaders">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_leaders.entries[$index]">
+                            <ol ng-if="currentClimb.male_leaderboard">
+                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.male_leaderboard.entries[$index]">
                                     <div ng-if="entry">{{ entry.athlete_name }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
                             </ol>
-                            <ol ng-if="currentClimb.female_leaders">
-                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_leaders.entries[$index]">
+                            <ol ng-if="currentClimb.female_leaderboard">
+                                <li ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb.female_leaderboard.entries[$index]">
                                     <div ng-if="entry">{{ entry.athlete_name }}</div>
                                     <div ng-if="!entry">None</div>
                                 </li>
