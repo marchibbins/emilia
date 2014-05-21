@@ -123,10 +123,11 @@
 
 .climb-stats__item {
     box-shadow: -1px 0 rgba(0, 0, 0, 0.15);
-    display: inline-block;
+    display: block;
+    float: left;
     padding: $baseline 0 $baseline*1.5;
     text-align: center;
-    width: 24%;
+    width: 25%;
 
     &:first-child {
         box-shadow: none;
