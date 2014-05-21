@@ -60,49 +60,59 @@
 
                     <div class="climb-info">
                         <div ng-repeat="leaderboard in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[leaderboard]" ng-show="leaderboard === 'club_leaderboard' ? showClubLeaders : !showClubLeaders">
-                            <h3 class="climb-info__title">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
-                            <table ng-repeat="gender_leaderboard in ['male_' + leaderboard, 'female_' + leaderboard]" ng-if="currentClimb[gender_leaderboard]" class="leaderboard leaderboard--{{ gender_leaderboard }} leaderboard--leaders">
-                                <thead>
-                                    <tr>
-                                        <th class="leaderboard__header"><span class="hidden">Rank</span></th>
-                                        <th class="leaderboard__header"><span class="hidden">Athlete</span></th>
-                                        <th class="leaderboard__header">Speed</th>
-                                        <th class="leaderboard__header">Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb[gender_leaderboard].entries[$index]" class="leaderboard__entry">
-                                        <td class="leaderboard__rank">{{ num }}</td>
-                                        <td class="leaderboard__name">{{ entry ? parseName(entry.athlete_name) : '-' }}</td>
-                                        <td class="leaderboard__speed">{{ entry ? parseSpeed(entry.elapsed_time, currentClimb.segment.distance) : '-' }}<span ng-if="entry" class="leaderboard__unit">km/h</span></td>
-                                        <td class="leaderboard__time">{{ entry ? parseSeconds(entry.elapsed_time) : '-' }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href ng-click="toggle('showClubLeaders')">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} leaders</a>
+                            <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
+                            <div class="climb-info__leaderboards">
+                                <div ng-repeat="gender_leaderboard in ['male_' + leaderboard, 'female_' + leaderboard]">
+                                    <table ng-if="currentClimb[gender_leaderboard]" class="leaderboard leaderboard--leaders">
+                                        <thead ng-show="gender_leaderboard === 'male_' + leaderboard">
+                                            <tr>
+                                                <th class="leaderboard__header"><span class="hidden">Rank</span></th>
+                                                <th class="leaderboard__header"><span class="hidden">Athlete</span></th>
+                                                <th class="leaderboard__header"><span class="super">Speed</span></th>
+                                                <th class="leaderboard__header"><span class="super">Time</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="num in [1, 2, 3]" ng-init="entry = currentClimb[gender_leaderboard].entries[$index]" class="leaderboard__entry">
+                                                <td class="leaderboard__rank">{{ num }}</td>
+                                                <td class="leaderboard__name">{{ entry ? parseName(entry.athlete_name) : '-' }}</td>
+                                                <td class="leaderboard__speed">{{ entry ? parseSpeed(entry.elapsed_time, currentClimb.segment.distance) : '-' }}<span ng-if="entry" class="leaderboard__unit">km/h</span></td>
+                                                <td class="leaderboard__time">{{ entry ? parseSeconds(entry.elapsed_time) : '-' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr ng-if="gender_leaderboard === 'male_' + leaderboard" class="leaderboard__break" style="background-color: #{{ currentClimb.bg_colour }}">
+                                </div>
+                                <a href ng-click="toggle('showClubLeaders')" class="climb-info__toggle">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} leaders</a>
+                            </div>
                         </div>
 
                         <div ng-repeat="leaderboard in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[leaderboard]" ng-show="leaderboard === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard">
-                            <h3 class="climb-info__title">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
-                            <table ng-repeat="gender_leaderboard in ['male_' + leaderboard, 'female_' + leaderboard]" ng-if="currentClimb[gender_leaderboard]" class="leaderboard leaderboard--{{ gender_leaderboard }}">
-                                <thead>
-                                    <tr>
-                                        <th class="leaderboard__header"><span class="hidden">Rank</span></th>
-                                        <th class="leaderboard__header"><span class="hidden">Athlete</span></th>
-                                        <th class="leaderboard__header">Speed</th>
-                                        <th class="leaderboard__header">Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="entry in currentClimb[gender_leaderboard].entries" class="leaderboard__entry">
-                                        <td class="leaderboard__rank">{{ entry.rank }}</td>
-                                        <td class="leaderboard__name">{{ parseName(entry.athlete_name) }}</td>
-                                        <td class="leaderboard__speed">{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}<span class="leaderboard__unit">km/h</span></td>
-                                        <td class="leaderboard__time">{{ parseSeconds(entry.elapsed_time) }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href ng-click="toggle('showClubLeaderboard')">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} standings</a>
+                            <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
+                            <div class="climb-info__leaderboards">
+                                <div ng-repeat="gender_leaderboard in ['male_' + leaderboard, 'female_' + leaderboard]">
+                                    <table ng-if="currentClimb[gender_leaderboard]" class="leaderboard">
+                                        <thead ng-show="gender_leaderboard === 'male_' + leaderboard">
+                                            <tr>
+                                                <th class="leaderboard__header"><span class="hidden">Rank</span></th>
+                                                <th class="leaderboard__header"><span class="hidden">Athlete</span></th>
+                                                <th class="leaderboard__header"><span class="super">Speed</span></th>
+                                                <th class="leaderboard__header"><span class="super">Time</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="entry in currentClimb[gender_leaderboard].entries" class="leaderboard__entry">
+                                                <td class="leaderboard__rank">{{ entry.rank }}</td>
+                                                <td class="leaderboard__name">{{ parseName(entry.athlete_name) }}</td>
+                                                <td class="leaderboard__speed">{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}<span class="leaderboard__unit">km/h</span></td>
+                                                <td class="leaderboard__time">{{ parseSeconds(entry.elapsed_time) }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr ng-if="gender_leaderboard === 'male_' + leaderboard" class="leaderboard__break" style="background-color: #{{ currentClimb.bg_colour }}">
+                                </div>
+                                <a href ng-click="toggle('showClubLeaderboard')" class="climb-info__toggle">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} standings</a>
+                            </div>
                         </div>
 
                         <a href ng-click="deselectClimb()">Back to regions</a>

@@ -64,7 +64,7 @@
 }
 
 .book-info__region {
-    background: $bgGrey;
+    background-color: $bgGrey;
     border-top: 1px solid $bgDarkGrey;
     color: #fff;
     display: block;
@@ -141,12 +141,18 @@
 }
 
 .climb-info__title {
+    border-bottom: 2px solid $bgGrey;
     font-weight: $weightBold;
+    margin-bottom: $baseline/2;
+    padding-bottom: $baseline/2;
     text-transform: uppercase;
 }
 
+.climb-info__leaderboards {
+    margin-bottom: $baseline*2;
+}
+
 .leaderboard {
-    margin-bottom: $baseline;
     width: 100%;
 }
 
@@ -156,6 +162,13 @@
     text-align: left;
     text-transform: uppercase;
     opacity: 0.95;
+    position: relative;
+}
+
+.leaderboard__header .super {
+    position:  absolute;
+    top: -37px;
+    left: 0;
 }
 
 .leaderboard__entry {
@@ -171,7 +184,6 @@
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-transform: capitalize;
     white-space: nowrap;
     width: 190px;
 }
@@ -186,6 +198,7 @@
 
 .leaderboard__unit {
     font-size: 14px;
+    line-height: normal;
     margin-left: 2px;
     opacity: 0.95;
 }
@@ -193,6 +206,20 @@
 .leaderboard--leaders .leaderboard__entry {
     font-size: 24px;
     line-height: 38px;
+}
+
+.leaderboard__break {
+    background-color: $bgGrey;
+    border: none;
+    height: 2px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.climb-info__toggle {
+    display: block;
+    margin-top: $baseline;
+    text-align: right;
 }
 
 .marker-label {

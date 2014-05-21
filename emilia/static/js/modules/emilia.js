@@ -101,8 +101,12 @@ angular.module('emilia', ['google-maps'])
         };
 
         $scope.parseName = function (name) {
+            // Crude cleaning
+            name = _.map(name.split(' '), function(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+            }).join(' ');
             name = name.replace(/ *\([^)]*\) */g, "");
-            return name.split('-')[0];
+            return name.split(' - ')[0].split('#')[0].split('@')[0];
         };
 
         $scope.parseSeconds = function (seconds) {
@@ -110,7 +114,7 @@ angular.module('emilia', ['google-maps'])
                 min = parseInt(seconds / 60) % 60,
                 sec = parseInt(seconds % 60, 10);
 
-            return (hours > 0 ? hours + ":" : '') + (hours > 0 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+            return (hours > 0 ? hours + ":" : '') + (hours > 0 && min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
         };
 
         $scope.parseSpeed = function (seconds, distance) {
