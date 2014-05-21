@@ -87,6 +87,14 @@ angular.module('emilia', ['google-maps'])
             $scope.$apply();
         };
 
+        $scope.parseSeconds = function (seconds) {
+            var hours = parseInt(seconds / 3600) % 24,
+                min = parseInt(seconds / 60) % 60,
+                sec = parseInt(seconds % 60, 10);
+
+            return (hours > 0 ? hours + ":" : '') + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+        };
+
         $scope.clickMarker.$inject = ['$markerModel'];
 
         var allez = function () {
@@ -138,7 +146,7 @@ angular.module('emilia', ['google-maps'])
                 climb.bg_colour = region.bg_colour;
                 climb.text_colour = region.text_colour;
 
-                // Format distances
+                // Format values
                 climb.segment.total_elevation_gain = Math.round(climb.segment.total_elevation_gain);
                 if (climb.segment.distance > 1000) {
                     climb.segment.distance = (climb.segment.distance/1000).toFixed(2) + "km";
