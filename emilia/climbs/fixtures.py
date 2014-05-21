@@ -76,7 +76,7 @@ def install():
                 ('chapel-fell', 62, u'Chapel Fell', u'North-East', 6678141),
                 ('mennock-pass', 63, u'Mennock Pass', u'Scotland', 6697054),
                 ('cairn-o-mount', 64, u'Cairn o\' Mount', u'Scotland', 6674408),
-                ('the-cairnwell', 65, u'The Cairnwell', u'Scotland', 6674420),
+                ('the-cairnwell', 65, u'The Cairnwell', u'Scotland', 7011208),
                 ('the-lecht', 66, u'The Lecht', u'Scotland', 6674394),
                 ('cairn-gorm', 67, u'Cairn Gorm', u'Scotland', 6674377),
                 ('rest-and-be-thankfull', 68, u'Rest and be Thankfull', u'Scotland', 6697031),
