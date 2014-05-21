@@ -134,6 +134,14 @@ angular.module('emilia', ['google-maps'])
                 climb.bg_colour = region.bg_colour;
                 climb.text_colour = region.text_colour;
 
+                // Format distances
+                climb.segment.total_elevation_gain = Math.round(climb.segment.total_elevation_gain);
+                if (climb.segment.distance > 1000) {
+                    climb.segment.distance = (climb.segment.distance/1000).toFixed(2) + "km";
+                } else {
+                    climb.segment.distance = Math.round(climb.segment.distance) + "m";
+                }
+
                 return {
                     id: climb.id,
                     number: climb.number,

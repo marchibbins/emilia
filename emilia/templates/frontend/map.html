@@ -17,7 +17,7 @@
         <div class="map-info">
             {% raw %}
                 <div class="map-info__buttons">
-                    <button ng-repeat="book in books" class="btn map-info__btn" ng-class="{'active': book.id === currentBook.id}" ng-disabled="book.id === currentBook.id" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
+                    <button ng-repeat="book in books" class="btn map-info__btn" ng-class="{'active': book.id === currentBook.id}" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
                 </div>
 
                 <div class="book-info__pane" ng-if="currentBook.id && currentClimb === null">
@@ -40,19 +40,19 @@
                         <p class="climb-header__location">{{ currentClimb.location }}</p>
                         <ul class="climb-stats unstyled">
                             <li class="climb-stats__item">
-                                <span class="climb-stats__label">Distance:</span>
-                                <span class="climb-stats__value">{{ currentClimb.segment.distance }}m</span>
+                                <span class="climb-stats__label">Distance</span>
+                                <span class="climb-stats__value">{{ currentClimb.segment.distance }}</span>
                             </li>
                             <li class="climb-stats__item">
-                                <span class="climb-stats__label">Average grade:</span>
+                                <span class="climb-stats__label">Avg grade</span>
                                 <span class="climb-stats__value">{{ currentClimb.segment.average_grade }}%</span>
                             </li>
                             <li class="climb-stats__item">
-                                <span class="climb-stats__label">Maximum grade:</span>
+                                <span class="climb-stats__label">Max grade</span>
                                 <span class="climb-stats__value">{{ currentClimb.segment.maximum_grade }}%</span>
                             </li>
                             <li class="climb-stats__item">
-                                <span class="climb-stats__label">Elevation gain:</span>
+                                <span class="climb-stats__label">Height gain</span>
                                 <span class="climb-stats__value">{{ currentClimb.segment.total_elevation_gain }}m</span>
                             </li>
                         </ul>

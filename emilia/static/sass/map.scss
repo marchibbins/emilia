@@ -96,29 +96,47 @@
 }
 
 .climb-header {
-    padding: $baseline*2 0;
+    padding-top: $baseline*3;
+    text-align: center;
 }
 
-.climb-header__name,
-.climb-header__location {
+.climb-header__name {
     color: inherit;
-    text-align: center;
+    font-size: 30px;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.climb-header__location {
+    font-size: 24px;
+    font-size: 2.4rem;
+    line-height: 36px;
+    line-height: 3.6rem;
+    margin: 0;
+    opacity: 0.95;
 }
 
 .climb-stats {
-    margin: $baseline*2 0 0;
-    padding: 0;
+    box-shadow: 0 -1px rgba(0, 0, 0, 0.15);
+    margin: $baseline*3 0 0;
 }
 
 .climb-stats__item {
+    box-shadow: -1px 0 rgba(0, 0, 0, 0.15);
     display: inline-block;
+    padding: $baseline 0 $baseline*1.5;
     text-align: center;
     width: 24%;
+
+    &:first-child {
+        box-shadow: none;
+    }
 }
 
 .climb-stats__label {
     font-size: 12px;
     font-size: 1.2rem;
+    opacity: 0.95;
     text-transform: uppercase;
 }
 
