@@ -29399,16 +29399,21 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             return distance.toFixed(points) + units;
         };
 
+        $scope.parseName = function (name) {
+            name = name.replace(/ *\([^)]*\) */g, "");
+            return name.split('-')[0];
+        };
+
         $scope.parseSeconds = function (seconds) {
             var hours = parseInt(seconds / 3600) % 24,
                 min = parseInt(seconds / 60) % 60,
                 sec = parseInt(seconds % 60, 10);
 
-            return (hours > 0 ? hours + ":" : '') + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+            return (hours > 0 ? hours + ":" : '') + (hours > 0 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
         };
 
         $scope.parseSpeed = function (seconds, distance) {
-            return (distance/seconds * 3.6).toFixed(1) + "km/h"; // 60*60 / 1000
+            return (distance/seconds * 3.6).toFixed(1); // 60*60 / 1000
         };
 
         $scope.clickMarker.$inject = ['$markerModel'];

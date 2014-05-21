@@ -101,7 +101,7 @@
 .climb-header__name {
     color: inherit;
     font-size: 30px;
-    font-weight: $bold;
+    font-weight: $weightBold;
 }
 
 .climb-header__location {
@@ -141,14 +141,64 @@
 }
 
 .climb-info__title {
-    font-weight: $bold;
+    font-weight: $weightBold;
     text-transform: uppercase;
+}
+
+.leaderboard {
+    margin-bottom: $baseline;
+    width: 100%;
+}
+
+.leaderboard__header {
+    font-size: 12px;
+    font-weight: $weightNormal;
+    text-align: left;
+    text-transform: uppercase;
+    opacity: 0.95;
+}
+
+.leaderboard__entry {
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.leaderboard__rank {
+    width: 40px;
+}
+
+.leaderboard__name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    white-space: nowrap;
+    width: 190px;
+}
+
+.leaderboard__speed {
+    width: 100px;
+}
+
+.leaderboard__time {
+    width: 60px;
+}
+
+.leaderboard__unit {
+    font-size: 14px;
+    margin-left: 2px;
+    opacity: 0.95;
+}
+
+.leaderboard--leaders .leaderboard__entry {
+    font-size: 24px;
+    line-height: 38px;
 }
 
 .marker-label {
     color: #fff;
     font-size: 14px;
-    font-weight: $bold;
+    font-weight: $weightBold;
     line-height: 20px;
     width: 28px;
     text-align: center;
