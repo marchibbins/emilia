@@ -29299,6 +29299,10 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
   this.label.setMap(theMap);
 };;angular.module('emilia', ['google-maps'])
     .controller('emilia-map', ['$scope', '$window', '$http', function ($scope, $window, $http) {
+        // Cloak
+        var el = document.body.querySelector('[ng-app="emilia"]');
+        angular.element(el).removeClass('hidden');
+
         // Global namespace
         $scope.Emilia = $window.Emilia;
 
