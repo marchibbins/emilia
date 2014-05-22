@@ -29401,11 +29401,19 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
         $scope.parseName = function (name) {
             // Crude cleaning
-            name = _.map(name.split(' '), function(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-            }).join(' ');
-            name = name.replace(/ *\([^)]*\) */g, "");
-            return name.split(' - ')[0].split('#')[0].split('@')[0];
+            _.each([' - ', '#', '@'], function(character) {
+                name = name.split(character)[0];
+            });
+            _.each([' ', '-'], function(join) {
+                name = _.map(name.split(join), function(string) {
+                    if (string === string.toUpperCase()) {
+                        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+                    } else {
+                        return string;
+                    }
+                }).join(join);
+            });
+            return name.replace(/ *\([^)]*\) */g, "");
         };
 
         $scope.parseSeconds = function (seconds) {
