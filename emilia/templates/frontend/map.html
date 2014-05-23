@@ -24,10 +24,10 @@
                     <p class="book-info__loading" ng-if="currentBook.loading">Loading</p>
                     <ul class="unstyled" ng-if="currentBook.regions">
                         <li ng-repeat="region in currentBook.regions">
-                            <h2><a class="book-info__region" href ng-click="selectRegion(region.id, true)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h2>
+                            <h2><a href class="book-info__region" ng-click="selectRegion(region.id, true)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h2>
                             <ul class="book-info__climb-list unstyled" ng-if="region.climbs.length" ng-show="currentRegion.id === region.id">
                                 <li ng-repeat="climb in region.climbs">
-                                    <a class="book-info__climb" href ng-click="selectClimb(climb.id)" title="">{{ climb.number }}. {{ climb.name }}</a>
+                                    <a href class="book-info__climb" ng-click="selectClimb(climb.id)" title="View stats for {{ climb.name }}">{{ climb.number }}. {{ climb.name }}</a>
                                 </li>
                             </ul>
                         </li>
@@ -38,7 +38,7 @@
                     <div class="climb-header" style="background-color: #{{ currentClimb.bg_colour }}; color: #{{ currentClimb.text_colour }}">
                         <h2 class="climb-header__name">{{ currentClimb.number }}. {{ currentClimb.name }}</h2>
                         <p class="climb-header__location">{{ currentClimb.location }}</p>
-                        <a href ng-click="deselectClimb()" class="climb-header__close">&#10005;</a>
+                        <a href ng-click="deselectClimb()" class="climb-header__close" title="Return to region">&#10005;</a>
                         <ul class="climb-stats clearfix unstyled">
                             <li class="climb-stats__item">
                                 <span class="climb-stats__label">Distance</span>
@@ -60,11 +60,11 @@
                     </div>
 
                     <div class="climb-info">
-                        <div ng-repeat="leaderboard in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[leaderboard]" ng-show="leaderboard === 'club_leaderboard' ? showClubLeaders : !showClubLeaders">
-                            <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
+                        <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaders : !showClubLeaders">
+                            <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
                             <div class="climb-info__leaderboards">
-                                <div ng-repeat="gender in ['male', 'female']" ng-init="gender_leaderboard = currentClimb[gender + '_' + leaderboard]">
-                                    <table ng-if="gender_leaderboard" class="leaderboard leaderboard--leaders">
+                                <div ng-repeat="gender in ['male', 'female']" ng-init="leaderboard = currentClimb[gender + '_' + type]">
+                                    <table ng-if="leaderboard" class="leaderboard leaderboard--leaders">
                                         <thead ng-show="$first">
                                             <tr>
                                                 <th class="leaderboard__header"><span class="hidden">Rank</span></th>
@@ -74,8 +74,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="num in [1, 2, 3]" ng-init="entry = gender_leaderboard.entries[$index]" ng-if="gender_leaderboard.entries[$index] || $first" class="leaderboard__entry">
-                                                <td class="leaderboard__rank" ng-if="entry">{{ num }}</td>
+                                            <tr ng-repeat="num in range(3) track by $index"
+                                                ng-if="leaderboard.entries[$index] || $first"
+                                                ng-init="entry = leaderboard.entries[$index]"
+                                                class="leaderboard__entry">
+                                                <td class="leaderboard__rank" ng-if="entry">{{ entry.rank }}</td>
                                                 <td class="leaderboard__name" ng-if="entry">{{ parseName(entry.athlete_name) }}</td>
                                                 <td class="leaderboard__speed" ng-if="entry">{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}<span ng-if="entry" class="leaderboard__unit">km/h</span></td>
                                                 <td class="leaderboard__time" ng-if="entry">{{ parseSeconds(entry.elapsed_time) }}</td>
@@ -85,15 +88,15 @@
                                     </table>
                                     <hr ng-if="$first" class="leaderboard__break" style="background-color: #{{ currentClimb.bg_colour }}">
                                 </div>
-                                <a href ng-click="toggle('showClubLeaders')" class="climb-info__toggle">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} leaders</a>
+                                <a href ng-click="toggle('showClubLeaders')" class="climb-info__toggle" title="Show {{ type === 'club_leaderboard' ? 'overall' : 'club' }} leaders">Show {{ type === 'club_leaderboard' ? 'overall' : 'club' }} leaders</a>
                             </div>
                         </div>
 
-                        <div ng-repeat="leaderboard in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[leaderboard]" ng-show="leaderboard === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard">
-                            <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ leaderboard === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
+                        <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard">
+                            <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
                             <div class="climb-info__leaderboards">
-                                <div ng-repeat="gender in ['male', 'female']" ng-init="gender_leaderboard = currentClimb[gender + '_' + leaderboard]">
-                                    <table ng-if="gender_leaderboard" class="leaderboard">
+                                <div ng-repeat="gender in ['male', 'female']" ng-init="leaderboard = currentClimb[gender + '_' + type]">
+                                    <table ng-if="leaderboard" class="leaderboard" ng-class="{'leaderboard--disabled': leaderboard.disabled === true}">
                                         <thead ng-show="$first">
                                             <tr>
                                                 <th class="leaderboard__header"><span class="hidden">Rank</span></th>
@@ -103,20 +106,62 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="entry in gender_leaderboard.entries" class="leaderboard__entry">
-                                                <td class="leaderboard__rank">{{ entry.rank }}</td>
-                                                <td class="leaderboard__name">{{ parseName(entry.athlete_name) }}</td>
-                                                <td class="leaderboard__speed">{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}<span class="leaderboard__unit">km/h</span></td>
-                                                <td class="leaderboard__time">{{ parseSeconds(entry.elapsed_time) }}</td>
+                                            <tr ng-repeat="entry in leaderboard.entries track by $index"
+                                                ng-show="($index + 1) <= (leaderboard.page * leaderboardPerPage) && ($index + 1) > (leaderboard.page * leaderboardPerPage - leaderboardPerPage)" class="leaderboard__entry">
+                                                <td class="leaderboard__rank" ng-if="entry">{{ entry.rank }}</td>
+                                                <td class="leaderboard__name" ng-if="entry">{{ parseName(entry.athlete_name) }}</td>
+                                                <td class="leaderboard__speed" ng-if="entry">{{ parseSpeed(entry.elapsed_time, currentClimb.segment.distance) }}<span class="leaderboard__unit">km/h</span></td>
+                                                <td class="leaderboard__time" ng-if="entry">{{ parseSeconds(entry.elapsed_time) }}</td>
                                             </tr>
-                                            <tr ng-if="gender_leaderboard.entry_count === 0">
+                                            <tr ng-if="leaderboard.entry_count === 0">
                                                 <td colspan="4">No {{ gender }} riders!</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <ul ng-if="leaderboard.entry_count > leaderboardPerPage" class="pagination unstyled" ng-class="{'pagination--disabled': leaderboard.disabled === true}">
+                                        <li class="pagination__item">
+                                            <a href ng-if="leaderboard.page > 1"
+                                                    ng-click="selectPage(leaderboard, leaderboard.page - 1)"
+                                                    hover-colours data-hover-color="#{{ currentClimb.bg_colour }}"
+                                                    data-hover-text-color="#{{ currentClimb.text_colour }}"
+                                                    data-hover-border-color="#{{ currentClimb.bg_colour }}"
+                                                    class="pagination__link"
+                                                    title="Show previous page">&lt;</a>
+                                            <span ng-if="leaderboard.page === 1"
+                                                  class="pagination__link pagination__link--disabled">&lt;</span>
+                                        </li>
+                                        <li ng-repeat="num in range(leaderboard.totalPages) track by $index"
+                                            ng-if="$index + 1 <= 3 || $index + 1 > leaderboard.totalPages - 3 || ($index + 1 >= leaderboard.page - 1 && $index + 1 <= leaderboard.page + 1)"
+                                            ng-init="page = $index + 1"
+                                            class="pagination__item">
+                                            <span ng-if="(page === leaderboard.page - 1 && leaderboard.page < leaderboard.totalPages && leaderboard.page - 2 > 3) || (leaderboard.page > leaderboard.totalPages - 2 && page === leaderboard.totalPages - 2 && leaderboard.totalPages > 6)">&hellip;</span>
+                                            <a href ng-if="leaderboard.page !== page"
+                                                    ng-click="selectPage(leaderboard, page)"
+                                                    hover-colours data-hover-color="#{{ currentClimb.bg_colour }}"
+                                                    data-hover-text-color="#{{ currentClimb.text_colour }}"
+                                                    data-hover-border-color="#{{ currentClimb.bg_colour }}"
+                                                    class="pagination__link"
+                                                    title="Show page {{ page }}">{{ page }}</a>
+                                            <span ng-if="leaderboard.page === page"
+                                                  class="pagination__link"
+                                                  style="background-color: #{{ currentClimb.bg_colour }}; border-color: #{{ currentClimb.bg_colour }}; color: #{{ currentClimb.text_colour }}">{{ page }}</span>
+                                            <span ng-if="(page === leaderboard.page + 1 && leaderboard.page + 1 > 3 && leaderboard.page < leaderboard.totalPages - 4) || (leaderboard.page < 3 && page === 3 && leaderboard.totalPages > 6)">&hellip;</span>
+                                        </li>
+                                        <li class="pagination__item">
+                                            <a href ng-if="leaderboard.page < leaderboard.totalPages"
+                                                    ng-click="selectPage(leaderboard, leaderboard.page + 1)"
+                                                    hover-colours data-hover-color="#{{ currentClimb.bg_colour }}"
+                                                    data-hover-text-color="#{{ currentClimb.text_colour }}"
+                                                    data-hover-border-color="#{{ currentClimb.bg_colour }}"
+                                                    class="pagination__link"
+                                                    title="Show next page">&gt;</a>
+                                            <span ng-if="leaderboard.page === leaderboard.totalPages"
+                                                  class="pagination__link pagination__link--disabled">&gt;</span>
+                                        </li>
+                                    </ul>
                                     <hr ng-if="$first" class="leaderboard__break" style="background-color: #{{ currentClimb.bg_colour }}">
                                 </div>
-                                <a href ng-click="toggle('showClubLeaderboard')" class="climb-info__toggle">Show {{ leaderboard === 'club_leaderboard' ? 'overall' : 'club' }} standings</a>
+                                <a href ng-click="toggle('showClubLeaderboard')" class="climb-info__toggle" title="Show {{ type === 'club_leaderboard' ? 'overall' : 'club' }} standings">Show {{ type === 'club_leaderboard' ? 'overall' : 'club' }} standings</a>
                             </div>
                         </div>
                     </div>

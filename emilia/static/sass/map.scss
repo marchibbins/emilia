@@ -231,6 +231,41 @@
     margin-bottom: 8px;
 }
 
+.leaderboard--disabled,
+.pagination--disabled {
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+.pagination {
+    margin: $baseline/2 0 $baseline;
+    text-align: center;
+    width: 100%;
+}
+
+.pagination__item {
+    display: inline;
+}
+
+.pagination__link {
+    border: 1px solid $bgLightGrey;
+    color: $bgDarkGrey;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    padding: $baseline/4 $baseline/2;
+
+    &:hover,
+    &:active {
+        color: $bgDarkGrey;
+        text-decoration: none;
+    }
+}
+
+.pagination__link--disabled {
+    opacity: 0.5;
+}
+
 .climb-info__toggle {
     display: block;
     margin-top: $baseline;

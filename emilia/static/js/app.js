@@ -29341,6 +29341,8 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         $scope.showClubLeaders = true;
         $scope.showClubLeaderboard = true;
 
+        $scope.leaderboardPerPage = 10;
+
         $scope.selectBook = function (bookId) {
             if (bookId !== $scope.currentBook.id) {
                 $scope.currentRegion = {};
@@ -29377,13 +29379,35 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             }
         };
 
-        $scope.toggle = function (variable) {
-            $scope[variable] = !$scope[variable];
-        };
-
         $scope.clickMarker = function (climb) {
             $scope.selectClimb(climb.id);
             $scope.$apply();
+        };
+
+        $scope.clickMarker.$inject = ['$markerModel'];
+
+        $scope.selectPage = function(leaderboard, page) {
+            if (leaderboard.disabled !== true) {
+                if (leaderboard.pages.indexOf(page) === -1) {
+                    leaderboard.disabled = true;
+                    var url = '/api/climbs/' + leaderboard.climb.slug + '/' + leaderboard.type + '/' + leaderboard.gender;
+                    $http({method: 'GET', url: url, params: {page: page}})
+                        .success(function (data, status, headers, config) {
+                            parseLeaderboardPage(data, leaderboard, page);
+                            leaderboard.page = page;
+                            leaderboard.disabled = false;
+                        })
+                        .error(function (data, status, headers, config) {
+                            console.log('Error loading climb ' + leaderboard.climb.id, status);
+                        });
+                } else {
+                    leaderboard.page = page;
+                }
+            }
+        };
+
+        $scope.range = function (num) {
+            return new Array(num);
         };
 
         $scope.parseDistance = function (distance, kms) {
@@ -29400,7 +29424,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
         };
 
         $scope.parseName = function (name) {
-            // Crude cleaning
+            // Crude cleaning attempt
             _.each([' - ', '#', '@'], function(character) {
                 name = name.split(character)[0];
             });
@@ -29428,7 +29452,9 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             return (distance/seconds * 3.6).toFixed(1); // 60*60 / 1000
         };
 
-        $scope.clickMarker.$inject = ['$markerModel'];
+        $scope.toggle = function (variable) {
+            $scope[variable] = !$scope[variable];
+        };
 
         var allez = function () {
             // Create books object
@@ -29532,11 +29558,55 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
         parseLeaderboard = function (data, leaderboard) {
             // Attach leaderboard data to existing object
-            var climb = _.findWhere($scope.climbs, {id: data.climb.id});
+            var climb = _.findWhere($scope.climbs, {id: data.climb.id}),
+                obj = {
+                    climb: data.climb,
+                    type: leaderboard,
+                    page: 1,
+                    pages: [1]
+                };
+
             climb[leaderboard] = true;
-            climb['male_' + leaderboard] = data['male_' + leaderboard];
-            climb['female_' + leaderboard] = data['female_' + leaderboard];
+
+            climb['male_' + leaderboard] = _.extend(_.extend({
+                gender: 'male',
+                totalPages: Math.ceil(data['male_' + leaderboard].entry_count / $scope.leaderboardPerPage)
+            }, _.clone(obj)), data['male_' + leaderboard]);
+
+            climb['female_' + leaderboard] = _.extend(_.extend({
+                gender: 'female',
+                totalPages: Math.ceil(data['female_' + leaderboard].entry_count / $scope.leaderboardPerPage)
+            }, _.clone(obj)), data['female_' + leaderboard]);
+        },
+
+        parseLeaderboardPage = function(data, leaderboard, page) {
+            leaderboard.pages.push(page);
+            _.each(data[leaderboard.gender + '_' + leaderboard.type].entries, function(entry, i) {
+                leaderboard.entries[i + (page - 1) * 10] = entry;
+            });
         };
 
         allez();
-    }]);
+    }])
+
+    .directive('hoverColours', function() {
+        return {
+            scope: true,
+            link: function ($scope, $element, $attrs) {
+                $element.bind('mouseenter', function() {
+                    angular.element($element).css({
+                        'backgroundColor': $attrs.hoverColor,
+                        'borderColor': $attrs.hoverBorderColor,
+                        'color': $attrs.hoverTextColor
+                    });
+                });
+                $element.bind('mouseleave', function() {
+                    angular.element($element).css({
+                        'backgroundColor': '',
+                        'borderColor': '',
+                        'color': ''
+                    });
+                });
+            }
+        };
+    });
