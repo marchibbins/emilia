@@ -60,7 +60,7 @@ def book_climbs(slug):
     book = Book.query.filter_by(slug=slug).first_or_404()
     context = {
         'book': book.serialize_summary(),
-        'climbs': [item.serialize_summary() for item in book.climbs]
+        'climbs': [item.serialize_summary() for item in book.climbs.order_by('number')]
     }
     return json_response(**context)
 
