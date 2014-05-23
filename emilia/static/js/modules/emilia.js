@@ -45,11 +45,27 @@ angular.module('emilia', ['google-maps'])
         $scope.leaderboardPerPage = 10;
 
         $scope.selectBook = function (bookId) {
+            // Check whether current region is in next book
+            var currentRegionId = $scope.currentRegion.id ? $scope.currentRegion.id : $scope.currentClimb ? $scope.currentClimb.region_id : null,
+                nextRegion = _.findWhere($scope.books[bookId].regions, {id: currentRegionId});
+
             if (bookId !== $scope.currentBook.id) {
-                $scope.currentRegion = {};
+                // Reset if not
+                if (!nextRegion) {
+                    $scope.currentRegion = {};
+                }
+            } else if ($scope.currentClimb) {
+                // Reselect region if book is the same
+                $scope.selectRegion($scope.currentClimb.region_id);
             }
+
             $scope.currentClimb = null;
             $scope.currentBook = $scope.books[bookId];
+
+            // Select region if book has changed
+            if (nextRegion && nextRegion.id) {
+                $scope.selectRegion(nextRegion.id);
+            }
         };
 
         $scope.selectClimb = function (climbId) {
