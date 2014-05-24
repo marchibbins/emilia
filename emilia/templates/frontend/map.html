@@ -17,7 +17,7 @@
         <div class="map-info">
             {% raw %}
                 <div class="map-info__buttons">
-                    <button ng-repeat="book in books" class="btn map-info__btn" ng-class="{'active': book.id === currentBook.id}" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
+                    <button ng-repeat="book in books" class="btn map-info__btn map-info__btn--{{ book.slug }}" ng-class="{'active': book.id === currentBook.id}" ng-click="selectBook(book.id)">Book {{ book.id }}</button>
                 </div>
 
                 <div class="book-info__pane" ng-if="currentBook.id && currentClimb === null">

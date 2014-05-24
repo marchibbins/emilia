@@ -32,26 +32,56 @@
 }
 
 .map-info__btn {
-    background-color: $bgGrey;
+    background: darken($bgGrey, 5%);
     border: 1px solid $bgDarkGrey;
     border-bottom: none;
     border-right: none;
-    color: #eee;
     display: inline-block;
     height: $baseline*3;
+    overflow: hidden;
+    position: relative;
+    text-indent: -9999px;
     width: 25%;
 
     &:first-child {
         border-left: none;
     }
+}
 
-    &:hover {
-        background-color: darken($bgGrey, 5%);
-    }
+.map-info__btn:after {
+    background-position: -5px 7px;
+    background-repeat: no-repeat;
+    background-size: 160px;
+    content: '';
+    display: block;
+    height: 150px;
+    left: -26px;
+    opacity: 0.75;
+    position: absolute;
+    @include rotate(-10deg);
+    top: -60px;
+    width: 150px;
+}
 
-    &.active {
-        background-color: $bgDarkGrey;
-    }
+.map-info__btn:hover:after,
+.map-info__btn.active:after {
+    opacity: 1;
+}
+
+.map-info__btn--greatest:after {
+    background-image: url(/static/img/greatest.png);
+}
+
+.map-info__btn--another:after {
+    background-image: url(/static/img/another.png);
+}
+
+.map-info__btn--hellingen:after {
+    background-image: url(/static/img/hellingen.png);
+}
+
+.map-info__btn--le-tour:after {
+    background-image: url(/static/img/le-tour.png);
 }
 
 .book-info__pane,
