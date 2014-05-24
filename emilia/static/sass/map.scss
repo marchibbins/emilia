@@ -46,6 +46,10 @@
     &:first-child {
         border-left: none;
     }
+
+    &.active {
+        background: $bgDarkGrey;
+    }
 }
 
 .map-info__btn:after {
@@ -84,6 +88,17 @@
     background-image: url(/static/img/le-tour.png);
 }
 
+.book-header {
+    background-color: lighten($bgLightGrey, 25%);
+    border-top: 1px solid $bgDarkGrey;
+    padding: $baseline $gutter;
+}
+
+.book-header__name {
+    font-size: 34px;
+    line-height: 40px;
+}
+
 .book-info__pane,
 .climb-info__pane {
     bottom: 0;
@@ -98,6 +113,7 @@
     border-top: 1px solid $bgDarkGrey;
     color: #fff;
     display: block;
+    font-size: 24px;
     line-height: $baseline*3;
     height: $baseline*3;
     padding-left: $gutter;

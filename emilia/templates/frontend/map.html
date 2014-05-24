@@ -21,10 +21,13 @@
                 </div>
 
                 <div class="book-info__pane" ng-if="currentBook.id && currentClimb === null">
-                    <p class="book-info__loading" ng-if="currentBook.loading">Loading</p>
+                    <div class="book-header">
+                        <h1 class="book-header__name">{{ currentBook.short_name }}</h1>
+                    </div>
+                    <p class="book-info__loading" ng-if="currentBook.loading">Loading data</p>
                     <ul class="unstyled" ng-if="currentBook.regions">
                         <li ng-repeat="region in currentBook.regions">
-                            <h2><a href class="book-info__region" ng-click="selectRegion(region.id, true)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h2>
+                            <h3><a href class="book-info__region" ng-click="selectRegion(region.id, true)" title="View climbs for {{ region.name }}" style="background-color: #{{ region.bg_colour }}; color: #{{ region.text_colour }}">{{ region.name }}</a></h3>
                             <ul class="book-info__climb-list unstyled" ng-if="region.climbs.length" ng-show="currentRegion.id === region.id">
                                 <li ng-repeat="climb in region.climbs">
                                     <a href class="book-info__climb" ng-click="selectClimb(climb.id)" title="View stats for {{ climb.name }}">{{ climb.number }}. {{ climb.name }}</a>
