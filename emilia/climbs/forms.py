@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import HiddenField, IntegerField, TextField
+from wtforms import HiddenField, IntegerField, TextAreaField, TextField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, NumberRange, Optional
 
@@ -15,6 +15,8 @@ class BookForm(Form):
     slug = TextField(u'Slug', [DataRequired(), UniqueValidator(Book, Book.slug), Length(max=Book.SLUG_STR_MAX)], filters=[lowercase_filter], description=u'Url-safe identifier, for example: "100-climbs"')
     short_name = TextField(u'Short name', [DataRequired(), Length(max=Book.NAME_STR_MAX)], description=u'For example: "100 Climbs"')
     long_name = TextField(u'Long name', [DataRequired(), Length(max=Book.NAME_STR_MAX)], description=u'For example: "100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills"')
+    description = TextAreaField(u'Description', [DataRequired()])
+    image_url = TextField(u'Image URL', [DataRequired()])
 
 
 class ClimbForm(Form):

@@ -10,7 +10,9 @@ def install():
         {
             'book': ('greatest',
                      u'100 Greatest Cycling Climbs',
-                     u'100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills'),
+                     u'100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills',
+                     u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                     '/static/img/greatest-cover.jpg'),
             'climbs': [
                 ('cheddar-gorge', 1, u'Cheddar Gorge', u'Cheddar, Somerset', 6665302),
                 ('weston-hill', 2, u'Weston Hill', u'Weston, Bath', 6665281),
@@ -117,7 +119,9 @@ def install():
         {
             'book': ('another',
                      u'Another 100 Greatest Cycling Climbs',
-                     u'Another 100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills'),
+                     u'Another 100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills',
+                     u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                     '/static/img/another-cover.jpg'),
             'climbs': [
                 ('gold-hill', 101, u'Gold Hill', u'Shaftesbury, Dorset', 689528),
                 ('zig-zag-hill', 102, u'Zig Zag Hill', u'Shaftesbury, Dorset', 772570),
@@ -128,7 +132,9 @@ def install():
         {
             'book': ('hellingen',
                      u'Hellingen: Belgium\'s Greatest Climbs',
-                     u'Hellingen: A Road Cyclist\'s Guide to Belgium\'s Greatest Cycling Climbs'),
+                     u'Hellingen: A Road Cyclist\'s Guide to Belgium\'s Greatest Cycling Climbs',
+                     u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                     '/static/img/hellingen-cover.jpg'),
             'climbs': [
                 ('kemmelberg', 1, u'Kemmelberg', u'Flanders', 641316),
                 ('mur-de-huy', 31, u'Mur de Huy', u'Wallonia', 617076),
@@ -137,7 +143,9 @@ def install():
         {
             'book': ('le-tour',
                      u'100 Greatest Tour de France Climbs',
-                     u'100 Greatest Cycling Climbs of the Tour de France: A Cyclist\'s Guide to Riding the Mountains of the Tour'),
+                     u'100 Greatest Cycling Climbs of the Tour de France: A Cyclist\'s Guide to Riding the Mountains of the Tour',
+                     u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                     '/static/img/le-tour-cover.jpg'),
             'climbs': [
                 ('alpe-d-huez', 1, u'Alpe d\'Huez', u'Isère, France', 661401),
                 ('col-du-tourmalet', 2, u'Col Du Tourmalet', u'Midi-Pyrénées, France', 652848),

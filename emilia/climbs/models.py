@@ -15,6 +15,8 @@ class Book(db.Model):
     slug = Column(db.String(SLUG_STR_MAX), unique=True, nullable=False)
     short_name = Column(db.String(NAME_STR_MAX), nullable=False)
     long_name = Column(db.String(NAME_STR_MAX), nullable=False)
+    description = Column(db.Text(), nullable=False)
+    image_url = Column(db.String(NAME_STR_MAX), nullable=False)
 
     def serialize(self):
         """ Returns the object as an easily serializeable object. """
@@ -23,6 +25,8 @@ class Book(db.Model):
             'slug': self.slug,
             'short_name': self.short_name,
             'long_name': self.long_name,
+            'description': self.description,
+            'image_url': self.image_url,
         }
 
     def serialize_summary(self):
@@ -32,11 +36,13 @@ class Book(db.Model):
             'slug': self.slug,
         }
 
-    def __init__(self, slug, short_name, long_name):
+    def __init__(self, slug, short_name, long_name, description, image_url):
         """ Populates model properties. """
         self.slug = slug
         self.short_name = short_name
         self.long_name = long_name
+        self.description = description
+        self.image_url = image_url
 
     def __repr__(self):
         """ Returns the Book object representation. """
