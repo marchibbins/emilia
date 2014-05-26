@@ -95,8 +95,18 @@
 }
 
 .book-header__name {
-    font-size: 34px;
+    font-size: 32px;
     line-height: 40px;
+    margin-bottom: $baseline;
+    padding-right: 10px;
+}
+
+.book-header__image {
+    display: block;
+    float: left;
+    margin-bottom: 16px;
+    margin-right: 20px;
+    width: 150px;
 }
 
 .book-info__pane,
