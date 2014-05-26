@@ -25,6 +25,7 @@
                         <h1 class="book-header__name">{{ currentBook.short_name }}</h1>
                         <img class="book-header__image" ng-src="{{ currentBook.image_url }}">
                         <p>{{ currentBook.description }}</p>
+                        <p><a href="{{ currentBook.buy_url }}" title="Buy this book">Buy the book!</a></p>
                     </div>
                     <p class="book-info__loading" ng-if="currentBook.loading">Loading data</p>
                     <ul class="unstyled" ng-if="currentBook.regions">
