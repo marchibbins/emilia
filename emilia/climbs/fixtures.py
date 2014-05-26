@@ -131,7 +131,7 @@ def install():
         },
         {
             'book': ('hellingen',
-                     u'Hellingen: Belgium\'s Greatest Climbs',
+                     u'Hellingen: Belgium\'s Greatest Cycling Climbs',
                      u'Hellingen: A Road Cyclist\'s Guide to Belgium\'s Greatest Cycling Climbs',
                      u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
                      '/static/img/hellingen-cover.jpg'),
@@ -142,7 +142,7 @@ def install():
         },
         {
             'book': ('le-tour',
-                     u'100 Greatest Tour de France Climbs',
+                     u'100 Greatest Cycling Climbs of the Tour de France',
                      u'100 Greatest Cycling Climbs of the Tour de France: A Cyclist\'s Guide to Riding the Mountains of the Tour',
                      u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
                      '/static/img/le-tour-cover.jpg'),
