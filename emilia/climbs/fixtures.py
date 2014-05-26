@@ -12,7 +12,8 @@ def install():
                      u'100 Greatest Cycling Climbs',
                      u'100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills',
                      u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                     '/static/img/greatest-cover.jpg'),
+                     '/static/img/greatest-cover.jpg',
+                     'http://www.franceslincoln.com/100-greatest-cycling-climbs'),
             'climbs': [
                 ('cheddar-gorge', 1, u'Cheddar Gorge', u'Cheddar, Somerset', 6665302),
                 ('weston-hill', 2, u'Weston Hill', u'Weston, Bath', 6665281),
@@ -121,7 +122,8 @@ def install():
                      u'Another 100 Greatest Cycling Climbs',
                      u'Another 100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills',
                      u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                     '/static/img/another-cover.jpg'),
+                     '/static/img/another-cover.jpg',
+                     'http://www.franceslincoln.com/another-100-greatest-cycling-climbs'),
             'climbs': [
                 ('gold-hill', 101, u'Gold Hill', u'Shaftesbury, Dorset', 689528),
                 ('zig-zag-hill', 102, u'Zig Zag Hill', u'Shaftesbury, Dorset', 772570),
@@ -134,7 +136,8 @@ def install():
                      u'Hellingen: Belgium\'s Greatest Cycling Climbs',
                      u'Hellingen: A Road Cyclist\'s Guide to Belgium\'s Greatest Cycling Climbs',
                      u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                     '/static/img/hellingen-cover.jpg'),
+                     '/static/img/hellingen-cover.jpg',
+                     'http://www.franceslincoln.com/hellingen'),
             'climbs': [
                 ('kemmelberg', 1, u'Kemmelberg', u'Flanders', 641316),
                 ('mur-de-huy', 31, u'Mur de Huy', u'Wallonia', 617076),
@@ -145,7 +148,8 @@ def install():
                      u'100 Greatest Cycling Climbs of the Tour de France',
                      u'100 Greatest Cycling Climbs of the Tour de France: A Cyclist\'s Guide to Riding the Mountains of the Tour',
                      u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                     '/static/img/le-tour-cover.jpg'),
+                     '/static/img/le-tour-cover.jpg',
+                     'http://www.franceslincoln.com/100-greatest-cycling-climbs-of-the-tour-de-france'),
             'climbs': [
                 ('alpe-d-huez', 1, u'Alpe d\'Huez', u'Isère, France', 661401),
                 ('col-du-tourmalet', 2, u'Col Du Tourmalet', u'Midi-Pyrénées, France', 652848),

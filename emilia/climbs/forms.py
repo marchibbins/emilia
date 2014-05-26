@@ -16,7 +16,8 @@ class BookForm(Form):
     short_name = TextField(u'Short name', [DataRequired(), Length(max=Book.NAME_STR_MAX)], description=u'For example: "100 Climbs"')
     long_name = TextField(u'Long name', [DataRequired(), Length(max=Book.NAME_STR_MAX)], description=u'For example: "100 Greatest Cycling Climbs: A Road Cyclist\'s Guide to Britain\'s Hills"')
     description = TextAreaField(u'Description', [DataRequired()])
-    image_url = TextField(u'Image URL', [DataRequired()])
+    image_url = TextField(u'Image URL', [DataRequired(), Length(max=Book.URL_STR_MAX)])
+    buy_url = TextField(u'Image URL', [DataRequired(), Length(max=Book.URL_STR_MAX)])
 
 
 class ClimbForm(Form):
