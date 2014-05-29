@@ -22,7 +22,7 @@
 
                 <div class="book-info__pane" ng-if="currentBook.id && currentClimb === null">
                     <div class="book-header clearfix">
-                        <h1 class="book-header__name">{{ currentBook.short_name }}</h1>
+                        <h2 class="book-header__name">{{ currentBook.short_name }}</h2>
                         <img class="book-header__image" ng-src="{{ currentBook.image_url }}">
                         <p>{{ currentBook.description }}</p>
                         <p><a href="{{ currentBook.buy_url }}" title="Buy this book">Buy the book!</a></p>
