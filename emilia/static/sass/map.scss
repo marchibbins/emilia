@@ -34,7 +34,6 @@
 .map-info__btn {
     background: darken($bgGrey, 5%);
     border: 1px solid $bgDarkGrey;
-    border-bottom: none;
     border-right: none;
     display: inline-block;
     height: $baseline*3;
@@ -90,7 +89,6 @@
 
 .book-header {
     background-color: lighten($bgLightGrey, 25%);
-    border-top: 1px solid $bgDarkGrey;
     padding: $baseline $gutter;
 }
 
