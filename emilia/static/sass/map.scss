@@ -87,6 +87,22 @@
     background-image: url(/static/img/le-tour.png);
 }
 
+.svg .map-info__btn--greatest:after {
+    background-image: url(/static/img/greatest.svg);
+}
+
+.svg .map-info__btn--another:after {
+    background-image: url(/static/img/another.svg);
+}
+
+.svg .map-info__btn--hellingen:after {
+    background-image: url(/static/img/hellingen.svg);
+}
+
+.svg .map-info__btn--le-tour:after {
+    background-image: url(/static/img/le-tour.svg);
+}
+
 .book-header {
     background-color: lighten($bgLightGrey, 25%);
     padding: $baseline $gutter;

@@ -87,6 +87,10 @@ p {
     top: 4px;
 }
 
+.svg .site-title {
+    background-image: url(/static/img/greatest.svg);
+}
+
 .site-title__link {
     background: transparent url(/static/img/ride-them-all.jpg) no-repeat;
     display: inline-block;
