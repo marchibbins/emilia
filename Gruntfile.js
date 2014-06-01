@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'emilia/static/css/style.css': 'emilia/static/sass/style.scss'
+                    'emilia/static/css/style.min.css': 'emilia/static/sass/style.scss'
                 }
             }
         },
