@@ -29567,6 +29567,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                         })
                         .error(function (data, status, headers, config) {
                             console.log('Error loading climb ' + climb.id, status);
+                            climb[leaderboard + "_error"] = true;
                         });
                 }
             });

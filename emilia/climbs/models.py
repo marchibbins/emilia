@@ -115,6 +115,7 @@ class Climb(db.Model):
             'number': self.number,
             'name': self.name,
             'location': self.location,
+            'strava_id': self.strava_id,
             'segment': self.segment.serialize_summary(),
             'book_id': self.book_id,
             'region_id': self.region_id,

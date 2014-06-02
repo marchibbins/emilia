@@ -97,6 +97,7 @@
                                 <a href ng-click="toggle('showClubLeaders')" class="climb-info__toggle" title="Show {{ type === 'club_leaderboard' ? 'overall' : 'club' }} leaders">Show {{ type === 'club_leaderboard' ? 'overall' : 'club' }} leaders</a>
                             </div>
                         </div>
+                        <p ng-if="currentClimb.leaderboard_error"><a href="http://www.strava.com/segments/{{ currentClimb.strava_id }}" title="View leaderboards for {{ currentClimb.name }} on Strava">View full leaderboards on Strava</a></p>
 
                         <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard">
                             <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
