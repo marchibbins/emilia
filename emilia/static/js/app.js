@@ -29414,7 +29414,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                             leaderboard.disabled = false;
                         })
                         .error(function (data, status, headers, config) {
-                            console.log('Error loading climb ' + leaderboard.climb.id, status);
+                            console.error(status, 'Error loading leaderboard page ' + page + ' for ' + leaderboard.climb.slug);
                         });
                 } else {
                     leaderboard.page = page;
@@ -29488,7 +29488,9 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 
         loadBook = function (bookId) {
             // Load the data book by book
-            var url = '/api/books/' + $scope.books[bookId].slug + '/climbs';
+            var slug = $scope.books[bookId].slug,
+                url = '/api/books/' + slug + '/climbs';
+
             $http({method: 'GET', url: url})
                 .success(function (data, status, headers, config) {
                     parseBook(data);
@@ -29500,7 +29502,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                     }
                 })
                 .error(function (data, status, headers, config) {
-                    console.log('Error loading book ' + bookId, status);
+                    console.error(status, 'Error loading book for ' + slug);
                 });
         },
 
@@ -29566,7 +29568,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                             parseLeaderboard(data, leaderboard);
                         })
                         .error(function (data, status, headers, config) {
-                            console.log('Error loading climb ' + climb.id, status);
+                            console.error(status, 'Error loading climb leaderboards for ' + climb.slug);
                             climb[leaderboard + "_error"] = true;
                         });
                 }
