@@ -93,7 +93,7 @@ def get_segment_leaderboard(self, segment_id, gender=None, club_id=None, page=No
 
 def get_segment_stream(self, segment_id):
     """ Gets basic Stream data for segment. """
-    raw = self.protocol.get('/segments/{id}/streams/{types}', id=segment_id, types='distance,altitude,latlng')
+    raw = self.protocol.get('/segments/{id}/streams/{types}', id=segment_id, types='distance,altitude')  # Omit latlng
     return SegmentStream.deserialize(raw)
 
 
@@ -150,10 +150,6 @@ def serialize_segment_stream(self):
         {
             'type': 'altitude',
             'data': [item for item in self.altitude],
-        },
-        {
-            'type': 'latlng',
-            'data': [item for item in self.latlng],
         }
     ]
 
