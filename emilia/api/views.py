@@ -115,12 +115,12 @@ def climb_leaderboard(slug, leaderboard, gender=None):
         abort(404)
 
     if gender and gender not in ('male', 'female'):
-        abort(404) # Enforce options
+        abort(404)  # Enforce options
 
     if leaderboard not in ('club_leaders', 'leaders'):
         page = request.args.get('page')
     else:
-        page = None # Pagination not allowed
+        page = None  # Pagination not allowed
 
     if gender != 'female':
         context['male_%s' % leaderboard] = resource(climb.strava_id, page=page, gender='M').serialize()
