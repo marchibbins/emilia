@@ -88,6 +88,17 @@ def climb_detail(slug):
     return json_response(**context)
 
 
+@api.route('/climbs/<slug>/summary')
+@cache.cached(timeout=Config.CACHE_STRAVA_TIMEOUT)
+def climb_summary(slug):
+    """ Renders a summary view for the Climb, matching slug, as JSON. """
+    climb = Climb.query.filter_by(slug=slug).first_or_404()
+    context = {
+        'climb': climb.serialize_summary(),
+    }
+    return json_response(**context)
+
+
 @api.route('/climbs/<slug>/<leaderboard>')
 @api.route('/climbs/<slug>/<leaderboard>/<gender>')
 @cache.cached(timeout=Config.CACHE_STRAVA_TIMEOUT, key_prefix=full_path_cache_key_prefix)
