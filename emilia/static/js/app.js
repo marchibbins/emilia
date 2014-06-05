@@ -31177,7 +31177,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                     stroke: {
                         color: '#' + region.bg_colour,
                         opacity: 0.75,
-                        weight: 5
+                        weight: 4
                     },
                     visible: false
                 };

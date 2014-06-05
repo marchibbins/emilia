@@ -182,6 +182,7 @@
                     <markers ng-if="currentRegion.climbs" models="currentRegion.climbs" coords="'coords'" click="clickMarker" fit="true" icon="'hiddenIcon'" options="{visible: false}" ng-show="false"></markers>
                     <markers ng-if="currentBook.markers" models="currentBook.markers" coords="'coords'" click="clickMarker" fit="true" icon="'icon'" labelAnchor="14 37" labelContent="'number'" labelClass="marker-label"></markers>
                     <polyline ng-if="currentClimb.polyline.visible" fit="true" path="currentClimb.polyline.path" refit="true" stroke="currentClimb.polyline.stroke"></polyline>
+                    <marker ng-if="currentClimb.polyline.visible" coords="currentClimb.polyline.path[currentClimb.polyline.path.length-1]" icon="'/static/img/marker-finish.png'"></marker>
                 </google-map>
             </div>
         {% endraw %}
