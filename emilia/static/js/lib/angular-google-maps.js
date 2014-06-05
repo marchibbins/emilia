@@ -1722,7 +1722,7 @@ Nicholas McCready - https://twitter.com/nmccready
           pathPoints = this.convertPathPoints(this.scope.path);
           this.polyline = new google.maps.Polyline(this.buildOpts(pathPoints));
           if (this.isTrue(this.attrs.fit)) {
-            extendMapBounds(map, pathPoints);
+            GmapUtil.extendMapBounds(map, pathPoints);
           }
           if (!scope["static"] && angular.isDefined(scope.editable)) {
             scope.$watch("editable", function(newValue, oldValue) {
