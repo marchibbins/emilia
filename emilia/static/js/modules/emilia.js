@@ -1,5 +1,5 @@
 angular.module('emilia', ['google-maps'])
-    .controller('emilia-map', ['$scope', '$window', '$http', function ($scope, $window, $http) {
+    .controller('emilia-map', ['$scope', '$window', '$http', '$timeout', function ($scope, $window, $http, $timeout) {
         // Cloak
         var el = document.body.querySelector('[ng-controller="emilia-map"]');
         angular.element(el).removeClass('hidden');
@@ -14,7 +14,6 @@ angular.module('emilia', ['google-maps'])
             },
 
             DEFAULT_DRAGGABLE = true,
-            DEFAULT_CLIMB_ZOOM = 12,
             DEFAULT_MIN_ZOOM = 6,
             DEFAULT_ZOOM = 6,
 
@@ -73,14 +72,13 @@ angular.module('emilia', ['google-maps'])
             $scope.currentRegion = {};
             $scope.showClubLeaders = true;
             $scope.showClubLeaderboard = true;
-
             $scope.currentClimb = _.findWhere($scope.climbs, {id: climbId});
             loadLeaderboards($scope.currentClimb);
 
-            $scope.map.control.refresh($scope.currentClimb.coords);
-            $scope.map.zoom = DEFAULT_CLIMB_ZOOM;
-
-            // $scope.currentClimb.polyline.visible = true;
+            // Show polyline after climb has been set
+            $timeout(function() {
+                $scope.currentClimb.polyline.visible = true;
+            }, 100);
         };
 
         $scope.deselectClimb = function () {
@@ -225,6 +223,20 @@ angular.module('emilia', ['google-maps'])
                 };
                 climb.bg_colour = region.bg_colour;
                 climb.text_colour = region.text_colour;
+                climb.polyline = {
+                    path: _.map(google.maps.geometry.encoding.decodePath(climb.segment.map_polyline), function(point) {
+                        return {
+                            longitude: point.A,
+                            latitude: point.k
+                        };
+                    }),
+                    stroke: {
+                        color: '#' + region.bg_colour,
+                        opacity: 0.75,
+                        weight: 5
+                    },
+                    visible: false
+                };
 
                 return {
                     id: climb.id,
@@ -232,19 +244,6 @@ angular.module('emilia', ['google-maps'])
                     coords: climb.coords,
                     icon: '/static/img/marker-' + region.slug + '.png',
                     hiddenIcon: '/static/img/marker-hidden.png'
-                    /*polyline: {
-                        path: _.map(google.maps.geometry.encoding.decodePath(climb.segment.map_polyline), function(point) {
-                            return {
-                                longitude: point.A,
-                                latitude: point.k
-                            };
-                        }),
-                        stroke: {
-                            color: '#' + region.bg_colour,
-                            weight: 3
-                        },
-                        visible: false
-                    }*/
                 };
             });
 
