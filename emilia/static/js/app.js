@@ -29499,6 +29499,8 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                     var nextBook = _.findWhere($scope.books, {loading: true});
                     if (nextBook) {
                         loadBook(nextBook.id);
+                    } else {
+                        fin();
                     }
                 })
                 .error(function (data, status, headers, config) {
@@ -29603,6 +29605,11 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             _.each(data[leaderboard.gender + '_' + leaderboard.type].entries, function(entry, i) {
                 leaderboard.entries[i + (page - 1) * 10] = entry;
             });
+        },
+
+        fin = function() {
+            // Chapeau
+            $window.Emilia = null;
         };
 
         allez();
