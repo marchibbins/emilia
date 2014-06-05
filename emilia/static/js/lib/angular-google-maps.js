@@ -1724,6 +1724,14 @@ Nicholas McCready - https://twitter.com/nmccready
           if (this.isTrue(this.attrs.fit)) {
             GmapUtil.extendMapBounds(map, pathPoints);
           }
+          if (this.isTrue(this.attrs.refit)) {
+            scope.$watch("path", function(newValue, oldValue) {
+              if (newValue !== oldValue) {
+                var newPoints = self.convertPathPoints(scope.path);
+                GmapUtil.extendMapBounds(map, newPoints);
+              }
+            });
+          }
           if (!scope["static"] && angular.isDefined(scope.editable)) {
             scope.$watch("editable", function(newValue, oldValue) {
               if (newValue !== oldValue) {
