@@ -15,6 +15,14 @@
     position: absolute;
     right: 0;
     top: 0;
+
+    @include mq(desktop) {
+        left: $leftColWidthDesktop;
+    }
+
+    @include mq(wide) {
+        left: $leftColWidthWide;
+    }
 }
 
 .map-container .angular-google-map-container {
@@ -29,6 +37,14 @@
     position: absolute;
     top: 0;
     width: $leftColWidth;
+
+    @include mq(desktop) {
+        width: $leftColWidthDesktop;
+    }
+
+    @include mq(wide) {
+        width: $leftColWidthWide;
+    }
 }
 
 .map-info__btn {
@@ -55,15 +71,27 @@
     background-position: -5px 7px;
     background-repeat: no-repeat;
     background-size: 160px;
+    bottom: -60px;
     content: '';
     display: block;
-    height: 150px;
     left: -26px;
     opacity: 0.75;
     position: absolute;
+    right: -26px;
     @include rotate(-10deg);
     top: -60px;
-    width: 150px;
+
+    @include mq(desktop) {
+        background-position: -11px -15px;
+        background-size: 205px;
+        @include rotate(-5deg);
+    }
+
+    @include mq(wide) {
+        background-position: -9px -26px;
+        background-size: 230px;
+        @include rotate(0deg);
+    }
 }
 
 .map-info__btn:hover:after,
