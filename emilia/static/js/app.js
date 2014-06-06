@@ -31227,19 +31227,20 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                 obj = {
                     climb: data.climb,
                     type: leaderboard,
-                    page: 1,
-                    pages: [1]
+                    page: 1
                 };
 
             climb[leaderboard] = true;
 
             climb['male_' + leaderboard] = _.extend(_.extend({
                 gender: 'male',
+                pages: [1],
                 totalPages: Math.ceil(data['male_' + leaderboard].entry_count / $scope.leaderboardPerPage)
             }, _.clone(obj)), data['male_' + leaderboard]);
 
             climb['female_' + leaderboard] = _.extend(_.extend({
                 gender: 'female',
+                pages: [1],
                 totalPages: Math.ceil(data['female_' + leaderboard].entry_count / $scope.leaderboardPerPage)
             }, _.clone(obj)), data['female_' + leaderboard]);
         },
