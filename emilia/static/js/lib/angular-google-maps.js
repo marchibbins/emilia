@@ -1,4 +1,4 @@
-/*! angular-google-maps 1.1.0 2014-05-31
+/*! angular-google-maps 1.1.0 2014-05-17
  *  AngularJS directives for Google Maps
  *  git: https://github.com/nlaplante/angular-google-maps.git
  */
@@ -242,20 +242,13 @@ Nicholas McCready - https://twitter.com/nmccready
   var async;
 
   async = {
-    each: function(array, callback, doneCallBack, pausedCallBack, chunk, index, pause) {
+    each: function(array, callback, doneCallBack, pausedCallBack, chunk, index) {
       var doChunk;
       if (chunk == null) {
-        chunk = 20;
+        chunk = 100;
       }
       if (index == null) {
         index = 0;
-      }
-      if (pause == null) {
-        pause = 1;
-      }
-      if (!pause) {
-        throw "pause (delay) must be set from _async!";
-        return;
       }
       if (array === void 0 || (array != null ? array.length : void 0) <= 0) {
         doneCallBack();
@@ -265,22 +258,18 @@ Nicholas McCready - https://twitter.com/nmccready
         var cnt, i;
         cnt = chunk;
         i = index;
-        while (cnt-- && i < (array ? array.length : i + 1)) {
-          callback(array[i], i);
+        while (cnt-- && i < array.length) {
+          callback(array[i]);
           ++i;
         }
-        if (array) {
-          if (i < array.length) {
-            index = i;
-            if (pausedCallBack != null) {
-              pausedCallBack();
-            }
-            return setTimeout(doChunk, pause);
-          } else {
-            if (doneCallBack) {
-              return doneCallBack();
-            }
+        if (i < array.length) {
+          index = i;
+          if (pausedCallBack != null) {
+            pausedCallBack();
           }
+          return setTimeout(doChunk, 1);
+        } else {
+          return doneCallBack();
         }
       };
       return doChunk();
@@ -973,7 +962,7 @@ Nicholas McCready - https://twitter.com/nmccready
         };
 
         ClustererMarkerManager.prototype.fit = function() {
-          return ClustererMarkerManager.__super__.fit.call(this, this.clusterer.getMarkers(), this.clusterer.getMap());
+          return ClustererMarkerManager.__super__.fit.call(this, this.clusterer.markers, this.gMap);
         };
 
         return ClustererMarkerManager;
