@@ -298,14 +298,14 @@
     text-overflow: ellipsis;
     text-transform: capitalize;
     white-space: nowrap;
-    width: 190px;
+    width: 215px;
 
     @include mq(desktop) {
-        width: 260px;
+        width: 275px;
     }
 
     @include mq(wide) {
-        width: 315px;
+        width: 345px;
     }
 }
 
@@ -325,11 +325,55 @@
     width: 60px;
 
     @include mq(desktop) {
-        width: 85px;
+        width: 70px;
+    }
+}
+
+.leaderboard--double {
+    /* Time values MM:SS */
+
+    .leaderboard__name {
+        width: 205px;
+
+        @include mq(desktop) {
+            width: 265px;
+        }
+
+        @include mq(wide) {
+            width: 335px;
+        }
     }
 
-    @include mq(wide) {
-        width: 100px;
+    .leaderboard__time {
+        width: 70px;
+
+        @include mq(desktop) {
+            width: 80px;
+        }
+    }
+}
+
+.leaderboard--triple {
+    /* Time values H:MM:SS */
+
+    .leaderboard__name {
+        width: 190px;
+
+        @include mq(desktop) {
+            width: 250px;
+        }
+
+        @include mq(wide) {
+            width: 320px;
+        }
+    }
+
+    .leaderboard__time {
+        width: 85px;
+
+        @include mq(desktop) {
+            width: 95px;
+        }
     }
 }
 

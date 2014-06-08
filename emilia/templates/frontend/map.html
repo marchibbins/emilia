@@ -70,7 +70,7 @@
                             <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
                             <div class="climb-info__leaderboards">
                                 <div ng-repeat="gender in ['male', 'female']" ng-init="leaderboard = currentClimb[gender + '_' + type]">
-                                    <table ng-if="leaderboard" class="leaderboard leaderboard--leaders">
+                                    <table ng-if="leaderboard" class="leaderboard leaderboard--leaders leaderboard--{{ currentClimb.leaderboardWidth }}">
                                         <thead ng-show="$first">
                                             <tr>
                                                 <th class="leaderboard__header"><span class="hidden">Rank</span></th>
@@ -103,7 +103,7 @@
                             <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
                             <div class="climb-info__leaderboards">
                                 <div ng-repeat="gender in ['male', 'female']" ng-init="leaderboard = currentClimb[gender + '_' + type]">
-                                    <table ng-if="leaderboard" class="leaderboard" ng-class="{'leaderboard--disabled': leaderboard.disabled === true}">
+                                    <table ng-if="leaderboard" class="leaderboard leaderboard--{{ currentClimb.leaderboardWidth }}" ng-class="{'leaderboard--disabled': leaderboard.disabled === true}">
                                         <thead ng-show="$first">
                                             <tr>
                                                 <th class="leaderboard__header"><span class="hidden">Rank</span></th>

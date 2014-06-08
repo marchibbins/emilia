@@ -31044,12 +31044,14 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                             parseLeaderboardPage(data, leaderboard, page);
                             leaderboard.page = page;
                             leaderboard.disabled = false;
+                            updateLeaderboardWidth();
                         })
                         .error(function (data, status, headers, config) {
                             console.error(status, 'Error loading leaderboard page ' + page + ' for ' + leaderboard.climb.slug);
                         });
                 } else {
                     leaderboard.page = page;
+                    updateLeaderboardWidth();
                 }
             }
         };
@@ -31232,6 +31234,8 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
                 pages: [1],
                 totalPages: Math.ceil(data['female_' + leaderboard].entry_count / $scope.leaderboardPerPage)
             }, _.clone(obj)), data['female_' + leaderboard]);
+
+           updateLeaderboardWidth();
         },
 
         parseLeaderboardPage = function(data, leaderboard, page) {
@@ -31239,6 +31243,31 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
             _.each(data[leaderboard.gender + '_' + leaderboard.type].entries, function(entry, i) {
                 leaderboard.entries[i + (page - 1) * 10] = entry;
             });
+        },
+
+        updateLeaderboardWidth = function() {
+            var climb = $scope.currentClimb,
+                entries = [];
+
+            _.each(['male_club_leaderboard', 'female_club_leaderboard', 'male_leaderboard', 'female_leaderboard'], function(type) {
+                var leaderboard = climb[type];
+                if (leaderboard) {
+                    var index = Math.min(leaderboard.page * $scope.leaderboardPerPage - 1, leaderboard.entries.length - 1);
+                    entries.push(leaderboard.entries[index]);
+                }
+            });
+
+            var last = _.max(entries, function(entry) {
+                return entry.elapsed_time;
+            });
+
+            if (last.elapsed_time >= 3600) {
+                climb.leaderboardWidth = 'triple';
+            } else if (last.elapsed_time >= 600) {
+                climb.leaderboardWidth = 'double';
+            } else if (last.elapsed_time < 600) {
+                climb.leaderboardWidth = 'single';
+            }
         },
 
         fin = function() {
