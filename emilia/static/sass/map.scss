@@ -299,14 +299,38 @@
     text-transform: capitalize;
     white-space: nowrap;
     width: 190px;
+
+    @include mq(desktop) {
+        width: 260px;
+    }
+
+    @include mq(wide) {
+        width: 315px;
+    }
 }
 
 .leaderboard__speed {
     width: 100px;
+
+    @include mq(desktop) {
+        width: 110px;
+    }
+
+    @include mq(wide) {
+        width: 120px;
+    }
 }
 
 .leaderboard__time {
     width: 60px;
+
+    @include mq(desktop) {
+        width: 85px;
+    }
+
+    @include mq(wide) {
+        width: 100px;
+    }
 }
 
 .leaderboard__unit {
