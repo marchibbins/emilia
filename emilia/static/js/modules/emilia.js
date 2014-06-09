@@ -319,8 +319,11 @@ angular.module('emilia', ['google-maps'])
             _.each(['male_club_leaderboard', 'female_club_leaderboard', 'male_leaderboard', 'female_leaderboard'], function(type) {
                 var leaderboard = climb[type];
                 if (leaderboard) {
-                    var index = Math.min(leaderboard.page * $scope.leaderboardPerPage - 1, leaderboard.entries.length - 1);
-                    entries.push(leaderboard.entries[index]);
+                    var index = Math.min(leaderboard.page * $scope.leaderboardPerPage - 1, leaderboard.entries.length - 1),
+                        entry = leaderboard.entries[index];
+                    if (entry) {
+                        entries.push(leaderboard.entries[index]);
+                    }
                 }
             });
 
