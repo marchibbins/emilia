@@ -362,14 +362,14 @@
     /* Time values H:MM:SS */
 
     .leaderboard__name {
-        width: 185px;
+        width: 180px;
 
         @include mq(desktop) {
-            width: 245px;
+            width: 240px;
         }
 
         @include mq(wide) {
-            width: 315px;
+            width: 310px;
         }
     }
 
@@ -389,11 +389,36 @@
     opacity: 0.95;
 }
 
-.leaderboard--leaders .leaderboard__entry {
-    background-color: transparent;
-    border: none;
-    font-size: 26px;
-    line-height: 52px;
+.leaderboard--leaders {
+
+    .leaderboard__entry {
+        background-color: transparent;
+        border: none;
+        font-size: 26px;
+        line-height: 52px;
+
+        .leaderboard__time {
+            font-size: 24px;
+        }
+    }
+
+    @include mq($to: desktop) {
+        .leaderboard__name {
+            width: 305px;
+        }
+
+        &.leaderboard--double {
+            .leaderboard__name {
+                width: 295px;
+            }
+        }
+
+        &.leaderboard--triple {
+            .leaderboard__name {
+                width: 280px;
+            }
+        }
+    }
 }
 
 .leaderboard__break {

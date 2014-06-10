@@ -26,3 +26,19 @@
 .hidden {
     display: none !important;
 }
+
+.desktop-show {
+    display: none !important;
+
+    @include mq(desktop) {
+        display: block !important;
+    }
+}
+
+.desktop-show-cell {
+    display: none !important;
+
+    @include mq(desktop) {
+        display: table-cell !important;
+    }
+}
