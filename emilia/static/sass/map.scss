@@ -289,7 +289,7 @@
 }
 
 .leaderboard__rank {
-    width: 40px;
+    width: 50px;
 }
 
 .leaderboard__name {
@@ -298,14 +298,14 @@
     text-overflow: ellipsis;
     text-transform: capitalize;
     white-space: nowrap;
-    width: 215px;
+    width: 205px;
 
     @include mq(desktop) {
-        width: 275px;
+        width: 265px;
     }
 
     @include mq(wide) {
-        width: 345px;
+        width: 335px;
     }
 }
 
@@ -333,14 +333,14 @@
     /* Time values MM:SS */
 
     .leaderboard__name {
-        width: 205px;
+        width: 195px;
 
         @include mq(desktop) {
-            width: 265px;
+            width: 255px;
         }
 
         @include mq(wide) {
-            width: 335px;
+            width: 325px;
         }
     }
 
@@ -357,14 +357,14 @@
     /* Time values H:MM:SS */
 
     .leaderboard__name {
-        width: 190px;
+        width: 185px;
 
         @include mq(desktop) {
-            width: 250px;
+            width: 245px;
         }
 
         @include mq(wide) {
-            width: 320px;
+            width: 315px;
         }
     }
 
