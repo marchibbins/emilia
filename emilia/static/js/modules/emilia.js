@@ -142,7 +142,7 @@ angular.module('emilia', ['google-maps'])
 
         $scope.parseName = function (name) {
             // Crude cleaning attempt
-            _.each([' - ', '#', '@'], function(character) {
+            _.each([' -', '#', '@'], function(character) {
                 name = name.split(character)[0];
             });
             _.each([' ', '-'], function(join) {
