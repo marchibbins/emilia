@@ -255,6 +255,7 @@
 .climb-info__title {
     border-bottom: 2px solid $bgGrey;
     font-weight: $weightBold;
+    margin-bottom: $baseline/2;
     padding-bottom: $baseline/2;
     text-transform: uppercase;
 }
@@ -278,7 +279,7 @@
 
 .leaderboard__header .super {
     position:  absolute;
-    top: -30px;
+    top: -37px;
     left: 0;
 }
 
@@ -418,6 +419,69 @@
                 width: 280px;
             }
         }
+    }
+
+    + .leaderboard__break {
+        margin: $baseline/2 0;
+    }
+
+    .ranking {
+        background-color: $bgLightGrey;
+        border-radius: 40px;
+        color: white;
+        display: block;
+        height: 40px;
+        line-height: 38px;
+        margin-left: -4px;
+        margin-top: 3px;
+        text-align: center;
+        width: 40px;
+    }
+
+    .ranking--1 {
+        background-color: #c7892b;
+    }
+
+    .ranking--2 {
+        background-color: #a8a8a8;
+    }
+
+    .ranking--3 {
+        background-color: #d3672e;
+    }
+}
+
+.leaderboard--club_leaderboard {
+    .ranking {
+        background-color: none;
+        background-size: 40px;
+        text-indent: -9999px;
+    }
+
+    .ranking--1 {
+        background-image: url(/static/img/gold.png);
+    }
+
+    .ranking--2 {
+        background-image: url(/static/img/silver.png);
+    }
+
+    .ranking--3 {
+        background-image: url(/static/img/bronze.png);
+    }
+}
+
+.svg .leaderboard--club_leaderboard {
+    .ranking--1 {
+        background-image: url(/static/img/gold.svg);
+    }
+
+    .ranking--2 {
+        background-image: url(/static/img/silver.svg);
+    }
+
+    .ranking--3 {
+        background-image: url(/static/img/bronze.svg);
     }
 }
 
