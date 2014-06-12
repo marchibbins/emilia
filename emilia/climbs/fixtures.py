@@ -51,7 +51,7 @@ def install():
                 ('rowsley-bar', 34, u'Rowsley Bar', u'Rowsley, Derbyshire', 6, 6681397),
                 ('curbar-edge', 35, u'Curbar Edge', u'Curbar, Derbyshire', 6, 6687953),
                 ('mow-cop', 36, u'Mow Cop', u'Mow Cop, Staffordshire', 9, 6687912),
-                ('peaslows', 37, u'Peaslows', u'Chapel-en-le-Frith, Derbyshire', 4, 6820230),
+                ('peaslows', 37, u'Peaslows', u'Chapel-en-le-Frith, Derbyshire', 4, 6820268),
                 ('jiggers-bank', 38, u'Jiggers Bank', u'Ironbridge, Shropshire', 3, 6681373),
                 ('the-burway', 39, u'The Burway', u'Church Stretton, Shropshire', 9, 6681340),
                 ('shibden-wall', 40, u'Shibden Wall', u'Halifax, West Yorkshire', 8, 6690966),
