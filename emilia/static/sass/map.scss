@@ -314,6 +314,16 @@
     }
 }
 
+.leaderboard__classification {
+    font-size: 12px;
+    left: 0;
+    line-height: 12px;
+    margin-left: 1px;
+    opacity: 0.95;
+    position: absolute;
+    top: 32px;
+}
+
 .leaderboard__speed {
     width: 100px;
 
@@ -408,6 +418,13 @@
         .leaderboard__time {
             font-size: 24px;
         }
+    }
+
+    .leaderboard__name {
+        height: 46px;
+        line-height: 32px;
+        position: relative;
+        text-transform: uppercase;
     }
 
     @include mq($to: desktop) {
