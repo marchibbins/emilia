@@ -255,7 +255,6 @@
 .climb-info__title {
     border-bottom: 2px solid $bgGrey;
     font-weight: $weightBold;
-    margin-bottom: $baseline/2;
     padding-bottom: $baseline/2;
     text-transform: uppercase;
 }
@@ -279,7 +278,7 @@
 
 .leaderboard__header .super {
     position:  absolute;
-    top: -37px;
+    top: -30px;
     left: 0;
 }
 
@@ -390,7 +389,15 @@
     opacity: 0.95;
 }
 
-.leaderboard--leaders {
+.climb-info__leaders {
+
+    .climb-info__title {
+        margin-bottom: $baseline/2;
+    }
+
+    .leaderboard__header .super {
+        top: -37px;
+    }
 
     .leaderboard__entry {
         background-color: transparent;
@@ -421,7 +428,7 @@
         }
     }
 
-    + .leaderboard__break {
+    .leaderboard__break {
         margin: $baseline/2 0;
     }
 

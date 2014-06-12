@@ -66,11 +66,11 @@
                     </div>
 
                     <div class="climb-info climb-info--wide">
-                        <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaders : !showClubLeaders">
+                        <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaders : !showClubLeaders" class="climb-info__leaders">
                             <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} leaders</h3>
                             <div class="climb-info__leaderboards">
                                 <div ng-repeat="gender in ['male', 'female']" ng-init="leaderboard = currentClimb[gender + '_' + type]">
-                                    <table ng-if="leaderboard" class="leaderboard leaderboard--{{ type }} leaderboard--leaders leaderboard--{{ currentClimb.leaderboardWidth }}">
+                                    <table ng-if="leaderboard" class="leaderboard leaderboard--{{ type }} leaderboard--{{ currentClimb.leaderboardWidth }}">
                                         <thead ng-show="$first">
                                             <tr>
                                                 <th class="leaderboard__header"><span class="hidden">Rank</span></th>
@@ -98,7 +98,7 @@
                             </div>
                         </div>
 
-                        <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard">
+                        <div ng-repeat="type in ['club_leaderboard', 'leaderboard']" ng-if="currentClimb[type]" ng-show="type === 'club_leaderboard' ? showClubLeaderboard : !showClubLeaderboard" class="climb-info__overall">
                             <h3 class="climb-info__title" style="border-color: #{{ currentClimb.bg_colour }}">{{ type === 'club_leaderboard' ? 'Club' : 'Overall' }} standings</h3>
                             <div class="climb-info__leaderboards">
                                 <div ng-repeat="gender in ['male', 'female']" ng-init="leaderboard = currentClimb[gender + '_' + type]">
