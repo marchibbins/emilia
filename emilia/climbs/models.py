@@ -70,6 +70,7 @@ class Climb(db.Model):
     number = Column(db.Integer, nullable=False)
     name = Column(db.String(NAME_STR_MAX), nullable=False)
     location = Column(db.String(LOCATION_STR_MAX), nullable=False)
+    rating = Column(db.Integer, nullable=False)
     strava_id = Column(db.Integer, nullable=False)
 
     segment_id = Column(db.Integer, db.ForeignKey("segment.id"))
@@ -101,6 +102,7 @@ class Climb(db.Model):
             'number': self.number,
             'name': self.name,
             'location': self.location,
+            'rating': self.rating,
             'strava_id': self.strava_id,
             'segment': self.segment.serialize(),
             'book': self.book.serialize(),
@@ -115,18 +117,20 @@ class Climb(db.Model):
             'number': self.number,
             'name': self.name,
             'location': self.location,
+            'rating': self.rating,
             'strava_id': self.strava_id,
             'segment': self.segment.serialize_summary(),
             'book_id': self.book_id,
             'region_id': self.region_id,
         }
 
-    def __init__(self, slug, number, name, location, strava_id, book=None, region=None):
+    def __init__(self, slug, number, name, location, rating, strava_id, book=None, region=None):
         """ Populates model properties. """
         self.slug = slug
         self.number = number
         self.name = name
         self.location = location
+        self.rating = rating
         self.strava_id = strava_id
         self.book = book
         self.region = region
